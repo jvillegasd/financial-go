@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  # backend:
+  # container_name: fgo-backend
+  #   build:
+  #     context: ./server/
+  #     dockerfile: Dockerfile
+  #   command: python3 app.py
+  #   env_file: .env
+  #   restart: always
+  #   volumes: 
+  #     - ./server/:/src
+  #   ports:
+  #     - 5001:5001
+  #   networks:
+  #     - financial_go-net
+  frontend:
+    container_name: fgo-frontend
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    env_file: .env
+    restart: always
+    volumes: 
+      - ./client/:/client
+      - node_modules:/client/node_modules
+    ports:
+      - ${NODEJS_PORT}:8080
+    networks:
+      - financial_go-net
+
+volumes:
+  node_modules:
+
+networks:
+  financial_go-net:
+    driver: bridge

@@ -1,0 +1,5 @@
+Flask==1.1.2
+Flask-Cors==3.0.8
+environs==8.0.0
+pyjwt==1.7.1
+pymongo==3.11.2

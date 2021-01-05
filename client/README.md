@@ -1,4 +1,4 @@
-# financial-go
+# client
 
 ## Project setup
 ```
