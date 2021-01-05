@@ -1,5 +1,7 @@
-
 FROM node:alpine
+
+LABEL Author="Johnny Villegas"
+LABEL version="1.0"
 
 RUN mkdir -p /client
 WORKDIR /client
