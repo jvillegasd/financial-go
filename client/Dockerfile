@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:latest
 
 LABEL Author="Johnny Villegas"
 LABEL version="1.0"
