@@ -5,7 +5,7 @@
       <button class="bordered">Sign in</button>
     </div>
     <div id="text">
-      <h1>Financial Go</h1>
+      <h1 class="font-sans" >Financial Go</h1>
       <h2>The easiest way to manage your budget.</h2>
       <button class="non-bordered">Start saving</button>
     </div>

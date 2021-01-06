@@ -1,0 +1,47 @@
+/* GT Walsheim Pro Regular */
+@font-face {
+  font-family: "GT Walsheim Pro Regular";
+  src: url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.eot");
+  src: url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/0abeb2471faeb5269db428b9eac2075e.svg#GT Walsheim Pro Regular")
+      format("svg");
+}
+
+/* GT Walsheim Pro Medium */
+@font-face {
+  font-family: "GT Walsheim Pro Medium";
+  src: url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.eot");
+  src: url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/d4f20dfedfdf197ed0ac52b09bf25551.svg#GT Walsheim Pro Medium")
+      format("svg");
+}
+
+/* GT Walsheim Pro Bold */
+@font-face {
+  font-family: "GT Walsheim Pro Bold";
+  src: url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.eot");
+  src: url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/f7afe66fe9d022d7dc7fd57e4adc078f.svg#GT Walsheim Pro Bold")
+      format("svg");
+}
