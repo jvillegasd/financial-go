@@ -7,4 +7,10 @@
 #text {
   width: 585px;
   height: 258.45px;
+  z-index: 1;
+}
+
+#image-div, #image {
+  height: 829px;
+  width: 977px;
 }
