@@ -1,0 +1,52 @@
+#btn-signup {
+  color: white;
+  width: 233px;
+  height: 44.45px;
+  border-radius: 10px;
+  font-size: 19px;
+  margin-top: 30px;
+  outline: none;
+
+  @apply bg-blue-80 font-regular;
+}
+
+#btn-signup:hover {
+  background-color: white;
+
+  @apply text-blue-80 border-2 border-blue-80;
+}
+
+#btn-signin {
+  background-color: white;
+  width: 174px;
+  height: 44.45px;
+  border-radius: 10px;
+  font-size: 19px;
+  margin-top: 32px;
+  outline: none;
+
+  @apply text-blue-80 border-2 font-regular border-blue-80;
+}
+
+#btn-signin:hover {
+  color: white;
+
+  @apply bg-blue-80 border-none;
+}
+
+#btn-about {
+  width: 174px;
+  height: 44.45px;
+  font-size: 19px;
+  margin-top: 32px;
+  margin-right: 28px;
+  outline: none;
+
+  @apply text-blue-80 font-regular;
+}
+
+#btn-about:hover {
+  border-radius: 10px;
+
+  @apply border-2 border-blue-80;
+}

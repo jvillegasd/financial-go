@@ -1,0 +1,10 @@
+#content {
+  margin-top: 32px;
+
+  @apply font-regular text-4xl;
+}
+
+#text {
+  width: 585px;
+  height: 258.45px;
+}
