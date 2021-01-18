@@ -20,7 +20,7 @@
       ></BorderedButton>
     </div>
 
-    <div class="Flex flex-row">
+    <div class="Flex flex-row relative ">
       <div id="text" class="absolute inset-y-96 left-32">
         <h1 class="font-regular text-6xl">Financial Go</h1>
         <p id="content">The easiest way to manage your budget.</p>

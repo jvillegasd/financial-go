@@ -9,6 +9,7 @@ module.exports = {
       "blue-80": tinycolor("#005EEE").setAlpha(0.8).toRgbString(),
       "black": "#1C202E",
       "grey-bg": "#F4F4F4",
+      "white": "#FFFFFF"
     },
     fontFamily: {
       regular: ["GT Walsheim Pro Regular", "sans-serif"],

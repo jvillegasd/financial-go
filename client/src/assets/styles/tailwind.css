@@ -1,6 +1,15 @@
 @import './fonts.css';
 @import './landing.css';
+@import './global.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  @variants responsive {
+    .w-500 {
+      width: 500px;
+    }
+  }
+}

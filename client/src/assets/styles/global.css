@@ -1,0 +1,5 @@
+body.sign_in, body.sign_up {
+  background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #F4F4F4 0%);
+  height: 100%;
+  background-attachment: fixed !important;
+}
