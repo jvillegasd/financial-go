@@ -23,7 +23,7 @@
     <div class="Flex flex-row relative ">
       <div id="text" class="absolute inset-y-96 left-32">
         <h1 class="font-regular text-6xl">Financial Go</h1>
-        <p id="content">The easiest way to manage your budget.</p>
+        <p id="content" class="font-regular text-4xl">The easiest way to manage your budget.</p>
         <BlueButton
           title="Start saving"
           :width=233
@@ -55,3 +55,20 @@
     }
   }
 </script>
+
+<style scoped>
+  #content {
+    margin-top: 32px;
+  }
+
+  #text {
+    width: 585px;
+    height: 258.45px;
+    z-index: 1;
+  }
+
+  #image-div, #image {
+    height: 829px;
+    width: 977px;
+  }
+</style>

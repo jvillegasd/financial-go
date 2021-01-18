@@ -1,21 +1,19 @@
 <template>
-  <div class="flex h-screen justify-center items-center">
-    
-    <div class="space-y-2">
+  <div class="flex flex-col h-screen justify-center items-center">
 
-      <div id="title" class="block text-center -mt-20">
-        <img id="image" src="../assets/logo.svg" class="">
+      <div id="title" class="mb-8">
+        <img id="image" src="../assets/logo.svg" class="block mx-auto">
         <a id="landing_redirect" class="text-5xl font-regular text-white text-center">Financial Go</a>
       </div>
   
-      <div id="card" class="block text-center sm:w-full">
+      <div id="card" class="mb-20 text-center xs:w-full sm:w-full md:w-c-500">
         <h1 class="text-4xl font-regular">Login</h1>
-  
+
       </div>
 
     </div>
   
-  </div>
+  
 </template>
 
 <script>
@@ -30,7 +28,6 @@
 <style scoped>
   #card {
     background-color: white;
-    width: 500px;
     height: 419px;
     border-radius: 53px;
     margin-top: 0px;
