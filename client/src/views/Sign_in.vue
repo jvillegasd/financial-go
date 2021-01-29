@@ -9,35 +9,50 @@
       <div id="card" class="mb-20 text-center xs:w-full sm:w-full md:w-c-507">
         <h1 class="text-4xl font-regular">Login</h1>
 
-        <Textbox
-          label="Email"
-          :width=360
-          :labelFontSize=20
-          :inputFontSize=25
-          class="mx-auto mb-14">
-        </Textbox>
+        <div class="mb-12">
+          <Textbox
+            label="Email"
+            :width=360
+            :labelFontSize=20
+            :inputFontSize=25
+            class="mx-auto mb-12">
+          </Textbox>
 
-        <Textbox
-          label="Password"
-          :width=360
-          :lineWidth=245
-          :labelFontSize=20
-          :inputFontSize=25
-          :isPassword=true
-          class="mx-auto">
-        </Textbox>
+          <div class="relative">
+            <Textbox
+              label="Password"
+              :width=360
+              :lineWidth=245
+              :labelFontSize=20
+              :inputFontSize=25
+              :isPassword=true
+              class="mx-auto">
+            </Textbox>
+
+            <ArrowButton class="absolute top-0" style="right: 75px;">
+            </ArrowButton>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <p class="font-regular" style="font-size: 20px;">
+            Don't have an account? <a class="text-blue" id="sign_up">Sign up</a>
+          </p> 
+        </div>
       </div>
   </div>
 
 </template>
 
 <script>
-  import Textbox from '../components/textbox/Texbox';
+  import Textbox from '../components/textbox/Textbox';
+  import ArrowButton from '../components/arrow_btn/Arrow_btn';
 
   export default {
     name: 'Sign-in',
     components: {
-      Textbox
+      Textbox,
+      ArrowButton
     },
     beforeCreate: function() {
       document.body.className = 'sign_in';
@@ -48,7 +63,7 @@
 <style scoped>
   #card {
     background-color: white;
-    height: 419px;
+    height: 439px;
     border-radius: 53px;
     margin-top: 0px;
   }
@@ -61,8 +76,6 @@
     width: 119.03px;
     height: 93.36px;
   }
-
-
 
   #landing_redirect {
     display: block;
