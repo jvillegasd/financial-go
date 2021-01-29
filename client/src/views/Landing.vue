@@ -42,9 +42,9 @@
 </template>
 
 <script>
-  import BlueButton from '../components/Blue_btn';
-  import BorderedButton from '../components/Bordered_btn';
-  import BorderlessButton from '../components/Borderless_btn';
+  import BlueButton from '../components/blue_btn/Blue_btn';
+  import BorderedButton from '../components/bordered_btn/Bordered_btn';
+  import BorderlessButton from '../components/borderless_btn/Borderless_btn';
 
   export default {
     name: 'Landing',

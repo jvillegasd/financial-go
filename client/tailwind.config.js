@@ -26,7 +26,7 @@ module.exports = {
     },
     extend: {
       "spacing": {
-        "c-500": "500px",
+        "c-507": "507px",
       }
     }
   },
