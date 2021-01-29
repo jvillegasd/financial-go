@@ -10,7 +10,7 @@
         <h1 class="text-4xl font-regular">Sign up</h1>
 
         <div class="mb-12">
-          <div class="grid grid-cols-2 mb-12 mx-auto" style="width: 360px;">
+          <div class="grid grid-cols-2 mb-10 mx-auto" style="width: 360px;">
             <Textbox
               label="First name"
               :width=160
@@ -33,14 +33,13 @@
             :width=360
             :labelFontSize=20
             :inputFontSize=25
-            class="mx-auto mb-12">
+            class="mx-auto mb-10">
           </Textbox>
 
-          <div class="grid grid-cols-2 mb-12 mx-auto" style="width: 360px;">
+          <div class="grid grid-cols-2 mb-10 mx-auto" style="width: 360px;">
             <Textbox
               label="Password"
-              :width=360
-              :lineWidth=245
+              :width=245
               :labelFontSize=20
               :inputFontSize=25
               :isPassword=true
