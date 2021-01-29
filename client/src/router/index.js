@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../views/Landing.vue'
 import Sign_in from '../views/Sign_in.vue'
+import Sign_up from '../views/Sign_up.vue'
 
 Vue.use(VueRouter)
 
@@ -25,11 +26,25 @@ const routes = [
     name: 'Sign in',
     component: Sign_in,
     meta: {
-      title: "Financial Go | Sign in",
+      title: "Financial Go | Login",
       metaTags: [
         {
           name: "description",
           content: "Sign in a new user."
+        }
+      ]
+    }
+  },
+  {
+    path: '/sign_up',
+    name: 'Sign up',
+    component: Sign_up,
+    meta: {
+      title: "Financial Go | Sign up",
+      metaTags: [
+        {
+          name: "description",
+          content: "Sign up a new user."
         }
       ]
     }
