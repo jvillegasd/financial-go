@@ -9,7 +9,7 @@
       <div id="card" class="mb-20 text-center xs:w-full sm:w-full md:w-c-507">
         <h1 class="text-4xl font-regular">Login</h1>
 
-        <div class="mb-12">
+        <div class="mb-2">
           <Textbox
             label="Email"
             :width=360
@@ -18,27 +18,27 @@
             class="mx-auto mb-12">
           </Textbox>
 
-          <div class="relative">
+          <div class="grid grid-cols-2 mb-8 mx-auto" style="width: 360px;">
             <Textbox
               label="Password"
-              :width=360
-              :lineWidth=245
+              :width=245
               :labelFontSize=20
               :inputFontSize=25
               :isPassword=true
               class="mx-auto">
             </Textbox>
 
-            <ArrowButton class="absolute top-0" style="right: 75px;">
+            <ArrowButton class="ml-28">
             </ArrowButton>
           </div>
         </div>
 
-        <div class="w-full">
+        <div>
           <p class="font-regular" style="font-size: 20px;">
-            Don't have an account? <a class="text-blue" id="sign_up">Sign up</a>
+            Don't have an account? <a href="#" class="text-blue" id="sign_up">Sign up</a>
           </p> 
         </div>
+
       </div>
   </div>
 
@@ -63,7 +63,7 @@
 <style scoped>
   #card {
     background-color: white;
-    height: 439px;
+    height: 449px;
     border-radius: 53px;
     margin-top: 0px;
   }
