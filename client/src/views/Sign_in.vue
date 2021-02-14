@@ -3,7 +3,7 @@
 
       <div id="title" class="mb-10">
         <img id="image" src="../assets/logo.svg" class="block mx-auto">
-        <a id="landing_redirect" class="text-5xl font-regular text-white text-center">Financial Go</a>
+        <a id="landing_redirect" class="text-5xl font-regular text-white text-center" href="/">Financial Go</a>
       </div>
   
       <div id="card" class="mb-20 text-center xs:w-full sm:w-full md:w-c-507">
@@ -35,7 +35,7 @@
 
         <div>
           <p class="font-regular" style="font-size: 20px;">
-            Don't have an account? <a href="#" class="text-blue" id="sign_up">Sign up</a>
+            Don't have an account? <a href="/sign_up" class="text-blue" id="sign_up">Sign up</a>
           </p> 
         </div>
 
@@ -45,8 +45,8 @@
 </template>
 
 <script>
-  import Textbox from '../components/textbox/Textbox';
-  import ArrowButton from '../components/arrow_btn/Arrow_btn';
+  import Textbox from '../components/Textbox/Textbox';
+  import ArrowButton from '../components/Buttons/Arrow_btn';
 
   export default {
     name: 'Sign-in',

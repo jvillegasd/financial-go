@@ -3,3 +3,9 @@ body.sign_in, body.sign_up {
   height: 100%;
   background-attachment: fixed !important;
 }
+
+body.dashboard {
+  background: rgb(244, 244, 244);
+  height: 100%;
+  background-attachment: fixed !important;
+}

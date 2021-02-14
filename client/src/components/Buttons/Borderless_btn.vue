@@ -43,10 +43,8 @@ button {
   margin-top: var(--margin-top);
   outline: none;
 }
-
 button:hover {
   border-radius: var(--border-radius);
-
   @apply border-2 border-blue-80;
 }
 </style>

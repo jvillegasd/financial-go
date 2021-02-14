@@ -10,27 +10,31 @@
         :marginTop=32
         class="absolute right-64"
       ></BorderlessButton>
-      <BorderedButton
-        title="Sign in"
-        :width=174
-        :height=44.45
-        :fontSize=19
-        :marginTop=32
-        class="absolute right-14"
-      ></BorderedButton>
+      <a href="/sign_in">
+        <BorderedButton
+          title="Sign in"
+          :width=174
+          :height=44.45
+          :fontSize=19
+          :marginTop=32
+          class="absolute right-14"
+        ></BorderedButton>
+      </a>
     </div>
 
     <div class="Flex flex-row relative ">
       <div id="text" class="absolute inset-y-96 left-32">
         <h1 class="font-regular text-6xl">Financial Go</h1>
         <p id="content" class="font-regular text-4xl">The easiest way to manage your budget.</p>
-        <BlueButton
-          title="Start saving"
-          :width=233
-          :height=44.45
-          :fontSize=19
-          :marginTop=30
-        ></BlueButton>
+        <a href="/sign_up">
+          <BlueButton
+            title="Start saving"
+            :width=233
+            :height=44.45
+            :fontSize=19
+            :marginTop=30
+          ></BlueButton>
+        </a>
       </div>
 
       <div id="image-div" class="absolute inset-y-28 right-0">
@@ -42,9 +46,9 @@
 </template>
 
 <script>
-  import BlueButton from '../components/blue_btn/Blue_btn';
-  import BorderedButton from '../components/bordered_btn/Bordered_btn';
-  import BorderlessButton from '../components/borderless_btn/Borderless_btn';
+  import BlueButton from '../components/Buttons/Blue_btn';
+  import BorderedButton from '../components/Buttons/Bordered_btn';
+  import BorderlessButton from '../components/Buttons/Borderless_btn';
 
   export default {
     name: 'Landing',

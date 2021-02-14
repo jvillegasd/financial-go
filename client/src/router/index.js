@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../views/Landing.vue'
-import Sign_in from '../views/Sign_in.vue'
-import Sign_up from '../views/Sign_up.vue'
+import SignIn from '../views/Sign_in.vue'
+import SignUp from '../views/Sign_up.vue'
+import DashboardLayout from '../layout/DashboardLayout.vue';
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,7 @@ const routes = [
   {
     path: '/sign_in',
     name: 'Sign in',
-    component: Sign_in,
+    component: SignIn,
     meta: {
       title: "Financial Go | Login",
       metaTags: [
@@ -38,7 +39,7 @@ const routes = [
   {
     path: '/sign_up',
     name: 'Sign up',
-    component: Sign_up,
+    component: SignUp,
     meta: {
       title: "Financial Go | Sign up",
       metaTags: [
@@ -48,12 +49,19 @@ const routes = [
         }
       ]
     }
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardLayout,
+    children: []
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkExactActiveClass: 'active',
   routes
 })
 
