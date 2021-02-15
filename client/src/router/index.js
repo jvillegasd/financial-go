@@ -56,23 +56,68 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('../views/dashboard/Main.vue')
+        component: () => import('../views/dashboard/Main.vue'),
+        meta: {
+          title: "Financial Go | Dashboard",
+          metaTags: [
+            {
+              name: "dashboard",
+              description: "General data about the current user."
+            }
+          ]
+        }
       },
       {
         path: '/transactions',
-        component: () => import('../views/dashboard/Transactions.vue')
+        component: () => import('../views/dashboard/Transactions.vue'),
+        meta: {
+          title: "Financial Go | Transactions",
+          metaTags: [
+            {
+              name: "transactions",
+              description: "Transaction data of the current user."
+            }
+          ]
+        }
       },
       {
         path: '/invoices',
-        component: () => import('../views/dashboard/Invoices.vue')
+        component: () => import('../views/dashboard/Invoices.vue'),
+        meta: {
+          title: "Financial Go | Invoices",
+          metaTags: [
+            {
+              name: "invoices",
+              description: "Invoices data of the current user."
+            }
+          ]
+        }
       },
       {
         path: '/cards',
-        component: () => import('../views/dashboard/Cards.vue')
+        component: () => import('../views/dashboard/Cards.vue'),
+        meta: {
+          title: "Financial Go | Cards",
+          metaTags: [
+            {
+              name: "cards",
+              description: "Information about every card the current user registered."
+            }
+          ]
+        }
       },
       {
         path: '/settings',
-        component: () => import('../views/dashboard/Settings.vue')
+        component: () => import('../views/dashboard/Settings.vue'),
+        meta: {
+          title: "Financial Go | Settings",
+          metaTags: [
+            {
+              name: "settings",
+              description: "Dashboard settings."
+            }
+          ]
+        }
       }
     ]
   }
