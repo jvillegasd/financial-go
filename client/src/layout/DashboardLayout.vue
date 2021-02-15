@@ -19,7 +19,7 @@
       </div>
 
       <div id="content" class="text-left">
-        <ul>
+        <ul class="space-y-10">
           <li>
             <DashboardBtn :selected="true" title="Dashboard">
               <DashboardIcon />
