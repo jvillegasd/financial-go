@@ -21,27 +21,52 @@
       <div id="content" class="text-left">
         <ul class="space-y-10">
           <li>
-            <DashboardBtn :selected="true" title="Dashboard">
+            <DashboardBtn
+              id="dashboard_module"
+              title="Dashboard"
+              :selected="active_module === 'dashboard_module'"
+              @btn-pressed="activateModule"
+            >
               <DashboardIcon />
             </DashboardBtn>
           </li>
           <li>
-            <DashboardBtn title="Transactions">
+            <DashboardBtn
+              id="transaction_module"
+              title="Transactions"
+              :selected="active_module === 'transaction_module'"
+              @btn-pressed="activateModule"
+            >
               <TransactionIcon />
             </DashboardBtn>
           </li>
           <li>
-            <DashboardBtn title="Invoices">
+            <DashboardBtn
+              id="invoice_module"
+              title="Invoices"
+              :selected="active_module === 'invoice_module'"
+              @btn-pressed="activateModule"
+            >
               <ReceiptIcon />
             </DashboardBtn>
           </li>
           <li>
-            <DashboardBtn title="Cards">
+            <DashboardBtn
+              id="cards_module"
+              title="Cards"
+              :selected="active_module === 'cards_module'"
+              @btn-pressed="activateModule"
+            >
               <CreditCardIcon />
             </DashboardBtn>
           </li>
           <li>
-            <DashboardBtn title="Settings">
+            <DashboardBtn
+              id="settings_module"
+              title="Settings"
+              :selected="active_module === 'settings_module'"
+              @btn-pressed="activateModule"
+            >
               <SettingsIcon />
             </DashboardBtn>
           </li>
@@ -52,28 +77,38 @@
 </template>
 
 <script>
-  /* Material icons */
-  import DashboardBtn from "./Dashboard_btn";
-  import DashboardIcon from "vue-material-design-icons/ViewDashboard.vue";
-  import TransactionIcon from "vue-material-design-icons/Autorenew.vue";
-  import ReceiptIcon from "vue-material-design-icons/Receipt.vue";
-  import CreditCardIcon from "vue-material-design-icons/CreditCardOutline.vue";
-  import SettingsIcon from "vue-material-design-icons/Cog.vue";
+/* Material icons */
+import DashboardBtn from "./Dashboard_btn";
+import DashboardIcon from "vue-material-design-icons/ViewDashboard.vue";
+import TransactionIcon from "vue-material-design-icons/Autorenew.vue";
+import ReceiptIcon from "vue-material-design-icons/Receipt.vue";
+import CreditCardIcon from "vue-material-design-icons/CreditCardOutline.vue";
+import SettingsIcon from "vue-material-design-icons/Cog.vue";
 
-  export default {
-    name: "dashboard_layout",
-    components: {
-      DashboardBtn,
-      DashboardIcon,
-      TransactionIcon,
-      ReceiptIcon,
-      CreditCardIcon,
-      SettingsIcon
+export default {
+  name: "dashboard_layout",
+  components: {
+    DashboardBtn,
+    DashboardIcon,
+    TransactionIcon,
+    ReceiptIcon,
+    CreditCardIcon,
+    SettingsIcon,
+  },
+  data() {
+    return {
+      active_module: "dashboard_module",
+    };
+  },
+  beforeCreate: function () {
+    document.body.className = "dashboard";
+  },
+  methods: {
+    activateModule: function (btn_id) {
+      this.active_module = btn_id;
     },
-    beforeCreate: function () {
-      document.body.className = "dashboard";
-    },
-  };
+  }
+};
 </script>
 
 <style scoped>

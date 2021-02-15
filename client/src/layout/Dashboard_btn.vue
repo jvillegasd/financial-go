@@ -3,7 +3,9 @@
     
     <button
       v-if="selected"
+      :id="id"
       class="selected_item font-bold flex items-center justify-left"
+      @click="buttonPressed(id)"
     >
       <span class="selected_item_bar rounded-r-xl"></span>
       <slot></slot>
@@ -11,7 +13,9 @@
     </button>
     <button
       v-else
+      :id="id"
       class="dashboard_item font-bold flex items-center justify-left"
+      @click="buttonPressed(id)"
     > 
       <slot></slot>
       <p class="text-2xl ml-10">{{ title }}</p>
@@ -28,7 +32,13 @@
         type: Boolean,
         default: false,
       },
-      title: String
+      title: String,
+      id: String
+    },
+    methods: {
+      buttonPressed: function(btn_id) {
+        this.$emit("btn-pressed", btn_id);
+      }
     }
   }
 </script>
