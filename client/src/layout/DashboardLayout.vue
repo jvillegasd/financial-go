@@ -21,58 +21,72 @@
       <div id="content" class="text-left">
         <ul class="space-y-10">
           <li>
-            <DashboardBtn
-              id="dashboard_module"
-              title="Dashboard"
-              :selected="active_module === 'dashboard_module'"
-              @btn-pressed="activateModule"
-            >
-              <DashboardIcon />
-            </DashboardBtn>
+            <router-link to="/dashboard">
+              <DashboardBtn
+                id="dashboard_module"
+                title="Dashboard"
+                :selected="active_module === 'dashboard_module'"
+                @btn-pressed="activateModule"
+              >
+                <DashboardIcon />
+              </DashboardBtn>
+            </router-link>
           </li>
           <li>
-            <DashboardBtn
-              id="transaction_module"
-              title="Transactions"
-              :selected="active_module === 'transaction_module'"
-              @btn-pressed="activateModule"
-            >
-              <TransactionIcon />
-            </DashboardBtn>
+            <router-link to="/transactions">
+              <DashboardBtn
+                id="transaction_module"
+                title="Transactions"
+                :selected="active_module === 'transaction_module'"
+                @btn-pressed="activateModule"
+              >
+                <TransactionIcon />
+              </DashboardBtn>
+            </router-link>
           </li>
           <li>
-            <DashboardBtn
-              id="invoice_module"
-              title="Invoices"
-              :selected="active_module === 'invoice_module'"
-              @btn-pressed="activateModule"
-            >
-              <ReceiptIcon />
-            </DashboardBtn>
+            <router-link to="/invoices">
+              <DashboardBtn
+                id="invoice_module"
+                title="Invoices"
+                :selected="active_module === 'invoice_module'"
+                @btn-pressed="activateModule"
+              >
+                <ReceiptIcon />
+              </DashboardBtn>
+            </router-link>
           </li>
           <li>
-            <DashboardBtn
-              id="cards_module"
-              title="Cards"
-              :selected="active_module === 'cards_module'"
-              @btn-pressed="activateModule"
-            >
-              <CreditCardIcon />
-            </DashboardBtn>
+            <router-link to="/cards">
+              <DashboardBtn
+                id="cards_module"
+                title="Cards"
+                :selected="active_module === 'cards_module'"
+                @btn-pressed="activateModule"
+              >
+                <CreditCardIcon />
+              </DashboardBtn>
+            </router-link>
           </li>
           <li>
-            <DashboardBtn
-              id="settings_module"
-              title="Settings"
-              :selected="active_module === 'settings_module'"
-              @btn-pressed="activateModule"
-            >
-              <SettingsIcon />
-            </DashboardBtn>
+            <router-link to="/settings">
+              <DashboardBtn
+                id="settings_module"
+                title="Settings"
+                :selected="active_module === 'settings_module'"
+                @btn-pressed="activateModule"
+              >
+                <SettingsIcon />
+              </DashboardBtn>
+            </router-link>
           </li>
         </ul>
       </div>
     </aside>
+
+    <div class="main-content">
+      <router-view @selected-module="initActiveModule"></router-view>
+    </div>
   </div>
 </template>
 
@@ -97,7 +111,7 @@ export default {
   },
   data() {
     return {
-      active_module: "dashboard_module",
+      active_module: "",
     };
   },
   beforeCreate: function () {
@@ -107,36 +121,39 @@ export default {
     activateModule: function (btn_id) {
       this.active_module = btn_id;
     },
-  }
+    initActiveModule: function (current_module) {
+      this.active_module = current_module;
+    }
+  },
 };
 </script>
 
 <style scoped>
-  /* Sidebar */
-  #sidebar {
-    background-color: white;
-    width: 312px;
-    box-shadow: 5px 4px 4px 0 rgba(0, 0, 0, 0.07);
-  }
-  #image {
-    width: 50.03px;
-    height: 39.24px;
-  }
-  #title {
-    height: 85px;
-    width: 312px;
-  }
+/* Sidebar */
+#sidebar {
+  background-color: white;
+  width: 312px;
+  box-shadow: 5px 4px 4px 0 rgba(0, 0, 0, 0.07);
+}
+#image {
+  width: 50.03px;
+  height: 39.24px;
+}
+#title {
+  height: 85px;
+  width: 312px;
+}
 
-  /* Navbar */
-  #navbar {
-    background-color: white;
-    height: 84px;
-    border-bottom-right-radius: 50px;
-    box-shadow: 0px 3px 4px 0 rgba(0, 0, 0, 0.03);
-  }
-  #letter_circle {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-  }
+/* Navbar */
+#navbar {
+  background-color: white;
+  height: 84px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0px 3px 4px 0 rgba(0, 0, 0, 0.03);
+}
+#letter_circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
 </style>

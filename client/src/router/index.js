@@ -52,9 +52,29 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
     component: DashboardLayout,
-    children: []
+    children: [
+      {
+        path: '',
+        component: () => import('../views/dashboard/Main.vue')
+      },
+      {
+        path: '/transactions',
+        component: () => import('../views/dashboard/Transactions.vue')
+      },
+      {
+        path: '/invoices',
+        component: () => import('../views/dashboard/Invoices.vue')
+      },
+      {
+        path: '/cards',
+        component: () => import('../views/dashboard/Cards.vue')
+      },
+      {
+        path: '/settings',
+        component: () => import('../views/dashboard/Settings.vue')
+      }
+    ]
   }
 ]
 
