@@ -33,7 +33,7 @@ button {
 button:hover {
   background-color: white;
 
-  @apply text-blue-80 border-2 border-blue-80;
+  @apply text-blue-80 border-2 border-blue-80
 }
 
 button:hover > svg {
