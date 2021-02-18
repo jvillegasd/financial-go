@@ -25,3 +25,7 @@ body.dashboard {
 .bg-grad-purple_red {
   background: linear-gradient(176deg, rgba(117,98,255,1) 29%, rgba(234,107,107,1) 100%);
 }
+
+button {
+  outline: none !important;
+}
