@@ -10,6 +10,18 @@ body.dashboard {
   background-attachment: fixed !important;
 }
 
-.bg-grad-pb {
+.bg-grad-purple_blue {
   background: linear-gradient(172deg, rgba(51,201,255,1) 0%, rgba(117,98,255,1) 100%);
+}
+
+.bg-grad-pink_blue {
+  background: linear-gradient(176deg, rgba(233,186,255,1) 0%, rgba(21,171,255,1) 100%);
+}
+
+.bg-grad-dust_blue {
+  background: linear-gradient(176deg, rgba(234,186,107,1) 0%, rgba(107,176,234,1) 100%);
+}
+
+.bg-grad-purple_red {
+  background: linear-gradient(176deg, rgba(117,98,255,1) 29%, rgba(234,107,107,1) 100%);
 }
