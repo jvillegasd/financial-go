@@ -57,11 +57,11 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/cards">
+            <router-link to="/wallets">
               <DashboardBtn
-                id="cards_module"
-                title="Cards"
-                :selected="active_module === 'cards_module'"
+                id="wallets_module"
+                title="Wallets"
+                :selected="active_module === 'wallets_module'"
                 @btn-pressed="activateModule"
               >
                 <CreditCardIcon />

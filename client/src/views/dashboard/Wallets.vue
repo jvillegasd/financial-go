@@ -1,14 +1,14 @@
 <template>
   <div>
-    Cards
+    Wallets
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Cards',
+  name: 'Wallets',
   created() {
-    this.$emit('selected-module', "cards_module");
+    this.$emit('selected-module', "wallets_module");
   }
 }
 </script>

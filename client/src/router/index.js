@@ -94,14 +94,14 @@ const routes = [
         }
       },
       {
-        path: '/cards',
-        component: () => import('../views/dashboard/Cards.vue'),
+        path: '/wallets',
+        component: () => import('../views/dashboard/Wallets.vue'),
         meta: {
-          title: "Financial Go | Cards",
+          title: "Financial Go | Wallets",
           metaTags: [
             {
-              name: "cards",
-              description: "Information about every card the current user registered."
+              name: "wallets",
+              description: "Information about every wallet the current user registered."
             }
           ]
         }

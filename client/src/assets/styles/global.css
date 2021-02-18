@@ -9,3 +9,7 @@ body.dashboard {
   height: 100%;
   background-attachment: fixed !important;
 }
+
+.bg-grad-pb {
+  background: linear-gradient(172deg, rgba(51,201,255,1) 0%, rgba(117,98,255,1) 100%);
+}

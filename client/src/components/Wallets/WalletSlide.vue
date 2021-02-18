@@ -44,7 +44,15 @@ import RoundedBtn from "../../components/Buttons/Rounded_btn.vue";
 
 export default {
   name: "wallet-slide",
-  components: {RoundedBtn}
+  components: {RoundedBtn},
+  data() {
+    return {
+      wallets: null
+    }
+  },
+  mounted() {
+    
+  }
 }
 </script>
 
@@ -55,9 +63,6 @@ export default {
   }
   .wallet-label {
     color: rgba(250, 250, 250, 0.5);
-  }
-  .bg-grad-pb {
-    background: linear-gradient(172deg, rgba(51,201,255,1) 0%, rgba(117,98,255,1) 100%);
   }
   .card-slide-img {
     opacity: 0.1;
