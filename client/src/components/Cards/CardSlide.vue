@@ -31,10 +31,10 @@
       </div>
     </div>
 
-    <div class="flex flex-col items-center -mt-5">
+    <div class="flex flex-col items-center -mt-6">
       <div class="rounded-2xl bg-white shadow-md z-20" style="height: 37px; width: 307px;"></div>
-      <div class="rounded-2xl bg-white shadow-md z-10 -mt-3" style="height: 27px; width: 290px;"></div>
-      <rounded-btn class="z-20 -mt-5"></rounded-btn>
+      <div class="rounded-2xl bg-white shadow-md z-10 -mt-4" style="height: 27px; width: 290px;"></div>
+      <rounded-btn class="z-20 -mt-6"></rounded-btn>
     </div>
   </div>
 </template>
