@@ -119,11 +119,11 @@ export default {
 
 <style scoped>
   .line-plot {
-    width: 284px;
+    width: 324px;
     height: 170px;
   }
   .line-canvas {
-    width: 280px;
+    width: 320px;
     height: 100px;
   }
 </style>

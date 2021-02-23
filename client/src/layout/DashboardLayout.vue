@@ -85,7 +85,7 @@
     </aside>
 
     <main class="main-content pt-20 pl-80 flex justify-start">
-      <div class="p-4">
+      <div class="p-4 w-full h-full">
         <router-view @selected-module="initActiveModule"></router-view>
       </div>
       
