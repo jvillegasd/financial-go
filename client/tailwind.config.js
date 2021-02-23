@@ -19,7 +19,8 @@ module.exports = {
       "grey-bg": "#F4F4F4",
       "white": "#FFFFFF",
       "purple": "#7562FF",
-      "seablue": "#33C9FF"
+      "seablue": "#33C9FF",
+      "grey-label": "#AEB1B8"
     },
     fontFamily: {
       regular: ["GT Walsheim Pro Regular", "sans-serif"],
