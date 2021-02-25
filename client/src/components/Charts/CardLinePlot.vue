@@ -84,7 +84,7 @@ export default {
       this.chartdata = {
         datasets: [
           {
-            backgroundColor: '#005EEE',
+            backgroundColor: 'rgba(0, 94, 238, 0.8)',
             data: [
               this.getRandomInt(), 
               this.getRandomInt(),
@@ -103,7 +103,7 @@ export default {
             fill: false,
             pointBackgroundColor: '#005EEE',
             pointHoverBackgroundColor: '#005EEE',
-            borderColor: '#005EEE',
+            borderColor: 'rgba(0, 94, 238, 0.8)',
             pointBorderColor: '#005EEE',
             pointHoverBorderColor: '#005EEE'
           }
