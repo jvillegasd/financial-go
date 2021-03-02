@@ -2,7 +2,7 @@
   <div>
     <nav
       id="navbar"
-      class="fixed w-full flex items-center justify-end text-center"
+      class="fixed w-full flex items-center justify-end text-center z-50"
     >
       <p class="text-3xl font-bold mr-8">Hello, Admin</p>
       <span
@@ -12,7 +12,7 @@
       >
     </nav>
 
-    <aside id="sidebar" class="fixed h-full flex flex-col">
+    <aside id="sidebar" class="fixed h-full flex flex-col z-50">
       <div id="title" class="flex justify-center mt-5">
         <img id="image" src="../assets/logo.svg" class="" />
         <p class="font-bold text-3xl ml-3 mt-2">Financial Go</p>

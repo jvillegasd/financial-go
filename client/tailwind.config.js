@@ -14,7 +14,10 @@ module.exports = {
     },
     colors: {
       "blue": "#005EEE",
+      "dust": "#EABA6B",
       "blue-80": tinycolor("#005EEE").setAlpha(0.8).toRgbString(),
+      "blue-25": tinycolor("#005EEE").setAlpha(0.25).toRgbString(),
+      "dust-25": tinycolor("#EABA6B").setAlpha(0.25).toRgbString(),
       "black": "#1C202E",
       "grey-bg": "#F4F4F4",
       "white": "#FFFFFF",

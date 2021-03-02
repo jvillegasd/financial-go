@@ -33,7 +33,12 @@ export default {
         tooltips: {
           mode: "nearest",
           displayColors: false,
-          backgroundColor: "rgba(18, 24, 41, 1)"
+          backgroundColor: "rgba(18, 24, 41, 1)",
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return "$" + data['datasets'][0]['data'][tooltipItem['index']];
+            }
+          }
         },
         fullWidth: true,
         tooltipFontSize: 20,
@@ -111,7 +116,7 @@ export default {
       }
     },
     getRandomInt () {
-      return Math.floor(Math.random() * (1000000 - 5 + 1)) + 5
+      return Math.floor(Math.random() * (1000000 - 5 + 1)) + 5;
     }
   }
 }
