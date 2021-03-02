@@ -26,12 +26,12 @@
     <div class="my-4 ml-8">
       <selectbox
         class="cashflow-select"
-        :options="select_data"
+        :options="selectData"
       ></selectbox>
     </div>
 
     <div class="flex flex-between">
-      <div class="line-canvas ml-11">
+      <div class="line-canvas ml-11" v-if="showChart">
         <donut-chart :chartData="chartdata" :options="options" :height="155" :width="155"></donut-chart>
       </div>
 
@@ -45,7 +45,7 @@
           </div>
 
           <div class="text-left">
-            <h2 class="font-bold text-lg text-dust pt-2 truncate" style="width: 80px;">${{ model.income }}</h2>
+            <h2 class="font-bold text-lg text-dust pt-1 truncate" style="width: 80px;">${{ model.income }}</h2>
             <p class="font-bold text-dust text-sm pl-1 -mt-2">Income</p>
           </div>
         </div>
@@ -58,7 +58,7 @@
           </div>
 
           <div class="text-left">
-            <h2 class="font-bold text-lg text-blue pt-2 truncate" style="width: 80px;">${{ model.outcome }}</h2>
+            <h2 class="font-bold text-lg text-blue pt-1 truncate" style="width: 80px;">${{ model.outcome }}</h2>
             <p class="font-bold text-blue text-sm pl-1 -mt-2">Outcome</p>
           </div>
         </div>
@@ -81,6 +81,7 @@ export default {
   },
   data() {
     return {
+      showChart: false,
       model: {
         general: {
           daily: 250.5,
@@ -90,7 +91,7 @@ export default {
         income: null,
         outcome: null
       },
-      select_data: [
+      selectData: [
         {
           value: 'last_month',
           text: 'last month',
@@ -123,6 +124,9 @@ export default {
         elements: {
           arc: {
             borderWidth: 0
+          },
+          center: {
+            text: '$0' //set as you wish
           }
         },
         legend: {
@@ -133,11 +137,13 @@ export default {
   },
   mounted() {
     this.fillData();
+    this.showChart = true;
   },
   methods: {
     fillData() {
       this.model.income = this.getRandomInt();
       this.model.outcome = this.getRandomInt();
+      
       this.chartdata = {
         labels: ["Income", "Outcome"],
         datasets: [
