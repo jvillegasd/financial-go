@@ -16,8 +16,8 @@
 
 <script>
 import WalletSlide from '../../components/Wallets/WalletSlide.vue';
-import CardLinePlot from '../../components/Charts/CardLinePlot.vue';
-import Cashflow from '../../components/Charts/Cashflow.vue';
+import CardLinePlot from '../../components/Charts/Line/CardLinePlot.vue';
+import Cashflow from '../../components/Charts/Cashflow/Cashflow.vue';
 
 export default {
   name: 'Dashboard',

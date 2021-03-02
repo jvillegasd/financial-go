@@ -71,7 +71,7 @@
 
 <script>
 import DonutChart from "./DonutChart.vue";
-import Selectbox from "../Selectbox/Selectbox.vue";
+import Selectbox from "../../Selectbox/Selectbox.vue";
 
 export default {
   name: "cash-flow",
