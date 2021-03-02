@@ -10,6 +10,10 @@
     
     <div class="row flex justify-around mt-6">
       <cashflow></cashflow>
+      <div class="-mt-9 rounded-2xl bg-white shadow-md" style="height: 402px; width: 591px;" >
+        <h1 class="text-left text-2xl ml-8 mt-8 font-bold">Lastest transactions</h1>
+        <lastest-transactions></lastest-transactions>
+      </div>
     </div>
   </div>
 </template>
@@ -18,13 +22,15 @@
 import WalletSlide from '../../components/Wallets/WalletSlide.vue';
 import CardLinePlot from '../../components/Charts/Line/CardLinePlot.vue';
 import Cashflow from '../../components/Charts/Cashflow/Cashflow.vue';
+import LastestTransactions from '../../components/Tables/LastestTransactions.vue';
 
 export default {
   name: 'Dashboard',
   components: {
     WalletSlide,
     CardLinePlot,
-    Cashflow
+    Cashflow,
+    LastestTransactions
   },
   created() {
     this.$emit('selected-module', "dashboard_module");

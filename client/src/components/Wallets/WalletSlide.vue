@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <div :class="['wallet', 'shadow-md', 'rounded-2xl', 'space-y-2', 'z-30', walletCssClass]">
+    <div v-if="current_wallet" :class="['wallet', 'shadow-md', 'rounded-2xl', 'space-y-2', 'z-30', walletCssClass]">
       <div class="wallet-header flex justify-between items-center pl-8 pr-6 pt-4">
 
         <div class="text-left">

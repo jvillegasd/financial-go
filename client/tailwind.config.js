@@ -18,6 +18,7 @@ module.exports = {
       "blue-80": tinycolor("#005EEE").setAlpha(0.8).toRgbString(),
       "blue-25": tinycolor("#005EEE").setAlpha(0.25).toRgbString(),
       "dust-25": tinycolor("#EABA6B").setAlpha(0.25).toRgbString(),
+      "grey-table": tinycolor("#C4C4C4").setAlpha(0.07).toRgbString(),
       "black": "#1C202E",
       "grey-bg": "#F4F4F4",
       "white": "#FFFFFF",
