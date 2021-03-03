@@ -1,17 +1,13 @@
 <template>
-  <div>
+  <table class="table-base rounded-3xl bg-grey-table">
+    <thead class="table-header">
+      <slot name="header"></slot>
+    </thead>
 
-    <table class="table-base rounded-t-3xl bg-grey-table">
-      <thead class="table-header">
-        <slot name="header"></slot>
-      </thead>
-
-      <tbody>
-        <slot name="body"></slot>
-      </tbody>
-    </table>
-
-  </div>
+    <tbody>
+      <slot name="body"></slot>
+    </tbody>
+  </table>
 </template>
 
 <script>
