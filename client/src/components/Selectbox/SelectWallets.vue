@@ -5,7 +5,7 @@
       <div :class="['select-wallet-color', 'rounded-xl', 'absolute', 'flex', 'inset-y-0', 'items-center', 'left-2', 'top-2', 'pointer-events-none', walletCssClass]">
       </div>
 
-      <select v-model="selected_option" class="truncate rounded-xl pl-14 select-wallet block appearance-none outline-none w-full font-medium rounded leading-tight">
+      <select v-model="selected_option" class="shadow-md truncate rounded-xl pl-14 select-wallet block appearance-none outline-none w-full font-medium rounded leading-tight">
         <option
           v-for="option in wallets"
           v-bind:key="option.wallet_name"
