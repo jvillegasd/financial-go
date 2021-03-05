@@ -15,6 +15,10 @@
         <lastest-transactions class="flex justify-center mt-6"></lastest-transactions>
       </div>
     </div>
+
+    <div class="row flex justify-around mt-10">
+      <last-month-expenses></last-month-expenses>
+    </div>
   </div>
 </template>
 
@@ -23,6 +27,7 @@ import WalletSlide from '../../components/Wallets/WalletSlide.vue';
 import CardLinePlot from '../../components/Charts/Line/CardLinePlot.vue';
 import Cashflow from '../../components/Charts/Cashflow/Cashflow.vue';
 import LastestTransactions from '../../components/Tables/LastestTransactions.vue';
+import LastMonthExpenses from '../../components/Stadistics/ExpensesMonth.vue';
 
 export default {
   name: 'Dashboard',
@@ -30,7 +35,8 @@ export default {
     WalletSlide,
     CardLinePlot,
     Cashflow,
-    LastestTransactions
+    LastestTransactions,
+    LastMonthExpenses
   },
   created() {
     this.$emit('selected-module', "dashboard_module");

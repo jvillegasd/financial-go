@@ -26,6 +26,22 @@ body.dashboard {
   background: linear-gradient(176deg, rgba(117,98,255,1) 29%, rgba(234,107,107,1) 100%);
 }
 
+.black-expense-grad {
+  background: linear-gradient(176deg, rgba(28,32,46,1) 0%, rgba(66,78,121,1) 100%);
+}
+
+.blue-expense-grad {
+  background: linear-gradient(176deg, rgba(0,94,238,1) 0%, rgba(0,94,238,0.5) 100%);
+}
+
+.purple-expense-grad {
+  background: linear-gradient(176deg, rgba(117,98,255,1) 0%, rgba(117,98,255,0.7) 100%);
+}
+
+.dust-expense-grad {
+  background: linear-gradient(176deg, rgba(234,186,107,1) 0%, rgba(234,186,107,0.7) 100%);
+}
+
 button {
   outline: none !important;
 }
