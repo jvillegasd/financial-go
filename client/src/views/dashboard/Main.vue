@@ -18,6 +18,11 @@
 
     <div class="row flex justify-around mt-10">
       <last-month-expenses></last-month-expenses>
+      <expenses-recurrent></expenses-recurrent>
+    </div>
+
+    <div class="row flex justify-around mt-10">
+      <all-time-expenses></all-time-expenses>
     </div>
   </div>
 </template>
@@ -28,6 +33,8 @@ import CardLinePlot from '../../components/Charts/Line/CardLinePlot.vue';
 import Cashflow from '../../components/Charts/Cashflow/Cashflow.vue';
 import LastestTransactions from '../../components/Tables/LastestTransactions.vue';
 import LastMonthExpenses from '../../components/Stadistics/ExpensesMonth.vue';
+import ExpensesRecurrent from '../../components/Stadistics/ExpensesRecurrent.vue';
+import AllTimeExpenses from '../../components/Stadistics/ExpensesAllTime.vue';
 
 export default {
   name: 'Dashboard',
@@ -36,7 +43,9 @@ export default {
     CardLinePlot,
     Cashflow,
     LastestTransactions,
-    LastMonthExpenses
+    LastMonthExpenses,
+    ExpensesRecurrent,
+    AllTimeExpenses
   },
   created() {
     this.$emit('selected-module', "dashboard_module");

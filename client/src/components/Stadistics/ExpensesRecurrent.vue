@@ -1,30 +1,30 @@
 <template>
-  <div class="last-month-expenses rounded-2xl shadow-md bg-white">
-    <h1 class="text-left text-xl ml-8 mt-8 font-bold">Most expensive categories (last month)</h1>
+  <div class="recurrent-expenses rounded-2xl shadow-md bg-white">
+    <h1 class="text-left text-xl ml-8 mt-8 font-bold">Most expensive categories (recurrent)</h1>
 
-    <div class="flex justify-center items-center pt-7">
+    <div class="flex justify-center items-center pt-7 space-x-8">
       
-      <ul v-if="currentExpenses" class="expense-ul space-y-4">
+      <ul v-if="currentExpenses" class="rec-expense-ul space-y-4 pt-6">
         <li 
           v-for="elem in zip(currentExpenses, expensesColors)" 
           v-bind:key="elem[0].category"
           class="text-left font-bold flex items-center"
         >
-          <div :class="[elem[1], 'expense-li-square', 'rounded-md']"></div>
+          <div :class="[elem[1], 'rec-expense-li-square', 'rounded-md']"></div>
           <h3 class="pl-1">{{ elem[0].category }}</h3>
         </li>
       </ul>
 
       <div
         v-if="currentExpenses"
-        class="expense-div-grid grid gap-4 grid-cols-2"
+        class="rec-expense-div-grid grid gap-4 grid-rows-2"
       >
         <div
           v-for="elem in zip(currentExpenses, expensesColors, expensesShadows)"
           v-bind:key="elem[0].category"
-          :class="[elem[1], elem[2], 'rounded-2xl', 'expense-div-square', 'space-y-1', 'flex', 'flex-col', 'justify-center', 'items-center']"
+          :class="[elem[1], elem[2], 'rounded-2xl', 'rec-expense-div-square', 'space-y-1', 'flex', 'flex-col', 'justify-center', 'items-center']"
         > 
-          <img :src="getImgUrl(elem[0].icon_name)" class="expense-div-img block mx-auto">
+          <img :src="getImgUrl(elem[0].icon_name)" class="rec-expense-div-img block mx-auto">
           <h3 class="text-white font-bold truncate">${{ elem[0].value }}</h3>
         </div>
       </div>
@@ -35,20 +35,16 @@
 
 <script>
 export default {
-  name: "last-month-expenses",
+  name: "expenses-recurrent",
   data() {
     return {
       expensesColors: [
         "black-expense-grad",
         "blue-expense-grad",
-        "purple-expense-grad",
-        "dust-expense-grad"
       ],
       expensesShadows: [
         "black-expense-shadow",
         "blue-expense-shadow",
-        "purple-expense-shadow",
-        "dust-expense-shadow"
       ],
       currentExpenses: null
     }
@@ -64,16 +60,6 @@ export default {
         category: "Eating",
         icon_name: "eating.svg",
         value: 15790
-      },
-      {
-        category: "Fitness",
-        icon_name: "fitness.svg",
-        value: 500
-      },
-      {
-        category: "Credit card",
-        icon_name: "credit_card.svg",
-        value: 55
       }
     ];
   },
@@ -89,23 +75,23 @@ export default {
 </script>
 
 <style scoped>
-  .last-month-expenses {
-    width: 507px;
+  .recurrent-expenses {
+    width: 440px;
     height: 405px;
   }
-  .expense-li-square {
+  .rec-expense-li-square {
     width: 17px;
     height: 17px;
   }
-  .expense-div-square {
+  .rec-expense-div-square {
     width: 125px;
     height: 125px;
   }
-  .expense-div-grid {
-    width: 279px;
+  .rec-expense-div-grid {
+    width: 125px;
     height: 279px;
   }
-  .expense-ul {
+  .rec-expense-ul {
     width: 145px;
     height: 152px;
   }
