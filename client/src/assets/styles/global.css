@@ -42,6 +42,22 @@ body.dashboard {
   background: linear-gradient(176deg, rgba(234,186,107,1) 0%, rgba(234,186,107,0.7) 100%);
 }
 
+.black-expense-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(28, 32, 46, 0.3);
+}
+
+.blue-expense-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(0, 94, 238, 0.3);
+}
+
+.purple-expense-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(117, 98, 255, 0.3);
+}
+
+.dust-expense-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(234, 186, 107, 0.3);
+}
+
 button {
   outline: none !important;
 }
