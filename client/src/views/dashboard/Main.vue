@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="flex justify-start text-3xl font-bold ml-20 mt-7">Dashboard</h1>
+    <h1 class="flex justify-start text-3xl font-bold 2xl:ml-20 xl:ml-0 mt-7 mt-7">Dashboard</h1>
     
     <div class="row flex justify-around mt-6">
       <wallet-slide class="pl-2"></wallet-slide>
