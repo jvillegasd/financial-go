@@ -1,12 +1,12 @@
 <template>
-  <div class="all-time-expenses rounded-2xl shadow-md bg-white w-4/5">
+  <div class="all-time-expenses rounded-2xl shadow-md bg-white">
     <h1 class="text-left text-xl ml-8 mt-8 font-bold">Most expensive categories (all time)</h1>
 
-    <div class="flex justify-center items-center pt-7">
+    <div class="pt-3 flex justify-center">
 
       <div
         v-if="currentExpenses"
-        class="all-time-expense-div-grid grid gap-4 grid-cols-2"
+        class="all-time-expense-div-grid flex justify-center 2xl:space-x-6 lg:space-x-3"
       >
         <div
           v-for="elem in zip(currentExpenses, expensesColors, expensesShadows)"
@@ -79,20 +79,16 @@ export default {
 
 <style scoped>
   .all-time-expenses {
-    
-    height: 405px;
+    width: 1240px;
+    height: 192px;
   }
   .all-time-expense-li-square {
     width: 17px;
     height: 17px;
   }
   .all-time-expense-div-square {
-    width: 125px;
-    height: 125px;
-  }
-  .all-time-expense-div-grid {
-    width: 279px;
-    height: 279px;
+    width: 220px;
+    height: 98px;
   }
   .all-time-expense-ul {
     width: 145px;
