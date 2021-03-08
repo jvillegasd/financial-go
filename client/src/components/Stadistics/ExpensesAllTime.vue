@@ -11,10 +11,13 @@
         <div
           v-for="elem in zip(currentExpenses, expensesColors, expensesShadows)"
           v-bind:key="elem[0].category"
-          :class="[elem[1], elem[2], 'rounded-2xl', 'all-time-expense-div-square', 'space-y-1', 'flex', 'flex-col', 'justify-center', 'items-center']"
+          :class="[elem[1], elem[2], 'rounded-2xl', 'all-time-expense-div-square', 'space-y-1', 'space-x-5', 'flex', 'flex-row', 'justify-center', 'items-center']"
         > 
-          <img :src="getImgUrl(elem[0].icon_name)" class="all-time-expense-div-img block mx-auto">
-          <h3 class="text-white font-bold truncate">${{ elem[0].value }}</h3>
+          <img :src="getImgUrl(elem[0].icon_name)" class="all-time-expense-div-img">
+          <div>
+            <h2 class="text-white font-bold truncate">{{ elem[0].category }}</h2>
+            <h3 class="text-white font-bold truncate">${{ elem[0].value }}</h3>
+          </div>
         </div>
       </div>
 
