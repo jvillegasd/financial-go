@@ -40,6 +40,7 @@
               <td class="font-medium">18/05</td>
               <td class="pr-6">
                 <point-button></point-button>
+                <table-modal class="absolute"></table-modal>
               </td>
             </tr>
             <tr>
@@ -77,6 +78,7 @@ import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import PointButton from '../../components/Buttons/Point_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import TableBase from '../../components/Tables/TableBase.vue';
+import TableModal from '../../components/Modals/TableModal.vue';
 
 export default {
   name: 'Transactions',
@@ -84,6 +86,7 @@ export default {
     BlueButton,
     PointButton,
     SelectWallets,
+    TableModal,
     TableBase
   },
   created() {
