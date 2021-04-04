@@ -39,8 +39,10 @@
               <td class="font-medium text-blue">-$12</td>
               <td class="font-medium">18/05</td>
               <td class="pr-6">
-                <point-button></point-button>
-                <table-modal class="absolute"></table-modal>
+                <table-modal 
+                @delete-record="deleteRecord('some_id')"
+                @edit-record="editRecord('some_id')"
+                ></table-modal>
               </td>
             </tr>
             <tr>
@@ -51,7 +53,7 @@
               <td class="font-medium text-dust">+$1200</td>
               <td class="font-medium">17/05</td>
               <td class="pr-6">
-                <point-button></point-button>
+                <table-modal></table-modal>
               </td>
             </tr>
             <tr>
@@ -62,7 +64,7 @@
               <td class="font-medium text-blue">-$15</td>
               <td class="font-medium">17/05</td>
               <td class="pr-6">
-                <point-button></point-button>
+                <table-modal></table-modal>
               </td>
             </tr>
           </template>
@@ -75,7 +77,6 @@
 
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
-import PointButton from '../../components/Buttons/Point_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import TableBase from '../../components/Tables/TableBase.vue';
 import TableModal from '../../components/Modals/TableModal.vue';
@@ -84,13 +85,20 @@ export default {
   name: 'Transactions',
   components: {
     BlueButton,
-    PointButton,
     SelectWallets,
     TableModal,
     TableBase
   },
   created() {
     this.$emit('selected-module', "transaction_module");
+  },
+  methods: {
+    deleteRecord: function(recordId) {
+      console.log(`delete record ${recordId}`);
+    },
+    editRecord: function(recordId) {
+      console.log(`edit record ${recordId}`);
+    }
   }
 }
 </script>
