@@ -21,7 +21,8 @@
     "vue-chartjs": "^3.5.1",
     "vue-material-design-icons": "^4.11.0",
     "vue-router": "^3.2.0",
-    "vue-select": "^3.11.2"
+    "vue-select": "^3.11.2",
+    "vuesax": "^4.0.1-alpha.25"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

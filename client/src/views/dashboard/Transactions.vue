@@ -16,59 +16,62 @@
 
     <div class="row flex justify-center mt-8">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
-
-        <table-base class="transaction-table">
-          <template v-slot:header>
-            <tr style="height: 42px;">
-              <th class="w-1/6 ...">Id</th>
-              <th class="w-1/6 ...">Title</th>
-              <th class="w-1/6 ...">Category</th>
-              <th class="w-1/6 ...">Type</th>
-              <th class="w-1/6 ...">Amount</th>
-              <th class="w-1/6 ...">Date</th>
-              <th class="w-1/6 ..."></th>
-            </tr>
+        <vs-table class="transaction-table">
+          <template #thead>
+            <vs-tr>
+              <vs-th>Id</vs-th>
+              <vs-th>Title</vs-th>
+              <vs-th>Category</vs-th>
+              <vs-th>Type</vs-th>
+              <vs-th>Amount</vs-th>
+              <vs-th>Date</vs-th>
+              <vs-th></vs-th>
+            </vs-tr>
           </template>
 
-          <template v-slot:body>
-            <tr>
-              <td class="font-medium">50</td>
-              <td class="font-medium">Netflix</td>
-              <td class="font-medium">Entertaiment</td>
-              <td class="font-medium text-blue">Recurrent</td>
-              <td class="font-medium text-blue">-$12</td>
-              <td class="font-medium">18/05</td>
-              <td class="pr-6">
+          <template #tbody>
+            <vs-tr>
+              <vs-td class="font-medium">50</vs-td>
+              <vs-td class="font-medium">Netflix</vs-td>
+              <vs-td class="font-medium">Entertaiment</vs-td>
+              <vs-td class="font-medium text-blue">Recurrent</vs-td>
+              <vs-td class="font-medium text-blue">-$12</vs-td>
+              <vs-td class="font-medium">18/05</vs-td>
+              <vs-td class="pr-6">
                 <table-modal 
                 @delete-record="deleteRecord('some_id')"
                 @edit-record="editRecord('some_id')"
                 ></table-modal>
-              </td>
-            </tr>
-            <tr>
-              <td class="font-medium">49</td>
-              <td class="font-medium">Salary</td>
-              <td class="font-medium">Cash</td>
-              <td class="font-medium text-dust">Income</td>
-              <td class="font-medium text-dust">+$1200</td>
-              <td class="font-medium">17/05</td>
-              <td class="pr-6">
+              </vs-td>
+            </vs-tr>
+            <vs-tr>
+              <vs-td class="font-medium">49</vs-td>
+              <vs-td class="font-medium">Salary</vs-td>
+              <vs-td class="font-medium">Cash</vs-td>
+              <vs-td class="font-medium text-dust">Income</vs-td>
+              <vs-td class="font-medium text-dust">+$1200</vs-td>
+              <vs-td class="font-medium">17/05</vs-td>
+              <vs-td class="pr-6">
                 <table-modal></table-modal>
-              </td>
-            </tr>
-            <tr>
-              <td class="font-medium">48</td>
-              <td class="font-medium">Jeans</td>
-              <td class="font-medium">Shopping</td>
-              <td class="font-medium text-blue">Outcome</td>
-              <td class="font-medium text-blue">-$15</td>
-              <td class="font-medium">17/05</td>
-              <td class="pr-6">
+              </vs-td>
+            </vs-tr>
+            <vs-tr>
+              <vs-td class="font-medium">48</vs-td>
+              <vs-td class="font-medium">Jeans</vs-td>
+              <vs-td class="font-medium">Shopping</vs-td>
+              <vs-td class="font-medium text-blue">Outcome</vs-td>
+              <vs-td class="font-medium text-blue">-$15</vs-td>
+              <vs-td class="font-medium">17/05</vs-td>
+              <vs-td class="pr-6">
                 <table-modal></table-modal>
-              </td>
-            </tr>
+              </vs-td>
+            </vs-tr>
           </template>
-        </table-base>
+
+          <template #footer>
+            <vs-pagination v-model="page" :length="20" />
+          </template>
+        </vs-table>
 
       </div>
     </div>
@@ -78,7 +81,7 @@
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
-import TableBase from '../../components/Tables/TableBase.vue';
+//import TableBase from '../../components/Tables/TableBase.vue';
 import TableModal from '../../components/Modals/TableModal.vue';
 
 export default {
@@ -87,7 +90,11 @@ export default {
     BlueButton,
     SelectWallets,
     TableModal,
-    TableBase
+  },
+  data() {
+    return {
+      page: 1
+    }
   },
   created() {
     this.$emit('selected-module', "transaction_module");
