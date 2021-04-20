@@ -16,60 +16,59 @@
 
     <div class="row flex justify-center mt-8">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
-        <vs-table class="transaction-table">
+        
+        <vs-table class="transaction-table"  max-height="501px">
           <template #thead>
             <vs-tr>
-              <vs-th>Id</vs-th>
-              <vs-th>Title</vs-th>
-              <vs-th>Category</vs-th>
-              <vs-th>Type</vs-th>
-              <vs-th>Amount</vs-th>
-              <vs-th>Date</vs-th>
-              <vs-th></vs-th>
+              <vs-th>
+                <p class="font-medium text-lg text-center">Id</p>
+              </vs-th>
+              <vs-th>
+                <p class="font-medium text-lg">Title</p>
+              </vs-th>
+              <vs-th>
+                <p class="font-medium text-lg">Category</p>
+              </vs-th>
+              <vs-th>
+                <p class="font-medium text-lg">Type</p>
+              </vs-th>
+              <vs-th>
+                <p class="font-medium text-lg">Amount</p>
+              </vs-th>
+              <vs-th>
+                <p class="font-medium text-lg">Date</p>
+              </vs-th>
             </vs-tr>
           </template>
 
           <template #tbody>
-            <vs-tr>
-              <vs-td class="font-medium">50</vs-td>
-              <vs-td class="font-medium">Netflix</vs-td>
-              <vs-td class="font-medium">Entertaiment</vs-td>
-              <vs-td class="font-medium text-blue">Recurrent</vs-td>
-              <vs-td class="font-medium text-blue">-$12</vs-td>
-              <vs-td class="font-medium">18/05</vs-td>
-              <vs-td class="pr-6">
-                <table-modal 
-                @delete-record="deleteRecord('some_id')"
-                @edit-record="editRecord('some_id')"
-                ></table-modal>
+            <vs-tr
+              :key="i"
+              v-for="(tr, i) in transactions"
+            >
+              <vs-td>
+                <p class="font-medium text-lg">{{ tr.id }}</p>
               </vs-td>
-            </vs-tr>
-            <vs-tr>
-              <vs-td class="font-medium">49</vs-td>
-              <vs-td class="font-medium">Salary</vs-td>
-              <vs-td class="font-medium">Cash</vs-td>
-              <vs-td class="font-medium text-dust">Income</vs-td>
-              <vs-td class="font-medium text-dust">+$1200</vs-td>
-              <vs-td class="font-medium">17/05</vs-td>
-              <vs-td class="pr-6">
-                <table-modal></table-modal>
+              <vs-td>
+                <p class="font-medium text-lg">{{ tr.title }}</p>
               </vs-td>
-            </vs-tr>
-            <vs-tr>
-              <vs-td class="font-medium">48</vs-td>
-              <vs-td class="font-medium">Jeans</vs-td>
-              <vs-td class="font-medium">Shopping</vs-td>
-              <vs-td class="font-medium text-blue">Outcome</vs-td>
-              <vs-td class="font-medium text-blue">-$15</vs-td>
-              <vs-td class="font-medium">17/05</vs-td>
-              <vs-td class="pr-6">
-                <table-modal></table-modal>
+              <vs-td>
+                <p class="font-medium text-lg">{{ tr.category }}</p>
+              </vs-td>
+              <vs-td>
+                <p :class="['font-medium', 'text-lg', tr.type !== 'Income' ? 'text-blue' : 'text-dust']">{{ tr.type }}</p>
+              </vs-td>
+              <vs-td>
+                <p :class="['font-medium', 'text-lg', tr.type !== 'Income' ? 'text-blue' : 'text-dust']">{{ tr.amount }}</p>
+              </vs-td>
+              <vs-td>
+                <p class="font-medium text-lg">{{ tr.date }}</p>
               </vs-td>
             </vs-tr>
           </template>
 
           <template #footer>
-            <vs-pagination v-model="page" :length="20" />
+            <vs-pagination v-model="page" :length="20" class="font-medium" />
           </template>
         </vs-table>
 
@@ -81,19 +80,42 @@
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
-//import TableBase from '../../components/Tables/TableBase.vue';
-import TableModal from '../../components/Modals/TableModal.vue';
 
 export default {
   name: 'Transactions',
   components: {
     BlueButton,
     SelectWallets,
-    TableModal,
   },
   data() {
     return {
-      page: 1
+      page: 1,
+      transactions: [
+        {
+          id: "50",
+          title: "Netflix",
+          category: "Entertaiment",
+          type: "Recurrent",
+          amount: "-$12",
+          date: "18/05"
+        },
+        {
+          id: "49",
+          title: "Salary",
+          category: "Cash",
+          type: "Recurrent",
+          amount: "+$1200",
+          date: "17/05"
+        },
+        {
+          id: "48",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        }
+      ]
     }
   },
   created() {
@@ -119,7 +141,7 @@ export default {
     height: 591px;
   }
   .transaction-table {
-    width: 919px;
-    height: 501px;
+    width: 919px !important;
+    height: 501px !important;
   }
 </style>
