@@ -2,7 +2,7 @@
   <div>
     <h1 class="flex justify-start text-3xl font-bold 2xl:ml-20 xl:ml-0 mt-7">Transactions</h1>
     
-    <div class="row flex justify-end mt-6 2xl:mr-20 xl:mr-14 md:mr-2">
+    <div class="row flex justify-end mt-8 2xl:mr-20 xl:mr-14 md:mr-2">
        <BlueButton
         class="create_transaction font-medium"
         title="Create"
@@ -14,7 +14,7 @@
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
 
-    <div class="row flex justify-center mt-8">
+    <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
         
         <vs-table class="transaction-table"  max-height="501px">
@@ -44,7 +44,7 @@
           <template #tbody>
             <vs-tr
               :key="i"
-              v-for="(tr, i) in transactions"
+              v-for="(tr, i) in $vs.getPage(transactions, page, max)"
             >
               <vs-td>
                 <p class="font-medium text-lg">{{ tr.id }}</p>
@@ -59,16 +59,31 @@
                 <p :class="['font-medium', 'text-lg', tr.type !== 'Income' ? 'text-blue' : 'text-dust']">{{ tr.type }}</p>
               </vs-td>
               <vs-td>
-                <p :class="['font-medium', 'text-lg', tr.type !== 'Income' ? 'text-blue' : 'text-dust']">{{ tr.amount }}</p>
+                <p :class="['font-medium', 'truncate', 'text-lg', tr.type !== 'Income' ? 'text-blue' : 'text-dust']">{{ tr.amount }}</p>
               </vs-td>
               <vs-td>
                 <p class="font-medium text-lg">{{ tr.date }}</p>
               </vs-td>
+
+              <template #expand>
+                <div class="con-content flex flex-row justify-center items-center">
+                  <BlueButton
+                    class="font-medium"
+                    title="Edit"
+                    :width=100
+                    :height=35
+                    :fontSize=16
+                  ></BlueButton>
+                  <vs-button border danger>
+                    Delete
+                  </vs-button>
+                </div>
+              </template>
             </vs-tr>
           </template>
 
           <template #footer>
-            <vs-pagination v-model="page" :length="20" class="font-medium" />
+            <vs-pagination v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
 
@@ -90,6 +105,7 @@ export default {
   data() {
     return {
       page: 1,
+      max: 6,
       transactions: [
         {
           id: "50",
@@ -109,6 +125,70 @@ export default {
         },
         {
           id: "48",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Income",
+          amount: "+$15",
+          date: "17/05"
+        },
+        {
+          id: "47",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "46",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "45",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "44",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "43",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "42",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "41",
+          title: "Jeans",
+          category: "Shopping",
+          type: "Outcome",
+          amount: "-$15",
+          date: "17/05"
+        },
+        {
+          id: "40",
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
