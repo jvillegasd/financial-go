@@ -84,7 +84,7 @@
           </template>
 
           <template #footer>
-            <vs-pagination v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
+            <vs-pagination :disabled=true v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
         <!-- https://www.youtube.com/watch?v=MNkjaPCY7NA -->
