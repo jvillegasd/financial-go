@@ -16,8 +16,8 @@
 
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
-        
-        <vs-table class="transaction-table"  max-height="501px">
+        <div style=""></div>
+        <vs-table class="transaction-table">
           <template #thead>
             <vs-tr>
               <vs-th>
@@ -73,6 +73,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
+                    @btn-pressed="$refs.modalName.openModal()"
                   ></BlueButton>
                   <vs-button border danger>
                     Delete
@@ -86,6 +87,9 @@
             <vs-pagination v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
+        <!-- https://www.youtube.com/watch?v=MNkjaPCY7NA -->
+        <transaction-modal ref="modalName" class="z-10">
+        </transaction-modal>
 
       </div>
     </div>
@@ -95,12 +99,14 @@
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
+import TransactionModal from '../../components/Modals/TransactionModal.vue';
 
 export default {
   name: 'Transactions',
   components: {
     BlueButton,
     SelectWallets,
+    TransactionModal
   },
   data() {
     return {

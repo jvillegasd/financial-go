@@ -1,5 +1,5 @@
 <template>
-  <button class="bg-blue-80 font-regular" :style="cssVars">
+  <button class="bg-blue-80 font-regular" :style="cssVars" @click="buttonPressed">
     {{ title }}
   </button>
 </template>
@@ -30,6 +30,11 @@ export default {
         '--margin-top': this.marginTop + 'px',
         '--border-radius': this.borderRadius + 'px',
       };
+    }
+  },
+  methods: {
+    buttonPressed: function() {
+      this.$emit('btn-pressed');
     }
   }
 }
