@@ -4,7 +4,7 @@
 
 
       <label class="text-left  font-regular block label-select">{{ title }}</label>
-      <select v-model="selected_option" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
+      <select @input="selectOption" v-model="selected_option" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
         <option
         v-for="option in options"
         v-bind:key="option.text"
@@ -13,7 +13,6 @@
           {{ option.text }}
         </option>
       </select>
-
       <div class="absolute flex inset-y-0 items-center pr-4 pt-7 right-0 pointer-events-none">
         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M18.6637 9.66375L13.5 14.8162L8.33625 9.66375L6.75 11.25L13.5 18L20.25 11.25L18.6637 9.66375Z" fill="#1D1D1D" fill-opacity="0.6"/>
@@ -43,6 +42,12 @@ export default {
   mounted () {
     if (this.options.length) {
       this.selected_option = this.options[0].value;
+      this.selectOption();
+    }
+  },
+  methods: {
+    selectOption: function () {
+      this.$emit('selected-option', this.selectedOption);
     }
   },
   computed: {
@@ -50,6 +55,9 @@ export default {
       return {
         '--width': this.width + 'px'
       };
+    },
+    selectedOption: function () {
+      return this.selected_option;
     }
   }
 }

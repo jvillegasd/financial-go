@@ -41,7 +41,8 @@
               <select-transaction
               title="Category"
               :options="categories"
-              :width=200>
+              :width=200
+              @selected-option="setCategory">
               </select-transaction>
             </div>
 
@@ -97,10 +98,19 @@ export default {
           value: 'entertainment',
           text: 'Entertainment'
         },
-      ]
+        {
+          value: 'cash',
+          text: 'Cash'
+        }
+      ],
+      selected_category: null
     };
   },
   methods: {
+    setCategory: function (category) {
+      this.selected_category = category;
+      console.log(this.selected_category)
+    }
   },
 };
 </script>
