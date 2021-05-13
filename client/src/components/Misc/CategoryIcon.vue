@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="icon_card">
+    <div class="icon_card rounded-2xl flex justify-center items-center">
       <img :src="iconPath">
     </div>
 
@@ -27,5 +27,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .icon_card {
+    width: 74px;
+    height: 74px;
+    background-color: rgba(196, 196, 196, 0.17);
+  }
 </style>
