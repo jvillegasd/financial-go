@@ -4,7 +4,7 @@
 
 
       <label class="text-left  font-regular block label-select">{{ title }}</label>
-      <select @input="selectOption" v-model="selected_option" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
+      <select @change="selectOption" v-model="selected_option" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
         <option
         v-for="option in options"
         v-bind:key="option.text"
