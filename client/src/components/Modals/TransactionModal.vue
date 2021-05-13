@@ -44,6 +44,7 @@
               :width=200
               @selected-option="setCategory">
               </select-transaction>
+              <category-icon :name="selected_category"></category-icon>
             </div>
 
             <BlueButton
@@ -68,13 +69,15 @@
 import Textbox from '../../components/Textbox/Textbox';
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectTransaction from '../../components/Selectbox/SelectTransaction.vue';
+import CategoryIcon from '../../components/Misc/CategoryIcon.vue';
 
 export default {
   name: "transaction-modal",
   components: {
     Textbox,
     BlueButton,
-    SelectTransaction
+    SelectTransaction,
+    CategoryIcon
   },
   data() {
     return {
@@ -99,8 +102,8 @@ export default {
           text: 'Entertainment'
         },
         {
-          value: 'cash',
-          text: 'Cash'
+          value: 'money',
+          text: 'Money'
         }
       ],
       selected_category: null
