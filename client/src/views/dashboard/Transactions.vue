@@ -10,9 +10,13 @@
         :height=35
         :fontSize=16
         :marginTop=6
+        @btn-pressed="showModal"
       ></BlueButton>
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
+
+    <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
+    </transaction-modal>
 
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
@@ -73,7 +77,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                    @btn-pressed="$refs.modalName.openModal()"
+                    @btn-pressed="showModal"
                   ></BlueButton>
                   <vs-button border danger>
                     Delete
@@ -84,13 +88,9 @@
           </template>
 
           <template #footer>
-            <vs-pagination :disabled=true v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
+            <vs-pagination :disabled="isModalVisible" v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
-        <!-- https://www.youtube.com/watch?v=MNkjaPCY7NA -->
-        <transaction-modal ref="modalName" class="z-10">
-        </transaction-modal>
-
       </div>
     </div>
   </div>
@@ -110,6 +110,7 @@ export default {
   },
   data() {
     return {
+      isModalVisible: false,
       page: 1,
       max: 6,
       transactions: [
@@ -213,6 +214,12 @@ export default {
     },
     editRecord: function(recordId) {
       console.log(`edit record ${recordId}`);
+    },
+    showModal: function() {
+      this.isModalVisible = true;
+    },
+    closeModal: function() {
+      this.isModalVisible = false;
     }
   }
 }

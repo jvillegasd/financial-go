@@ -4,56 +4,59 @@
     <div>
       <div class="fixed overflow-x-hidden overflow-y-auto inset-0 z-40 flex justify-center items-center" >
         <div class="relative mx-auto w-auto max-w-2xl">
-          <div class="bg-white w-20 modal rounded-2xl flex flex-col items-center">
+          <div class="bg-white w-20 modal rounded-2xl flex flex-col items-center justify-center space-y-6">
             
-            <p class="text-center font-medium text-xl">New transaction</p>
+            <p class="text-center font-bold text-2xl">New transaction</p>
 
-            <Textbox
-              label="Title"
-              :width=245
-              :labelFontSize=20
-              :inputFontSize=25
-              :isPassword=false>
-            </Textbox>
+            <div class="flex flex-col justify-center items-left space-y-6">
+              <Textbox
+                label="Title"
+                :width=303
+                :labelFontSize=20
+                :inputFontSize=25
+                :isPassword=false>
+              </Textbox>
 
-            <select-transaction
-              title="Type"
-              :options="transaction_types"
-            ></select-transaction>
-
-            <Textbox
-              label="Amount"
-              :width=245
-              :labelFontSize=20
-              :inputFontSize=25
-              :isPassword=false>
-            </Textbox>
-
-            <Textbox
-              label="Date"
-              :width=245
-              :labelFontSize=20
-              :inputFontSize=25
-              :isPassword=false>
-            </Textbox>
-
-            <div>
               <select-transaction
-              title="Category"
-              :options="categories"
-              :width=200
-              @selected-option="setCategory">
-              </select-transaction>
-              <category-icon :name="selected_category"></category-icon>
-            </div>
+                title="Type"
+                :options="transaction_types"
+              ></select-transaction>
 
-            <BlueButton
-              class="font-medium"
-              title="Create transaction"
-              :width=303
-              :height=46
-              :fontSize=18>
-            </BlueButton>
+              <Textbox
+                label="Amount"
+                :width=303
+                :labelFontSize=20
+                :inputFontSize=25
+                :isPassword=false>
+              </Textbox>
+
+              <Textbox
+                label="Date"
+                :width=303
+                :labelFontSize=20
+                :inputFontSize=25
+                :isPassword=false>
+              </Textbox>
+
+              <div class="flex justify-center space-x-7">
+                <select-transaction
+                title="Category"
+                :options="categories"
+                :width=200
+                @selected-option="setCategory">
+                </select-transaction>
+                <category-icon :name="selected_category"></category-icon>
+              </div>
+
+              <BlueButton
+                class="font-medium"
+                title="Create transaction"
+                :width=303
+                :height=46
+                :fontSize=18
+                @btn-pressed="modalClosed">
+              </BlueButton>
+            </div>
             
           </div>
         </div>
@@ -113,6 +116,9 @@ export default {
     setCategory: function (category) {
       this.selected_category = category;
       console.log(this.selected_category)
+    },
+    modalClosed: function () {
+      this.$emit('closed');
     }
   },
 };
