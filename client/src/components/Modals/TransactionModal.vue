@@ -5,6 +5,8 @@
       <div class="fixed overflow-x-hidden overflow-y-auto inset-0 z-40 flex justify-center items-center" >
         <div class="relative mx-auto w-auto max-w-2xl">
           <div class="bg-white w-20 modal rounded-2xl flex flex-col items-center justify-center space-y-6">
+
+            <exit-icon class="absolute top-5 right-5" @btn-pressed="modalClosed"></exit-icon>
             
             <p class="text-center font-bold text-2xl">New transaction</p>
 
@@ -73,6 +75,7 @@ import Textbox from '../../components/Textbox/Textbox';
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectTransaction from '../../components/Selectbox/SelectTransaction.vue';
 import CategoryIcon from '../../components/Misc/CategoryIcon.vue';
+import ExitIcon from '../../components/Buttons/Exit_btn.vue';
 
 export default {
   name: "transaction-modal",
@@ -80,7 +83,8 @@ export default {
     Textbox,
     BlueButton,
     SelectTransaction,
-    CategoryIcon
+    CategoryIcon,
+    ExitIcon
   },
   data() {
     return {
@@ -127,6 +131,6 @@ export default {
 <style scoped>
   .modal {
     width: 486px;
-    height: 652px;
+    height: 682px;
   }
 </style>
