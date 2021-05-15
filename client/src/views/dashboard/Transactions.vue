@@ -18,6 +18,9 @@
     <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
     </transaction-modal>
 
+    <transaction-edit-modal v-show="isEditModalVisible" class="z-10" @closed="closeEditModal">
+    </transaction-edit-modal>
+
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
         <div style=""></div>
@@ -100,17 +103,20 @@
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import TransactionModal from '../../components/Modals/TransactionModal.vue';
+import TransactionEditModal from '../../components/Modals/TransactionEditModal.vue';
 
 export default {
   name: 'Transactions',
   components: {
     BlueButton,
     SelectWallets,
-    TransactionModal
+    TransactionModal,
+    TransactionEditModal
   },
   data() {
     return {
       isModalVisible: false,
+      isEditModalVisible: false,
       page: 1,
       max: 6,
       transactions: [
@@ -220,6 +226,12 @@ export default {
     },
     closeModal: function() {
       this.isModalVisible = false;
+    },
+    showEditModal: function() {
+      this.isEditModalVisible = true;
+    },
+    closeEditModal: function() {
+      this.isEditModalVisible = false;
     }
   }
 }
