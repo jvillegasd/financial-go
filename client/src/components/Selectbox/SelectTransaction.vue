@@ -42,7 +42,7 @@ export default {
   },
   mounted () {
     if (this.options.length) {
-      this.selected_option = this.value;
+      this.selected_option = this.value || this.options[0].value;
       this.selectOption();
     }
   },
