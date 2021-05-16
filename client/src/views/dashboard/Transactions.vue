@@ -73,7 +73,7 @@
               </vs-td>
 
               <template #expand>
-                <div class="con-content flex flex-row justify-center items-center">
+                <div class="con-content flex flex-row justify-center items-center space-x-2">
                   <BlueButton
                     class="font-medium"
                     title="Edit"
@@ -82,9 +82,15 @@
                     :fontSize=16
                     @btn-pressed="showEditModal"
                   ></BlueButton>
-                  <vs-button border danger>
-                    Delete
-                  </vs-button>
+
+                  <red-button
+                    class="font-medium"
+                    title="Delete"
+                    :width=100
+                    :height=35
+                    :fontSize=16
+                    @btn-pressed="modalClosed">
+                  </red-button>
                 </div>
               </template>
             </vs-tr>
@@ -101,6 +107,7 @@
 
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
+import RedButton from '../../components/Buttons/Red_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import TransactionModal from '../../components/Modals/TransactionModal.vue';
 import TransactionEditModal from '../../components/Modals/TransactionEditModal.vue';
@@ -109,6 +116,7 @@ export default {
   name: 'Transactions',
   components: {
     BlueButton,
+    RedButton,
     SelectWallets,
     TransactionModal,
     TransactionEditModal
