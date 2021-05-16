@@ -12,6 +12,7 @@
 
             <div class="flex flex-col justify-center items-left space-y-6">
               <Textbox
+                v-model="transactionData.title"
                 label="Title"
                 :width=303
                 :labelFontSize=20
@@ -20,6 +21,7 @@
               </Textbox>
 
               <select-transaction
+                v-model="transactionData.type"
                 title="Type"
                 :options="transaction_types"
               ></select-transaction>

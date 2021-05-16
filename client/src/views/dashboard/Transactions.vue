@@ -80,7 +80,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                    @btn-pressed="showModal"
+                    @btn-pressed="showEditModal"
                   ></BlueButton>
                   <vs-button border danger>
                     Delete
@@ -91,7 +91,7 @@
           </template>
 
           <template #footer>
-            <vs-pagination :disabled="isModalVisible" v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
+            <vs-pagination :disabled="isModalVisible || isEditModalVisible" v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
       </div>

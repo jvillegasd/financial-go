@@ -3,7 +3,7 @@
 
     <label class="font-regular block">{{ label }}</label>
     <div class="relative">
-      <input name="textbox" class="font-bold block" :type="textboxFieldType">
+      <input name="textbox" class="font-bold block" :value="value" :type="textboxFieldType" @input="handleInput($event.target.value)">
       
       <button v-if="isPassword" @click="showPassword">
         <EyeIcon v-if="textboxFieldType === 'password'" class="absolute top-2 right-0"/>
@@ -20,6 +20,7 @@ import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue';
 export default {
   name: 'Textbox',
   props: {
+    value: String,
     label: String,
     width: Number,
     labelFontSize: Number,
@@ -49,8 +50,11 @@ export default {
     };
   },
   methods: {
-    showPassword() {
+    showPassword () {
       this.textboxFieldType = this.textboxFieldType === "password" ? "text" : "password";
+    },
+    handleInput (value) {
+      this.$emit('input', value);
     }
   }
 }
