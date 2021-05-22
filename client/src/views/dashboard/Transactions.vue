@@ -26,7 +26,6 @@
 
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
-        <div style=""></div>
         <vs-table class="transaction-table">
           <template #thead>
             <vs-tr>
@@ -266,10 +265,11 @@ export default {
   }
   .card-table {
     width: 998px;
-    height: 591px;
   }
-  .transaction-table {
-    width: 919px !important;
-    height: 501px !important;
+  .card-table .transaction-table {
+    padding: 40px;
+    overflow: hidden;
+    height: auto;
+    transition: all .25s ease;
   }
 </style>
