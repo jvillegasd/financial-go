@@ -6,7 +6,7 @@
         <div class="relative mx-auto w-auto max-w-2xl">
           <div class="bg-white w-20 modal rounded-2xl flex flex-col items-center justify-center space-y-6">
 
-            <exit-icon class="absolute top-5 right-5" @btn-pressed="modalClosed"></exit-icon>
+            <exit-icon class="absolute top-5 right-5" @btn-pressed="modalClosed('exit')"></exit-icon>
             
             <p class="text-center font-bold text-2xl">Edit transaction</p>
 
@@ -58,7 +58,7 @@
                 :width=303
                 :height=46
                 :fontSize=18
-                @btn-pressed="modalClosed">
+                @btn-pressed="modalClosed('edit')">
               </BlueButton>
             </div>
             
@@ -135,10 +135,9 @@ export default {
   methods: {
     setCategory: function (category) {
       this.selected_category = category;
-      console.log(this.selected_category)
     },
-    modalClosed: function () {
-      this.$emit('closed');
+    modalClosed: function (optionPressed) {
+      this.$emit('closed', optionPressed);
     }
   },
 };

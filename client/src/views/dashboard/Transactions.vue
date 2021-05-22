@@ -15,6 +15,9 @@
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
 
+    <delete-record-modal v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
+    </delete-record-modal>
+
     <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
     </transaction-modal>
 
@@ -89,7 +92,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                    @btn-pressed="modalClosed">
+                    @btn-pressed="showDeleteModal">
                   </red-button>
                 </div>
               </template>
@@ -97,7 +100,7 @@
           </template>
 
           <template #footer>
-            <vs-pagination :disabled="isModalVisible || isEditModalVisible" v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
+            <vs-pagination :disabled="isModalVisible || isEditModalVisible || isDeleteModalVisible" v-model="page" :length="$vs.getLength(transactions, max)" class="font-medium" />
           </template>
         </vs-table>
       </div>
@@ -111,6 +114,7 @@ import RedButton from '../../components/Buttons/Red_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import TransactionModal from '../../components/Modals/TransactionModal.vue';
 import TransactionEditModal from '../../components/Modals/TransactionEditModal.vue';
+import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
 
 export default {
   name: 'Transactions',
@@ -119,12 +123,14 @@ export default {
     RedButton,
     SelectWallets,
     TransactionModal,
-    TransactionEditModal
+    TransactionEditModal,
+    DeleteRecordModal
   },
   data() {
     return {
       isModalVisible: false,
       isEditModalVisible: false,
+      isDeleteModalVisible: false,
       page: 1,
       max: 6,
       transactions: [
@@ -232,14 +238,23 @@ export default {
     showModal: function() {
       this.isModalVisible = true;
     },
-    closeModal: function() {
+    closeModal: function(optionPressed) {
+      console.log('create modal', optionPressed);
       this.isModalVisible = false;
     },
     showEditModal: function() {
       this.isEditModalVisible = true;
     },
-    closeEditModal: function() {
+    closeEditModal: function(optionPressed) {
+      console.log('edit modal', optionPressed);
       this.isEditModalVisible = false;
+    },
+    showDeleteModal: function() {
+      this.isDeleteModalVisible = true;
+    },
+    closeDeleteModal: function(optionPressed) {
+      console.log('delete modal', optionPressed);
+      this.isDeleteModalVisible = false;
     }
   }
 }
