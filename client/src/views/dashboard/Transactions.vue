@@ -125,7 +125,7 @@ export default {
     TransactionEditModal,
     DeleteRecordModal
   },
-  data() {
+  data () {
     return {
       isModalVisible: false,
       isEditModalVisible: false,
