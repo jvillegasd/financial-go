@@ -21,7 +21,7 @@
     <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
     </transaction-modal>
 
-    <transaction-edit-modal v-show="isEditModalVisible" class="z-10" @closed="closeEditModal">
+    <transaction-edit-modal :transactionData="selectedRow" v-show="isEditModalVisible" class="z-10" @closed="closeEditModal">
     </transaction-edit-modal>
 
     <div class="row flex justify-center mt-12">
@@ -82,7 +82,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                    @btn-pressed="showEditModal"
+                    @btn-pressed="showEditModal(tr)"
                   ></BlueButton>
 
                   <red-button
@@ -132,11 +132,12 @@ export default {
       isDeleteModalVisible: false,
       page: 1,
       max: 6,
+      selectedRow: null,
       transactions: [
         {
           id: "50",
           title: "Netflix",
-          category: "Entertaiment",
+          category: "Entertainment",
           type: "Recurrent",
           amount: "-$12",
           date: "18/05"
@@ -144,7 +145,7 @@ export default {
         {
           id: "49",
           title: "Salary",
-          category: "Cash",
+          category: "Money",
           type: "Recurrent",
           amount: "+$1200",
           date: "17/05"
@@ -241,7 +242,11 @@ export default {
       console.log('create modal', optionPressed);
       this.isModalVisible = false;
     },
-    showEditModal: function() {
+    showEditModal: function(selectedRow) {
+      this.selectedRow = Object.assign({}, selectedRow);
+      this.selectedRow.type = this.selectedRow.type.toLowerCase();
+      this.selectedRow.category = this.selectedRow.category.toLowerCase();
+      
       this.isEditModalVisible = true;
     },
     closeEditModal: function(optionPressed) {

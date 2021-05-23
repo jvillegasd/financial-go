@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade">
 
-    <div>
+    <div v-if="transactionData">
       <div class="fixed overflow-x-hidden overflow-y-auto inset-0 z-40 flex justify-center items-center" >
         <div class="relative mx-auto w-auto max-w-2xl">
           <div class="bg-white w-20 modal rounded-2xl flex flex-col items-center justify-center space-y-6">
@@ -23,15 +23,16 @@
               <select-transaction
                 v-model="transactionData.type"
                 title="Type"
-                :options="transaction_types"
-              ></select-transaction>
+                :options="transaction_types">
+              </select-transaction>
 
               <Textbox
                 label="Amount"
                 :width=303
                 :labelFontSize=20
                 :inputFontSize=25
-                :isPassword=false>
+                :isPassword=false
+                v-model="transactionData.amount">
               </Textbox>
 
               <Textbox
@@ -39,7 +40,8 @@
                 :width=303
                 :labelFontSize=20
                 :inputFontSize=25
-                :isPassword=false>
+                :isPassword=false
+                v-model="transactionData.date">
               </Textbox>
 
               <div class="flex justify-center space-x-7">
@@ -47,9 +49,12 @@
                 title="Category"
                 :options="categories"
                 :width=200
-                @selected-option="setCategory">
+                v-model="transactionData.category">
                 </select-transaction>
-                <category-icon :name="selected_category"></category-icon>
+
+                <category-icon 
+                :name="transactionData.category">
+                </category-icon>
               </div>
 
               <BlueButton
@@ -61,11 +66,10 @@
                 @btn-pressed="modalClosed('edit')">
               </BlueButton>
             </div>
-            
           </div>
         </div>
       </div>
-
+      
       <div class="absolute inset-0 z-10 opacity-25 bg-black"></div>
     </div>
 
@@ -90,7 +94,7 @@ export default {
           type: "recurrent",
           amount: 10,
           date: "1/1/2021",
-          selected_category: "money"
+          category: "money"
         }
       }
     }
@@ -127,14 +131,18 @@ export default {
         {
           value: 'money',
           text: 'Money'
+        },
+        {
+          value: 'shopping',
+          text: 'Shopping'
         }
       ],
-      selected_category: null
+      category: null
     };
   },
   methods: {
     setCategory: function (category) {
-      this.selected_category = category;
+      this.category = category;
     },
     modalClosed: function (optionPressed) {
       this.$emit('closed', optionPressed);

@@ -22,7 +22,8 @@
               <select-transaction
                 title="Type"
                 :options="transaction_types"
-              ></select-transaction>
+                v-model="selected_type">
+              </select-transaction>
 
               <Textbox
                 label="Amount"
@@ -45,7 +46,7 @@
                 title="Category"
                 :options="categories"
                 :width=200
-                @selected-option="setCategory">
+                v-model="selected_category">
                 </select-transaction>
                 <category-icon :name="selected_category"></category-icon>
               </div>
@@ -111,15 +112,17 @@ export default {
         {
           value: 'money',
           text: 'Money'
+        },
+        {
+          value: 'shopping',
+          text: 'Shopping'
         }
       ],
-      selected_category: null
+      selected_category: 'entertainment',
+      selected_type: 'recurrent'
     };
   },
   methods: {
-    setCategory: function (category) {
-      this.selected_category = category;
-    },
     modalClosed: function (optionPressed) {
       this.$emit('closed', optionPressed);
     }

@@ -1,10 +1,9 @@
 <template>
   <div class="relative select-transaction-div" :style="cssVars">
     <div class=" mt-1 relative">
-
-
+      
       <label class="text-left font-regular block label-select mb-1">{{ title }}</label>
-      <select @change="selectOption" :value="value" @input="handleInput($event.target.value)" v-model="selected_option" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
+      <select :value="value" @input="handleInput($event.target.value)" name="select" class="truncate rounded-xl pl-5 select-wallet block appearance-none outline-none bg-grey-select font-bold text-xl rounded leading-tight ">
         <option
         v-for="option in options"
         v-bind:key="option.text"
@@ -40,16 +39,7 @@ export default {
       selected_option: null
     }
   },
-  mounted () {
-    if (this.options.length) {
-      this.selected_option = this.value || this.options[0].value;
-      this.selectOption();
-    }
-  },
   methods: {
-    selectOption: function () {
-      this.$emit('selected-option', this.selectedOption);
-    },
     handleInput (value) {
       this.$emit('input', value);
     }
