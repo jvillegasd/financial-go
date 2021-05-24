@@ -2,6 +2,9 @@
   <div>
     <h1 class="flex justify-start text-3xl font-bold 2xl:ml-20 xl:ml-0 mt-7">Wallets</h1>
 
+    <wallet-modal v-show="isWalletModalVisible" class="z-10" @closed="closeModal">
+    </wallet-modal>
+
     <delete-record-modal v-if="selectedRow" v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
       <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "{{ selectedRow.name }}"?</h2>
     </delete-record-modal>
@@ -74,7 +77,8 @@
           title="Create a wallet"
           :width=130
           :height=35
-          :fontSize=16>
+          :fontSize=16
+          @btn-pressed="showModal">
         </BlueButton>
 
       </div>
@@ -86,16 +90,19 @@
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import RedButton from '../../components/Buttons/Red_btn.vue';
 import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
+import WalletModal from '../../components/Modals/WalletModal.vue';
 
 export default {
   name: 'Wallets',
   components: {
     BlueButton,
     RedButton,
-    DeleteRecordModal
+    DeleteRecordModal,
+    WalletModal
   },
   data () {
     return {
+      isWalletModalVisible: false,
       isDeleteModalVisible: false,
       selectedRow: null,
       cards: [
@@ -130,6 +137,13 @@ export default {
     this.$emit('selected-module', "wallets_module");
   },
   methods: {
+    showModal: function() {
+      this.isWalletModalVisible = true;
+    },
+    closeModal: function(optionPressed) {
+      console.log('create modal', optionPressed);
+      this.isWalletModalVisible = false;
+    },
     showDeleteModal: function(selectedRow) {
       this.selectedRow = Object.assign({}, selectedRow);
       this.isDeleteModalVisible = true;
