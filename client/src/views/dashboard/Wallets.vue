@@ -5,6 +5,9 @@
     <wallet-modal v-show="isWalletModalVisible" class="z-10" @closed="closeModal">
     </wallet-modal>
 
+    <wallet-edit-modal :walletData="selectedRow" v-show="isWalletEditModalVisible" class="z-10" @closed="closeEditModal">
+    </wallet-edit-modal>
+
     <delete-record-modal v-if="selectedRow" v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
       <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "{{ selectedRow.name }}"?</h2>
     </delete-record-modal>
@@ -56,7 +59,8 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                  ></BlueButton>
+                    @btn-pressed="showEditModal(tr)">
+                  </BlueButton>
 
                   <red-button
                     class="font-medium"
@@ -91,6 +95,7 @@ import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import RedButton from '../../components/Buttons/Red_btn.vue';
 import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
 import WalletModal from '../../components/Modals/WalletModal.vue';
+import WalletEditModal from '../../components/Modals/WalletEditModal.vue';
 
 export default {
   name: 'Wallets',
@@ -98,11 +103,13 @@ export default {
     BlueButton,
     RedButton,
     DeleteRecordModal,
-    WalletModal
+    WalletModal,
+    WalletEditModal
   },
   data () {
     return {
       isWalletModalVisible: false,
+      isWalletEditModalVisible: false,
       isDeleteModalVisible: false,
       selectedRow: null,
       cards: [
@@ -110,25 +117,29 @@ export default {
           id: "4",
           name: "Card 4",
           amount: "$0",
-          date: "18/05/2021"
+          date: "18/05/2021",
+          selectedColor: "purple_blue"
         },
         {
           id: "3",
           name: "Home wallet",
           amount: "$1200",
-          date: "17/05/2021"
+          date: "17/05/2021",
+          selectedColor: "pink_blue"
         },
         {
           id: "2",
           name: "Card 2",
           amount: "$50",
-          date: "17/05/2021"
+          date: "17/05/2021",
+          selectedColor: "dust_blue"
         },
         {
           id: "1",
           name: "Card 1",
           amount: "$600",
-          date: "16/05/2021"
+          date: "16/05/2021",
+          selectedColor: "purple_red"
         }
       ]
     }
@@ -143,6 +154,14 @@ export default {
     closeModal: function(optionPressed) {
       console.log('create modal', optionPressed);
       this.isWalletModalVisible = false;
+    },
+    showEditModal: function(selectedRow) {
+      this.selectedRow = Object.assign({}, selectedRow);
+      this.isWalletEditModalVisible = true;
+    },
+    closeEditModal: function(optionPressed) {
+      console.log('edit modal', optionPressed);
+      this.isWalletEditModalVisible = false
     },
     showDeleteModal: function(selectedRow) {
       this.selectedRow = Object.assign({}, selectedRow);
