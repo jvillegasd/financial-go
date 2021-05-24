@@ -75,7 +75,7 @@
               </vs-td>
 
               <template #expand>
-                <div class="con-content flex flex-row justify-center items-center space-x-2">
+                <div class="flex flex-row justify-center items-center space-x-2">
                   <BlueButton
                     class="font-medium"
                     title="Edit"

@@ -40,10 +40,28 @@
               <vs-td>
                 <p class="font-medium text-lg">{{ tr.date }}</p>
               </vs-td>
+              
+              <template #expand>
+                <div class="flex flex-row justify-center items-center space-x-2">
+                  <BlueButton
+                    class="font-medium"
+                    title="Edit"
+                    :width=100
+                    :height=35
+                    :fontSize=16
+                  ></BlueButton>
+
+                  <red-button
+                    class="font-medium"
+                    title="Delete"
+                    :width=100
+                    :height=35
+                    :fontSize=16>
+                  </red-button>
+                </div>
+              </template>
             </vs-tr>
           </template>
-
-
         </vs-table>
 
         <BlueButton
@@ -61,11 +79,13 @@
 
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
+import RedButton from '../../components/Buttons/Red_btn.vue';
 
 export default {
   name: 'Wallets',
   components: {
-    BlueButton
+    BlueButton,
+    RedButton
   },
   data () {
     return {
