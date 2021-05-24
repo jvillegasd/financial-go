@@ -10,7 +10,7 @@
             
             <p class="text-center font-bold text-2xl">New wallet</p>
 
-            <div>
+            <div class="flex flex-row space-x-2 ml-10">
               <div class="flex flex-col items-center">
                 <div :class="['wallet', 'shadow-md', 'rounded-2xl', 'space-y-2', 'z-30', walletCssClass]">
                   <div class="wallet-header flex justify-between items-center pl-8 pr-6 pt-4">
@@ -44,8 +44,16 @@
                 </div>
               </div>
 
-              <div>
-                
+              <div class="color-div shadow-md flex flex-col justify-center items-center space-y-3">
+                <svg class="mt-3" width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.71 0.292486L13.66 5.23249C15.22 6.79249 16 8.87249 16 10.8725C16 12.8725 15.22 14.9825 13.66 16.5425C12.1 18.1025 10.05 18.8925 8 18.8925C5.95 18.8925 3.9 18.1025 2.34 16.5425C0.78 14.9825 0 12.8725 0 10.8725C0 8.87249 0.78 6.79249 2.34 5.23249L7.3 0.292486C7.48683 0.105233 7.74048 0 8.005 0C8.26952 0 8.52317 0.105233 8.71 0.292486ZM3.76 6.83249C2.62 7.96249 2.01 9.23248 2 11.2325H14C13.99 9.23248 13.38 8.00249 12.24 6.88249L8 2.50249L3.76 6.83249Z" fill="black" fill-opacity="0.54"/>
+                </svg>
+
+                <button class="color_btn rounded-lg bg-grad-purple_blue" @click="selectColor('purple_blue')"></button>
+                <button class="color_btn rounded-lg bg-grad-pink_blue" @click="selectColor('pink_blue')"></button>
+                <button class="color_btn rounded-lg bg-grad-dust_blue" @click="selectColor('dust_blue')"></button>
+                <button class="color_btn rounded-lg bg-grad-purple_red" @click="selectColor('purple_red')"></button>
+
               </div>
 
             </div>
@@ -110,7 +118,7 @@ export default {
     BlueButton,
     ExitIcon
   },
-  data() {
+  data () {
     return {
       title: "",
       amount: "",
@@ -121,6 +129,9 @@ export default {
   methods: {
     modalClosed: function (optionPressed) {
       this.$emit('closed', optionPressed);
+    },
+    selectColor: function (optionPressed) {
+      this.selectedColor = optionPressed;
     }
   },
   computed: {
@@ -150,5 +161,14 @@ export default {
   }
   .amount-show, .title-h1 {
     width: 120px;
+  }
+  .color-div {
+    width: 30px;
+    height: 164px;
+    border-radius: 20px;
+  }
+  .color_btn {
+    width: 16px;
+    height: 16px;
   }
 </style>
