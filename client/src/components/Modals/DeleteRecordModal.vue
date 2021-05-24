@@ -12,8 +12,7 @@
 
             <h1 class="text-center font-bold text-2xl">Are you sure?</h1>
 
-            <!-- <slot></slot> -->
-            <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "Salary"?</h2>
+            <slot></slot>
 
             <div class="space-x-16">
               <red-button

@@ -15,7 +15,8 @@
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
 
-    <delete-record-modal v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
+    <delete-record-modal v-if="selectedRow" v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
+      <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "{{ selectedRow.title }}"?</h2>
     </delete-record-modal>
 
     <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
@@ -91,7 +92,7 @@
                     :width=100
                     :height=35
                     :fontSize=16
-                    @btn-pressed="showDeleteModal">
+                    @btn-pressed="showDeleteModal(tr)">
                   </red-button>
                 </div>
               </template>
@@ -253,7 +254,11 @@ export default {
       console.log('edit modal', optionPressed);
       this.isEditModalVisible = false;
     },
-    showDeleteModal: function() {
+    showDeleteModal: function(selectedRow) {
+      this.selectedRow = Object.assign({}, selectedRow);
+      this.selectedRow.type = this.selectedRow.type.toLowerCase();
+      this.selectedRow.category = this.selectedRow.category.toLowerCase();
+
       this.isDeleteModalVisible = true;
     },
     closeDeleteModal: function(optionPressed) {

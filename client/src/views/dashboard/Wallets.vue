@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1 class="flex justify-start text-3xl font-bold 2xl:ml-20 xl:ml-0 mt-7">Wallets</h1>
-  
+
+    <delete-record-modal v-if="selectedRow" v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
+      <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "{{ selectedRow.name }}"?</h2>
+    </delete-record-modal>
+
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
         
@@ -40,7 +44,7 @@
               <vs-td>
                 <p class="font-medium text-lg">{{ tr.date }}</p>
               </vs-td>
-              
+
               <template #expand>
                 <div class="flex flex-row justify-center items-center space-x-2">
                   <BlueButton
@@ -56,7 +60,8 @@
                     title="Delete"
                     :width=100
                     :height=35
-                    :fontSize=16>
+                    :fontSize=16
+                    @btn-pressed="showDeleteModal(tr)">
                   </red-button>
                 </div>
               </template>
@@ -80,15 +85,19 @@
 <script>
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import RedButton from '../../components/Buttons/Red_btn.vue';
+import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
 
 export default {
   name: 'Wallets',
   components: {
     BlueButton,
-    RedButton
+    RedButton,
+    DeleteRecordModal
   },
   data () {
     return {
+      isDeleteModalVisible: false,
+      selectedRow: null,
       cards: [
         {
           id: "4",
@@ -119,6 +128,16 @@ export default {
   },
   created() {
     this.$emit('selected-module', "wallets_module");
+  },
+  methods: {
+    showDeleteModal: function(selectedRow) {
+      this.selectedRow = Object.assign({}, selectedRow);
+      this.isDeleteModalVisible = true;
+    },
+    closeDeleteModal: function(optionPressed) {
+      console.log('delete modal', optionPressed);
+      this.isDeleteModalVisible = false;
+    }
   }
 }
 </script>
