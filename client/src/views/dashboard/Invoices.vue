@@ -15,6 +15,10 @@
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
 
+    <delete-record-modal v-if="selectedRow" v-show="isDeleteModalVisible" class="z-10" @closed="closeDeleteModal">
+      <h2 class="text-center font-medium text-2xl text-grey-label">Do you want to delete "{{ selectedRow.title }}"?</h2>
+    </delete-record-modal>
+
     <invoice-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
     </invoice-modal>
 
@@ -94,6 +98,7 @@ import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import RedButton from '../../components/Buttons/Red_btn.vue';
 import InvoiceModal from '../../components/Modals/InvoiceModal.vue';
+import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
 
 export default {
   name: 'Invoices',
@@ -101,7 +106,8 @@ export default {
     BlueButton,
     RedButton,
     SelectWallets,
-    InvoiceModal
+    InvoiceModal,
+    DeleteRecordModal
   },
   created() {
     this.$emit('selected-module', "invoice_module");
