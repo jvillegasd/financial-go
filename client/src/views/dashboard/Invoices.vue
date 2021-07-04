@@ -15,6 +15,9 @@
       <SelectWallets class="pl-8"></SelectWallets>
     </div>
 
+    <invoice-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
+    </invoice-modal>
+
     <div class="row flex justify-center mt-12">
       <div class="card-table rounded-2xl shadow-md bg-white flex flex-col justify-center items-center">
         <vs-table class="invoice-table">
@@ -90,13 +93,15 @@
 import BlueButton from '../../components/Buttons/Blue_btn.vue';
 import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
 import RedButton from '../../components/Buttons/Red_btn.vue';
+import InvoiceModal from '../../components/Modals/InvoiceModal.vue';
 
 export default {
   name: 'Invoices',
   components: {
     BlueButton,
     RedButton,
-    SelectWallets
+    SelectWallets,
+    InvoiceModal
   },
   created() {
     this.$emit('selected-module', "invoice_module");
