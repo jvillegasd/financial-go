@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h1 class="flex justify-start text-3xl font-bold 2xl:ml-20 xl:ml-0 mt-7">{{ $route.params.invoice_id }}</h1>
-  
-    
+    <div class="ticket-wrapper">
+
+      <div class="ticket-up flex flex-col justify-center items-center space-y-1">
+        <h1 class="font-medium text-2xl text-white">#{{ $route.params.invoice_id }}</h1>
+        <h2 class="font-medium text-2xl text-white">{{ invoice_name }}</h2>
+        <h3 class="font-medium text-xl text-white">{{ invoice_date }}</h3>
+      </div>
+
+      <div class="ticket-down bg-white"></div>
+
+    </div>
   
   </div>
 </template>
@@ -29,7 +37,9 @@ export default {
       page: 1,
       max: 6,
       selectedRow: null,
-      invoices: [
+      invoice_name: "Random meeting",
+      invoice_date: "1/05/2021",
+      transactions: [
         {
           id: "50",
           title: "Netflix",
@@ -145,16 +155,40 @@ export default {
 </script>
 
 <style scoped>
-  .create_invoice {
-    box-shadow: 0px 4px 4px 0px rgba(0, 94, 238, 0.15);
+  .ticket-wrapper {
+    width: 587px;
+    height: 606px;
   }
-  .card-table {
-    width: 998px;
+
+  .ticket-up {
+    width: 487px;
+    height: 185px;
+    background: rgba(0, 94, 238, 0.8);
+    border-radius: 20px 20px 0px 0px;
+    position: relative;
   }
-  .card-table .invoice-table {
-    padding: 40px;
-    overflow: hidden;
-    height: auto;
-    transition: all .25s ease;
+  .ticket-up::before, .ticket-up::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 78px;
+    height: 112px;
+    background:#F4F4F4;
+    border-radius: 50%;
+    bottom: -60px;
   }
+  .ticket-up::before {
+    right: -38px;
+  }
+  .ticket-up::after {
+    left: -38px;
+  }
+
+  .ticket-down {
+    width: 487px;
+    height: 421px;
+    border-radius: 0px 0px 20px 20px;
+  }
+
+
 </style>
