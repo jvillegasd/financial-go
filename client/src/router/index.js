@@ -82,13 +82,26 @@ const routes = [
       },
       {
         path: '/invoices',
-        component: () => import('../views/dashboard/Invoices.vue'),
+        component: () => import('../views/dashboard/invoices/Invoices.vue'),
         meta: {
           title: "Financial Go | Invoices",
           metaTags: [
             {
               name: "invoices",
               description: "Invoices data of the current user."
+            }
+          ]
+        }
+      },
+      {
+        path: '/invoices/ticket/:invoice_id',
+        component: () => import('../views/dashboard/invoices/Ticket.vue'),
+        meta: {
+          title: "Financial Go | Invoices",
+          metaTags: [
+            {
+              name: "ticket-invoice",
+              description: "Show data of a ticket."
             }
           ]
         }

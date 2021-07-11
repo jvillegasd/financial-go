@@ -62,14 +62,16 @@
 
               <template #expand>
                 <div class="flex flex-row justify-center items-center space-x-2">
-                  <BlueButton
-                    class="font-medium"
-                    title="Edit"
-                    :width=100
-                    :height=35
-                    :fontSize=16
-                  ></BlueButton>
-
+                  <a :href="`/invoices/ticket/${tr.id}`">
+                     <BlueButton
+                      class="font-medium"
+                      title="Edit"
+                      :width=100
+                      :height=35
+                      :fontSize=16
+                    ></BlueButton>
+                  </a>
+                  
                   <red-button
                     class="font-medium"
                     title="Delete"
@@ -94,11 +96,11 @@
 </template>
 
 <script>
-import BlueButton from '../../components/Buttons/Blue_btn.vue';
-import SelectWallets from '../../components/Selectbox/SelectWallets.vue';
-import RedButton from '../../components/Buttons/Red_btn.vue';
-import InvoiceModal from '../../components/Modals/InvoiceModal.vue';
-import DeleteRecordModal from '../../components/Modals/DeleteRecordModal.vue';
+import BlueButton from '../../../components/Buttons/Blue_btn.vue';
+import SelectWallets from '../../../components/Selectbox/SelectWallets.vue';
+import RedButton from '../../../components/Buttons/Red_btn.vue';
+import InvoiceModal from '../../../components/Modals/InvoiceModal.vue';
+import DeleteRecordModal from '../../../components/Modals/DeleteRecordModal.vue';
 
 export default {
   name: 'Invoices',
