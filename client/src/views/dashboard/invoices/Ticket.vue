@@ -8,7 +8,31 @@
         <h3 class="font-medium text-xl text-white">{{ invoice_date }}</h3>
       </div>
 
-      <div class="ticket-down bg-white"></div>
+      <div class="ticket-down bg-white flex justify-center">
+        
+        <div class="ticket-table-div mt-14">
+          <table class="flex flex-col space-y-1">
+            <tr
+              :key="i"
+              v-for="(tr, i) in transactions"
+            >
+              <th>
+
+                <div class="ticket-tcard">
+                  <div>
+                    <h1>{{ tr.title }}</h1>
+                    <h2>{{ tr.category }}</h2>
+                  </div>
+
+                  <h2>{{ tr.amount }}</h2>
+                </div>
+
+              </th>
+            </tr>
+          </table>
+        </div>
+
+      </div>
 
     </div>
   
@@ -45,7 +69,7 @@ export default {
           title: "Netflix",
           category: "Entertainment",
           type: "Recurrent",
-          amount: "-$12",
+          amount: "$12",
           date: "18/05"
         },
         {
@@ -53,7 +77,7 @@ export default {
           title: "Salary",
           category: "Money",
           type: "Recurrent",
-          amount: "+$1200",
+          amount: "$1200",
           date: "17/05"
         },
         {
@@ -61,7 +85,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Income",
-          amount: "+$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -69,7 +93,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -77,7 +101,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -85,7 +109,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -93,7 +117,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -101,7 +125,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -109,7 +133,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -117,7 +141,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         },
         {
@@ -125,7 +149,7 @@ export default {
           title: "Jeans",
           category: "Shopping",
           type: "Outcome",
-          amount: "-$15",
+          amount: "$15",
           date: "17/05"
         }
       ]
@@ -188,6 +212,33 @@ export default {
     width: 487px;
     height: 421px;
     border-radius: 0px 0px 20px 20px;
+  }
+
+  .ticket-tcard {
+    width: 380px;
+    height: 65px;
+    border: 1px solid rgba(196, 196, 196, 0.8);
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  .ticket-table-div {
+    height: 300px;
+    overflow: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C4C4C4;
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: rgba(196, 196, 196, 0.3);
+    border-radius: 20px;
   }
 
 
