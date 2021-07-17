@@ -8,29 +8,39 @@
         <h3 class="font-medium text-xl text-white">{{ invoice_date }}</h3>
       </div>
 
-      <div class="ticket-down bg-white flex justify-center">
+      <div class="ticket-down bg-white flex flex-col items-center justify-center flex space-y-2">
         
-        <div class="ticket-table-div mt-14">
-          <table class="flex flex-col space-y-1">
+        <div class="ticket-table-div mt-10">
+          <table class="flex flex-col space-y-2">
             <tr
               :key="i"
               v-for="(tr, i) in transactions"
             >
               <th>
 
-                <div class="ticket-tcard">
-                  <div>
-                    <h1>{{ tr.title }}</h1>
-                    <h2>{{ tr.category }}</h2>
+                <div :class="['ticket-tcard', 'flex', 'justify-around', selectInvoiceItemCss(tr)]" @click="selectInvoiceItem(tr)">
+                  <div class="mt-2 invoice-info">
+                    <h1 class="tcard-title">{{ tr.title }}</h1>
+                    <h2 class="text-grey-label font-medium tcard-category">{{ tr.category }}</h2>
                   </div>
 
-                  <h2>{{ tr.amount }}</h2>
+                  <div class="mt-4 invoice-amount">
+                    <h2 class="tcard-amount">{{ tr.amount }}</h2>
+                  </div>
                 </div>
 
               </th>
             </tr>
           </table>
         </div>
+
+        <BlueButton
+          class="font-medium"
+          title="Add new transaction"
+          :width=380
+          :height=40
+          :fontSize=18
+        ></BlueButton>
 
       </div>
 
@@ -40,14 +50,14 @@
 </template>
 
 <script>
-// import BlueButton from '../../../components/Buttons/Blue_btn.vue';
+import BlueButton from '../../../components/Buttons/Blue_btn.vue';
 // import RedButton from '../../../components/Buttons/Red_btn.vue';
 // import DeleteRecordModal from '../../../components/Modals/DeleteRecordModal.vue';https://www.bypeople.com/cinema-ticket-codepen/
 
 export default {
   name: 'Invoices-ticket',
   components: {
-    // BlueButton,
+    BlueButton,
     // RedButton,
     // DeleteRecordModal
   },
@@ -173,6 +183,18 @@ export default {
     closeDeleteModal: function(optionPressed) {
       console.log('delete modal', optionPressed);
       this.isDeleteModalVisible = false;
+    },
+    selectInvoiceItem: function(selectedRow) {
+      this.selectedRow = Object.assign({}, selectedRow);
+      this.selectedRow.type = this.selectedRow.type.toLowerCase();
+      this.selectedRow.category = this.selectedRow.category.toLowerCase();
+    },
+    selectInvoiceItemCss: function(selectedRow) {
+      if (this.selectedRow && selectedRow.id === this.selectedRow.id) {
+        return 'ticket-tcard-clicked'
+      }
+
+      return '';
     }
   }
 }
@@ -220,11 +242,27 @@ export default {
     border: 1px solid rgba(196, 196, 196, 0.8);
     box-sizing: border-box;
     border-radius: 10px;
+    cursor: pointer;
   }
 
   .ticket-table-div {
     height: 300px;
     overflow: auto;
+  }
+
+  .ticket-tcard-clicked {
+    border: 1px solid #005EEE;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  .ticket-tcard-clicked > .invoice-info > .tcard-title, 
+  .ticket-tcard-clicked > .invoice-amount > .tcard-amount {
+    color:#005EEE;
+  }
+
+  .ticket-tcard-clicked > .invoice-info > .tcard-category {
+    color: rgba(0, 94, 238, 0.8);
   }
 
   ::-webkit-scrollbar {
