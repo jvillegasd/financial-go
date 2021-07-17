@@ -1,5 +1,8 @@
 <template>
   <div>
+    <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
+    </transaction-modal>
+
     <div class="ticket-wrapper">
 
       <div class="ticket-up flex flex-col justify-center items-center space-y-1">
@@ -40,6 +43,7 @@
           :width=380
           :height=40
           :fontSize=18
+          @btn-pressed="showModal"
         ></BlueButton>
 
       </div>
@@ -51,6 +55,7 @@
 
 <script>
 import BlueButton from '../../../components/Buttons/Blue_btn.vue';
+import TransactionModal from '../../../components/Modals/TransactionModal.vue';
 // import RedButton from '../../../components/Buttons/Red_btn.vue';
 // import DeleteRecordModal from '../../../components/Modals/DeleteRecordModal.vue';https://www.bypeople.com/cinema-ticket-codepen/
 
@@ -58,6 +63,7 @@ export default {
   name: 'Invoices-ticket',
   components: {
     BlueButton,
+    TransactionModal,
     // RedButton,
     // DeleteRecordModal
   },
