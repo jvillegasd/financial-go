@@ -1,20 +1,20 @@
 version: '3.7'
 
 services:
-  # backend:
-  # container_name: fgo-backend
-  #   build:
-  #     context: ./server/
-  #     dockerfile: Dockerfile
-  #   command: python3 app.py
-  #   env_file: .env
-  #   restart: always
-  #   volumes: 
-  #     - ./server/:/src
-  #   ports:
-  #     - 5001:5001
-  #   networks:
-  #     - financial_go-net
+  backend:
+    container_name: fgo-backend
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    command: python3 app.py
+    env_file: .env
+    restart: always
+    volumes: 
+      - ./server/:/src
+    ports:
+      - ${FLASK_PORT}:${FLASK_PORT}
+    networks:
+      - financial_go-net
   frontend:
     container_name: fgo-frontend
     build:
