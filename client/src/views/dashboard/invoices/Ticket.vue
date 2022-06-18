@@ -3,51 +3,59 @@
     <transaction-modal v-show="isModalVisible" class="z-10" @closed="closeModal">
     </transaction-modal>
 
-    <div class="ticket-wrapper">
+    <div class="flex justify-between">
+      <div class="ticket-wrapper">
 
-      <div class="ticket-up flex flex-col justify-center items-center space-y-1">
-        <h1 class="font-medium text-2xl text-white">#{{ $route.params.invoice_id }}</h1>
-        <h2 class="font-medium text-2xl text-white">{{ invoice_name }}</h2>
-        <h3 class="font-medium text-xl text-white">{{ invoice_date }}</h3>
-      </div>
-
-      <div class="ticket-down bg-white flex flex-col items-center justify-center flex space-y-2">
-        
-        <div class="ticket-table-div mt-10">
-          <table class="flex flex-col space-y-2">
-            <tr
-              :key="i"
-              v-for="(tr, i) in transactions"
-            >
-              <th>
-
-                <div :class="['ticket-tcard', 'flex', 'justify-around', selectInvoiceItemCss(tr)]" @click="selectInvoiceItem(tr)">
-                  <div class="mt-2 invoice-info">
-                    <h1 class="tcard-title">{{ tr.title }}</h1>
-                    <h2 class="text-grey-label font-medium tcard-category">{{ tr.category }}</h2>
-                  </div>
-
-                  <div class="mt-4 invoice-amount">
-                    <h2 class="tcard-amount">{{ tr.amount }}</h2>
-                  </div>
-                </div>
-
-              </th>
-            </tr>
-          </table>
+        <div class="ticket-up flex flex-col justify-center items-center space-y-1">
+          <h1 class="font-medium text-2xl text-white">#{{ $route.params.invoice_id }}</h1>
+          <h2 class="font-medium text-2xl text-white">{{ invoice_name }}</h2>
+          <h3 class="font-medium text-xl text-white">{{ invoice_date }}</h3>
         </div>
 
-        <BlueButton
-          class="font-medium"
-          title="Add new transaction"
-          :width=380
-          :height=40
-          :fontSize=18
-          @btn-pressed="showModal"
-        ></BlueButton>
+        <div class="ticket-down bg-white flex flex-col items-center justify-center flex space-y-2">
+          
+          <div class="ticket-table-div mt-10">
+            <table class="flex flex-col space-y-2">
+              <tr
+                :key="i"
+                v-for="(tr, i) in transactions"
+              >
+                <th>
+
+                  <div :class="['ticket-tcard', 'flex', 'justify-around', selectInvoiceItemCss(tr)]" @click="selectInvoiceItem(tr)">
+                    <div class="mt-2 invoice-info">
+                      <h1 class="tcard-title">{{ tr.title }}</h1>
+                      <h2 class="text-grey-label font-medium tcard-category">{{ tr.category }}</h2>
+                    </div>
+
+                    <div class="mt-4 invoice-amount">
+                      <h2 class="tcard-amount">{{ tr.amount }}</h2>
+                    </div>
+                  </div>
+
+                </th>
+              </tr>
+            </table>
+          </div>
+
+          <BlueButton
+            class="font-medium"
+            title="Add new transaction"
+            :width=380
+            :height=40
+            :fontSize=18
+            @btn-pressed="showModal"
+          ></BlueButton>
+
+        </div>
 
       </div>
 
+      <div v-if="selectedRow" class="card-details rounded-2xl shadow-md bg-white">
+          <category-icon 
+          :name="selectedRow.category">
+          </category-icon>
+      </div>
     </div>
   
   </div>
@@ -56,6 +64,7 @@
 <script>
 import BlueButton from '../../../components/Buttons/Blue_btn.vue';
 import TransactionModal from '../../../components/Modals/TransactionModal.vue';
+import CategoryIcon from '../../../components/Misc/CategoryIcon.vue';
 // import RedButton from '../../../components/Buttons/Red_btn.vue';
 // import DeleteRecordModal from '../../../components/Modals/DeleteRecordModal.vue';https://www.bypeople.com/cinema-ticket-codepen/
 
@@ -64,6 +73,7 @@ export default {
   components: {
     BlueButton,
     TransactionModal,
+    CategoryIcon,
     // RedButton,
     // DeleteRecordModal
   },
@@ -76,7 +86,7 @@ export default {
       isDeleteModalVisible: false,
       page: 1,
       max: 6,
-      selectedRow: null,
+      selectedRow: undefined,
       invoice_name: "Random meeting",
       invoice_date: "1/05/2021",
       transactions: [
@@ -285,5 +295,9 @@ export default {
     border-radius: 20px;
   }
 
+  .card-details {
+    width: 420px;
+    height: 296px;
+  }
 
 </style>
