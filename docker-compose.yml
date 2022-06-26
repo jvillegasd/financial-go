@@ -1,11 +1,26 @@
 version: '3.7'
 
 services:
+  mongodb:
+    image: mongo
+    container_name: 'fgo-db'
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./server/config/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+
   backend:
     container_name: fgo-backend
     build:
       context: ./server/
       dockerfile: Dockerfile
+    depends_on:
+      - mongodb
     command: python3 app.py
     env_file: .env
     restart: always
@@ -15,6 +30,7 @@ services:
       - ${FLASK_PORT}:${FLASK_PORT}
     networks:
       - financial_go-net
+  
   frontend:
     container_name: fgo-frontend
     build:
