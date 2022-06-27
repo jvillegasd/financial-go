@@ -28,6 +28,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+__pycache__
 
 # Docker things
 mongo-volume

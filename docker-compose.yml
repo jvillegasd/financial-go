@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mongodb:
     image: mongo
-    container_name: 'fgo-db'
+    container_name: fgo-db
     environment:
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
@@ -13,6 +13,8 @@ services:
       - ./mongo-volume:/data/db
     ports:
       - ${MONGO_PORT}:${MONGO_PORT}
+    networks:
+      - financial_go-net
 
   backend:
     container_name: fgo-backend

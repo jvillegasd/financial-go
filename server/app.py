@@ -1,10 +1,12 @@
 import os
 import traceback
+import db
 from flask_cors import CORS
 from flask import Flask, jsonify, json, make_response
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
+db.connect_to_db()
 
 # CORS for frontend application
 CORS(app, resources={r'/*': {'origins': '*'}})
