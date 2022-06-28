@@ -1,9 +1,11 @@
 import os
-import traceback
 import db
+import traceback
 from flask_cors import CORS
-from flask import Flask, jsonify, json, make_response
+from flask import Flask, json, make_response
 from werkzeug.exceptions import HTTPException
+
+from modules.users.controller import user_blueprint
 
 app = Flask(__name__)
 db.connect_to_db()
@@ -16,6 +18,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.get('/')
 def ping():
     return {'message': 'server is up!'}, 200
+  
+# Attach blueprints to app
+app.register_blueprint(user_blueprint, url_prefix='/user')
 
 # Error handling to JSON
 @app.errorhandler(Exception)

@@ -1,15 +1,12 @@
-import os
 import bcrypt
 import mongoengine
 
 
 class PasswordField(mongoengine.StringField):
     """ Custom Mongoengine password field implementation """
-    
-    SALT_ROUNDS = int(os.getenv('SALT_ROUNDS'))
 
     def __init__(self, regex=None, **kwargs):
-        self.salt = bcrypt.gensalt(rounds=PasswordField.SALT_ROUNDS)
+        self.salt = bcrypt.gensalt()
         super(PasswordField, self).__init__(**kwargs)
 
     def __set_password(self, password: str) -> str:
