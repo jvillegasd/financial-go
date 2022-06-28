@@ -6,6 +6,7 @@ from flask import Flask, json, make_response
 from werkzeug.exceptions import HTTPException
 
 from modules.users.controller import user_blueprint
+from modules.auth.controller import auth_blueprint
 
 app = Flask(__name__)
 db.connect_to_db()
@@ -21,6 +22,7 @@ def ping():
   
 # Attach blueprints to app
 app.register_blueprint(user_blueprint, url_prefix='/user')
+app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
 # Error handling to JSON
 @app.errorhandler(Exception)

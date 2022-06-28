@@ -1,41 +1,27 @@
-import os
-import jwt
-import datetime
+from typing import Union
 from modules.users.models import User
-
-def create_auth_token(db_user):
-    JWT_KEY = os.getenv("SECRET_KEY")
-    expiration_date = datetime.datetime.now() + datetime.timedelta(days=1)
-    auth_token = jwt.encode({
-        'sub': db_user.username,
-        'name': db_user.name,
-        'doc_id': str(db_user.doc_id),
-        'exp': expiration_date,
-        'iat': datetime.datetime.now(),
-    }, JWT_KEY, algorithm='HS256')
-
-    return auth_token
+from modules.users.serializers import UserSchema
 
 
-def user_exists(email: str) -> bool:
+def get_user_by_email(email: str) -> Union[User, None]:
     """
-      Check if an user with provided email exists in database.
+      Fetch an user from database using email.
       
       Args:
         - email: str = Provided email used to check user existance.
       
       Return:
-        - Boolean that represents if user exists or not.
+        - user: User = User instance fetched by email from database.
     """
-    return len(User.objects.filter(email=email)) > 0
+    return User.objects.filter(email=email).first()
 
 
-def create_user(params: dict) -> User:
+def create_user(params: UserSchema) -> User:
     """
       Creates a new user from dict and save it into database.
       
       Args:
-        - params: dict = This dict contains new user info to be saved.
+        - params: UserSchema = This dict contains new user info to be saved.
       
       Return:
         - new_user: User = New user Mongoengine object created by provided params.
