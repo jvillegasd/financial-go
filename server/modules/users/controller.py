@@ -1,7 +1,9 @@
 import modules.users.service as service
 import modules.users.serializers as serializers
+import modules.auth.service as auth_service
 from flask import request, Blueprint, abort
 from middlewares.schemas import parameters
+from middlewares.auth import jwt_required
 
 
 user_blueprint = Blueprint('User module', __name__)
@@ -14,7 +16,16 @@ def create():
 
     if not service.get_user_by_email(body['email']):
         new_user = service.create_user(body)
-        response = serializers.UserSchema().dump(new_user)
-        return response
+        return serializers.UserSchema().dump(new_user)
     else:
         abort(400, 'User with same email exists.')
+
+
+@user_blueprint.get('/')
+@jwt_required
+def read():
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+    user = service.get_user_by_email(user_info['email'])
+
+    return serializers.UserSchema(exclude=('password',)).dump(user)

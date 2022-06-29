@@ -3,7 +3,6 @@ import modules.users.service as user_service
 import modules.auth.service as service
 from flask import request, Blueprint, abort
 from middlewares.schemas import parameters
-from middlewares.auth import jwt_required
 
 
 auth_blueprint = Blueprint('Auth module', __name__)
@@ -20,9 +19,3 @@ def create_auth_token():
         return {'token': f'Bearer {auth_token}'}
     else:
         abort(404, 'Invalid email or password.')
-
-# TODO: Refresh token;
-@auth_blueprint.get('/refresh')
-@jwt_required
-def refresh_auth_token():
-    pass
