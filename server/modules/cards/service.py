@@ -1,9 +1,8 @@
 import uuid
-from modules.cards.models import Card
-from modules.cards.serializers import CardSchema
 import modules.users.service as users_service
-from constants import MAX_NUMBER_OF_CARDS
-from typing import List
+from modules.cards.models import Card
+from modules.constants import MAX_NUMBER_OF_CARDS
+from modules.cards.serializers import CardSchema
 
 
 def user_can_create_card(owner_uuid: str) -> bool:
@@ -44,15 +43,15 @@ def create_card(card_info: CardSchema) -> Card:
 def add_card_to_user(card: Card, user_uuid: str):
     """
       Reference a card to a specific user.
-      
+
       Args:
         - card: Card = Card Mongoengine object to be referenced to user.
         - user_uuid: str = User uuid owner of provided card.
     """
-    
+
     user = users_service.get_user_by_id(user_uuid)
     card.owner_uuid = user.uuid
     user.cards.append(card)
-    
+
     card.save()
     user.save()
