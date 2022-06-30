@@ -11,7 +11,7 @@ class User(DocumentMixin):
     email = mongoengine.fields.EmailField(required=True)
     password = PasswordField(required=True)
     cards = mongoengine.fields.ListField(
-        mongoengine.fields.ReferenceField(Card))
+        mongoengine.fields.ReferenceField(Card, reverse_delete_rule=mongoengine.PULL))
 
     def check_password(self, value: str) -> bool:
         return bcrypt.checkpw(value.encode('utf-8'),

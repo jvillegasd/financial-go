@@ -55,3 +55,39 @@ def add_card_to_user(card: Card, user_uuid: str):
 
     card.save()
     user.save()
+
+
+def delete_card(card_uuid: str, owner_uuid: str):
+    """
+      Delete card from database.
+
+      Args:
+        - card_uuid: str = Card uuid to be deleted.
+        - owner_uuid: str = User uuid owner of the provided card.
+    """
+    Card.objects.filter(
+        uuid=uuid.UUID(card_uuid), owner_uuid=uuid.UUID(owner_uuid)).delete()
+
+
+def update_card(card_info: CardSchema, card_uuid: str, owner_uuid: str) -> Card:
+    """
+      Updates an existing card basic information.
+
+      Args:
+        - card_info: CardSchema = This dict contains the new information
+        of the provided card.
+        - card_uuid: str = Card uuid to be updated.
+        - owner_uuid: str = User uuid owner of the provided card.
+
+      Return:
+        - card: Card = Existing card Mongoengine object with updated information.
+    """
+
+    card = Card.objects.filter(
+        uuid=uuid.UUID(card_uuid), owner_uuid=uuid.UUID(owner_uuid)).first()
+    if card:
+        for attr, value in card_info.items():
+            setattr(card, attr, value)
+        card.save()
+    
+    return card

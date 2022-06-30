@@ -23,4 +23,28 @@ def create():
         service.add_card_to_user(new_card, user_info.get('uuid'))
         return serializers.CardSchema().dump(new_card)
     else:
-        abort(400, 'Created cards limit exceeded.')
+        abort(403, 'Created cards limit exceeded.')
+
+
+@cards_blueprint.patch('/<card_uuid>')
+@jwt_required
+@parameters(schema=serializers.CardSchema(only=('title', 'amount',)))
+def update(card_uuid: str):
+    body = request.get_json()
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+    
+    card = service.update_card(body, card_uuid, user_info.get('uuid'))
+    if card:
+        return serializers.CardSchema().dump(card)
+    else:
+        abort(404, 'User does not have provided card.')
+
+
+@cards_blueprint.delete('/<card_uuid>')
+@jwt_required
+def delete(card_uuid: str):
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+    service.delete_card(card_uuid, user_info.get('uuid'))
+    return {'message': 'Card deleted successfully.'}
