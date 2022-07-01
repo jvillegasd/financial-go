@@ -1,5 +1,6 @@
 import os
 import db
+import logging
 import traceback
 from flask_cors import CORS
 from flask import Flask, json, make_response
@@ -11,6 +12,8 @@ from modules.cards.controller import cards_blueprint
 
 app = Flask(__name__)
 db.connect_to_db()
+
+logging.basicConfig(level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 # CORS for frontend application
 CORS(app, resources={r'/*': {'origins': '*'}})
@@ -44,10 +47,12 @@ def handle_exception(error: Exception):
 
         response.content_type = 'application/json'
     else:
+        app.logger.error(traceback.format_exc())
+        
         response = json.dumps({
             'code': 500,
             'name': 'internal server error',
-            'description': traceback.format_exc()
+            'description': 'Internal server error'
         })
         response = make_response(response, 500)
         response.headers['Content-Type'] = 'application/json'
