@@ -1,8 +1,9 @@
 import uuid
 import modules.users.service as users_service
+from typing import Union
 from modules.cards.models import Card
-from modules.constants import MAX_NUMBER_OF_CARDS
 from modules.cards.serializers import CardSchema
+from modules.constants import MAX_NUMBER_OF_CARDS
 
 
 def user_can_create_card(owner_uuid: str) -> bool:
@@ -50,11 +51,8 @@ def add_card_to_user(card: Card, user_uuid: str):
     """
 
     user = users_service.get_user_by_id(user_uuid)
-    card.owner_uuid = user.uuid
-    user.cards.append(card)
-
-    card.save()
-    user.save()
+    if user:
+        user.add_card(card)
 
 
 def delete_card(card_uuid: str, owner_uuid: str):
@@ -69,7 +67,7 @@ def delete_card(card_uuid: str, owner_uuid: str):
         uuid=uuid.UUID(card_uuid), owner_uuid=uuid.UUID(owner_uuid)).delete()
 
 
-def update_card(card_info: CardSchema, card_uuid: str, owner_uuid: str) -> Card:
+def update_card(card_info: CardSchema, card_uuid: str, owner_uuid: str) -> Union[Card, None]:
     """
       Updates an existing card basic information.
 
