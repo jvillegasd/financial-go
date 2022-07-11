@@ -19,7 +19,7 @@ def connect_db():
     )
 
 
-@fixture(scope='module')
+@fixture
 def mock_user(connect_db: fixture) -> User:
     """
       Mocks a user and save it in mocked database.
@@ -42,15 +42,13 @@ def mock_user(connect_db: fixture) -> User:
     return mocked_user
 
 
-@fixture(scope='module')
-def mock_card(connect_db: fixture, mock_user: User) -> Card:
+@fixture
+def mock_card(connect_db: fixture) -> Card:
     """
       Mocks a card and save it in mocked database.
 
       Args:
         - connect_db: fixture = MongoDB connection fixture.
-        - mocked_user: User = Mocked user saved in mocked database
-          who is owner of mocked_card.
 
       Return:
         - mocked_card: Card = Mocked card saved in mocked database.
@@ -61,7 +59,5 @@ def mock_card(connect_db: fixture, mock_user: User) -> Card:
         title='Mocked card',
         amount=150.0
     )
-    mocked_card.save()
-    mock_user.add_card(mocked_card)
 
     return mocked_card

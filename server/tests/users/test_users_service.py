@@ -77,3 +77,6 @@ def test_create_user():
     assert new_user.last_name == params['last_name']
     assert new_user.email == params['email']
     assert new_user.check_password(params['password'])
+    
+    user = User.objects.filter(uuid=new_user.uuid).first()
+    assert user is not None
