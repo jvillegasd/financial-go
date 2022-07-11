@@ -6,7 +6,7 @@ import mongoengine
 class DocumentMixin(mongoengine.Document):
     """ Model mixin that contains common fields and functions. """
     
-    uuid = mongoengine.fields.UUIDField(default=uuid.uuid4, primary_key=True)
+    uuid = mongoengine.fields.UUIDField(binary=False, default=uuid.uuid4, primary_key=True)
     created_at = mongoengine.fields.DateTimeField(default=datetime.datetime.utcnow)
     updated_at = mongoengine.fields.DateTimeField(default=datetime.datetime.utcnow)
 

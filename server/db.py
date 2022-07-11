@@ -10,5 +10,6 @@ def connect_to_db():
         password=os.getenv('MONGO_INITDB_ROOT_PASSWORD'),
         host=f'mongodb://{os.getenv("MONGO_HOST")}:{os.getenv("MONGO_PORT")}',
         port=int(os.getenv('MONGO_PORT')),
-        authentication_source='admin'
+        authentication_source='admin',
+        uuidRepresentation='pythonLegacy'
     )

@@ -5,3 +5,5 @@ pyjwt
 pymongo
 mongoengine
 marshmallow
+pytest
+mongomock
