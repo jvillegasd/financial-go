@@ -1,9 +1,10 @@
 import modules.users.service as service
-import modules.users.serializers as serializers
 import modules.auth.service as auth_service
-from flask import request, Blueprint, abort
-from middlewares.schemas import parameters
+import modules.users.serializers as serializers
+
 from middlewares.auth import jwt_required
+from middlewares.schemas import parameters
+from flask import request, Blueprint, abort
 
 
 user_blueprint = Blueprint('User module', __name__)

@@ -1,7 +1,9 @@
 import bcrypt
 import mongoengine
+
 from modules.cards.models import Card
 from modules.mixin import DocumentMixin
+
 
 
 class User(DocumentMixin):
@@ -10,9 +12,23 @@ class User(DocumentMixin):
     email = mongoengine.fields.EmailField(required=True)
     password = mongoengine.fields.StringField(required=True)
     cards = mongoengine.fields.ListField(
-        mongoengine.fields.ReferenceField(Card, reverse_delete_rule=mongoengine.PULL))
+        mongoengine.fields.ReferenceField(
+            Card,
+            reverse_delete_rule=mongoengine.PULL
+        ))
 
     def check_password(self, value: str) -> bool:
+        """
+          Check if tentative password matchs with
+          current user password.
+
+          Args:
+            - value: str = Raw password to check.
+
+          Return:
+            - Boolean = A boolean that represents if tentative
+            password matches with hashed password.
+        """
         return bcrypt.checkpw(value.encode('utf-8'),
                               self.password.encode('utf-8'))
 

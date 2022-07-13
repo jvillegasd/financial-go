@@ -1,15 +1,31 @@
-import modules.transactions.serializers as serializers
-import modules.transactions.service as service
 import modules.auth.service as auth_service
-from flask import request, Blueprint, abort
+import modules.transactions.service as service
+import modules.transactions.serializers as serializers
+
 from middlewares.auth import jwt_required
 from middlewares.schemas import parameters
+from flask import request, Blueprint, abort
 
 
 transaction_blueprint = Blueprint('Transaction module', __name__)
 
 
-@transaction_blueprint.post('/')
+@transaction_blueprint.post('/card/{card_uuid}')
 @jwt_required
-def create():
-    pass
+@parameters(schema=serializers.TransactionSchema(
+    only=(
+        'title',
+        'type',
+        'amount',
+        'category',
+    )
+))
+def create(card_uuid: str):
+    body = request.get_json()
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+
+    new_transaction = service.create_transaction(
+        card_uuid,user_info.get('uuid'), body)
+
+    return serializers.TransactionSchema().dump(new_transaction)

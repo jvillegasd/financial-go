@@ -2,6 +2,7 @@ import os
 import db
 import logging
 import traceback
+
 from flask_cors import CORS
 from flask import Flask, json, make_response
 from werkzeug.exceptions import HTTPException
@@ -9,6 +10,7 @@ from werkzeug.exceptions import HTTPException
 from modules.users.controller import user_blueprint
 from modules.auth.controller import auth_blueprint
 from modules.cards.controller import cards_blueprint
+from modules.transactions.controller import transaction_blueprint
 
 app = Flask(__name__)
 db.connect_to_db()
@@ -28,6 +30,7 @@ def ping():
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
 app.register_blueprint(cards_blueprint, url_prefix='/card')
+app.register_blueprint(transaction_blueprint, url_prefix='/transaction')
 
 # Error handling to JSON
 @app.errorhandler(Exception)
