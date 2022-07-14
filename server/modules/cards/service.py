@@ -53,7 +53,7 @@ def create_card(card_info: CardSchema, user_uuid: str) -> Card:
     new_card.save()
     user.add_card(new_card)
     
-    return new_card   
+    return new_card  
 
 
 def delete_card(card_uuid: str, owner_uuid: str):

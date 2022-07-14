@@ -18,51 +18,26 @@ def test_create_card(mock_user: User):
         'amount': 1050.0
     }
     params = CardSchema().load(card_info)
-    new_card = service.create_card(params)
-    new_card.save()
-    mock_user.add_card(new_card)
+    new_card = service.create_card(params, str(mock_user.uuid))
 
     assert isinstance(new_card, Card)
     assert new_card.title == params['title']
     assert new_card.amount == params['amount']
     assert new_card.owner_uuid == mock_user.uuid
 
+    user = User.objects.filter(uuid=mock_user.uuid).first()
     user_card_filter = [
         card
-        for card in mock_user.cards
-        if card.uuid == new_card.uuid
+        for card in user.cards
+        if card.id == new_card.uuid
     ]
     
-    assert len(mock_user.cards) > 0
+    assert len(user.cards) > 0
     assert len(user_card_filter) == 1
     
     card = Card.objects.filter(uuid=new_card.uuid).first()
     
     assert card is not None
-
-
-def test_add_card_to_user(mock_user: User, mock_card: Card):
-    """
-      Test adding a new card to mocked_user.
-      
-      Args:
-        - mock_user: User = Mocked user fixture.
-        - mock_card: Card = Mocked card fixture.
-    """
-    
-    service.add_card_to_user(mock_card, str(mock_user.uuid))
-
-    assert mock_card.owner_uuid == mock_user.uuid
-
-    user = User.objects.filter(uuid=mock_user.uuid).first()
-    user_card_filter = [
-        card
-        for card in user.cards
-        if card.id == mock_card.uuid
-    ]
-    
-    assert len(user.cards) > 0
-    assert len(user_card_filter) == 1 
 
 
 def test_update_card(mock_card: Card, mock_user: User):
@@ -113,7 +88,7 @@ def test_user_can_create_card(mock_user: User):
 
     can_add_card = service.user_can_create_card(str(mock_user.uuid))
 
-    assert can_add_card == True
+    assert can_add_card
 
 
 def test_user_cannot_create_card(mock_user: User):
@@ -124,18 +99,20 @@ def test_user_cannot_create_card(mock_user: User):
       Args:
         - mock_user: User = Mocked user fixture.
     """
-
+    
     # Add MAX_NUMBER_OF_CARDS to mock_user
     for i in range(MAX_NUMBER_OF_CARDS):
         card_info = {
             'title': f'testing card {i}',
             'amount': 1050.0
         }
-        params = CardSchema().load(card_info)
-        new_card = service.create_card(params)
-        new_card.save()
+        new_card = Card(**card_info)
         mock_user.add_card(new_card)
 
     can_add_card = service.user_can_create_card(str(mock_user.uuid))
 
-    assert can_add_card == False
+    assert not can_add_card
+
+
+# TODO: Code test for create_card exception
+# TODO: Code test for update_card exception

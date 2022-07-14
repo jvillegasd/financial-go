@@ -15,7 +15,7 @@ def connect_db():
     connect(
         'mongoenginetest',
         is_mock=True,
-        uuidRepresentation='pythonLegacy'
+        uuidRepresentation='standard'
     )
 
 
@@ -32,7 +32,6 @@ def mock_user(connect_db: fixture) -> User:
     """
 
     mocked_user = User(
-        uuid=uuid.uuid4(),
         first_name='John',
         last_name='Doe',
         email='johndoe@email.com',
@@ -55,9 +54,8 @@ def mock_card(connect_db: fixture) -> Card:
     """
 
     mocked_card = Card(
-        uuid=uuid.uuid4(),
         title='Mocked card',
         amount=150.0
     )
-
+    mocked_card.save()
     return mocked_card
