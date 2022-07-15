@@ -1,3 +1,8 @@
+import uuid
+import pytest
+import modules.users.exceptions as users_exceptions
+import modules.cards.exceptions as cards_exceptions
+
 from modules.cards import service
 from modules.users.models import User
 from modules.cards.models import Card
@@ -40,6 +45,27 @@ def test_create_card(mock_user: User):
     assert card is not None
 
 
+def test_create_card_with_non_existing_user():
+    """
+      Test creating a new card using a random generated
+      uuid in order to raises expected exception.
+
+      Raises:
+        - UserNotFound = Raised when a user is not found
+        with provided uuid.
+    """
+    
+    non_existing_user_uuid = uuid.uuid4()
+    card_info = {
+        'title': 'testing card',
+        'amount': 1050.0
+    }
+    params = CardSchema().load(card_info)
+    
+    with pytest.raises(users_exceptions.UserNotFound):
+        service.create_card(params, str(non_existing_user_uuid))
+
+
 def test_update_card(mock_card: Card, mock_user: User):
     """
       Test updating an existing card.
@@ -55,11 +81,36 @@ def test_update_card(mock_card: Card, mock_user: User):
     }
     params = CardSchema().load(card_info)
     mock_user.add_card(mock_card)
-    updated_card = service.update_card(params, str(mock_card.uuid), str(mock_card.owner_uuid))
+    updated_card = service.update_card(params,
+                                      str(mock_card.uuid),
+                                      str(mock_card.owner_uuid))
 
     assert updated_card.uuid == mock_card.uuid
     assert updated_card.title == params['title']
     assert updated_card.amount == params['amount']
+
+
+def test_update_non_existing_card(mock_user: User):
+    """
+      Test updating an unexisting card with a random
+      generated uuid in order to raises expected exception.
+
+      Raises:
+        - CardNotFound = Raised when a card is not found
+        with provided uuid.
+    """
+
+    non_existing_card_uuid = uuid.uuid4()
+    card_info = {
+        'title': 'edited card',
+        'amount': 1050.0
+    }
+    params = CardSchema().load(card_info)
+    
+    with pytest.raises(cards_exceptions.CardNotFound):
+        service.update_card(params,
+                            str(non_existing_card_uuid),
+                            str(mock_user.uuid))
 
 
 def test_delete_card(mock_card: Card, mock_user: User):
@@ -112,7 +163,3 @@ def test_user_cannot_create_card(mock_user: User):
     can_add_card = service.user_can_create_card(str(mock_user.uuid))
 
     assert not can_add_card
-
-
-# TODO: Code test for create_card exception
-# TODO: Code test for update_card exception
