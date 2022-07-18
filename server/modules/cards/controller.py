@@ -44,10 +44,7 @@ def update(card_uuid: str):
     user_info = auth_service.decode_auth_token(auth_token)
 
     card = service.update_card(body, card_uuid, user_info.get('uuid'))
-    if card:
-        return serializers.CardSchema().dump(card)
-    else:
-        abort(404, 'User does not have provided card.')
+    return serializers.CardSchema().dump(card)
 
 
 @cards_blueprint.delete('/<card_uuid>')

@@ -1,5 +1,5 @@
 class CardNotFound(Exception):
-    """ Raise when a card is not found """
+    """ Raise when a card is not found. """
     pass
 
 

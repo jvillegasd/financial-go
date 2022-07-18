@@ -29,3 +29,15 @@ def create(card_uuid: str):
         card_uuid,user_info.get('uuid'), body)
 
     return serializers.TransactionSchema().dump(new_transaction)
+
+
+@transaction_blueprint.get('/{transaction_uuid}')
+@jwt_required
+def read(transaction_uuid: str):
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+    
+    transaction = service.get_transaction_by_id(transaction_uuid, user_info.get('uuid'))
+    return serializers.TransactionSchema().dump(transaction)
+
+
