@@ -55,6 +55,29 @@ def create_card(card_info: CardSchema, user_uuid: str) -> Card:
     return new_card
 
 
+def get_card_by_id(card_uuid: str, owner_uuid: str) -> Card:
+    """
+      Fetch a card from database using uuid.
+
+      Args:
+        - card_uuid: str = Provided uuid used to check card existance.
+        - owner_uuid: str = User uuid owner of the provided card.
+
+      Return:
+        - card: Card = Card instance fetched by uuid from database.
+
+      Raises:
+        - CardNotFound = Exception raises when a card is not found with
+        provided owner_uuid.
+    """
+
+    card = Card.objects.filter(uuid=card_uuid, owner_uuid=owner_uuid).first()
+    if not card:
+        raise CardNotFound
+
+    return card
+
+
 def delete_card(card_uuid: str, owner_uuid: str):
     """
       Delete card from database.
@@ -63,14 +86,14 @@ def delete_card(card_uuid: str, owner_uuid: str):
         - card_uuid: str = Card uuid to be deleted.
         - owner_uuid: str = User uuid owner of the provided card.
     """
-    Card.objects.filter(
-        uuid=uuid.UUID(card_uuid), owner_uuid=uuid.UUID(owner_uuid)).delete()
+    
+    card = get_card_by_id(card_uuid, owner_uuid)
+    Card.objects.filter(uuid=card.uuid).delete()
 
 
-def update_card(
-        card_info: CardSchema,
-        card_uuid: str,
-        owner_uuid: str) -> Card:
+def update_card(card_info: CardSchema,
+                card_uuid: str,
+                owner_uuid: str) -> Card:
     """
       Updates an existing card basic information.
 
@@ -82,42 +105,12 @@ def update_card(
 
       Return:
         - card: Card = Existing card Mongoengine object with updated information.
-
-      Raises:
-        - CardNotFound = Exception raises when a card is not found with
-        provided owner_uuid.
     """
 
-    card = Card.objects.filter(
-        uuid=uuid.UUID(card_uuid), owner_uuid=uuid.UUID(owner_uuid)).first()
-    if not card:
-        raise CardNotFound
+    card = get_card_by_id(card_uuid, owner_uuid)
 
     for attr, value in card_info.items():
         setattr(card, attr, value)
     card.save()
 
-    return card
-
-
-def get_card_by_id(card_uuid: str, owner_uuid: str) -> Card:
-    """
-      Fetch a card from database using uuid.
-
-      Args:
-        - card_uuid: str = Provided uuid used to check card existance.
-        - owner_uuid: str = User uuid owner of the provided card.
-
-      Return:
-        - card: Card = Card instance fetched by uuid from database.
-        
-      Raises:
-        - CardNotFound = Exception raises when a card is not found with
-        provided owner_uuid.
-    """
-    
-    card = Card.objects.filter(uuid=card_uuid, owner_uuid=owner_uuid).first()
-    if not card:
-        raise CardNotFound
-    
     return card
