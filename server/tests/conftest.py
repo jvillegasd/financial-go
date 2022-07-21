@@ -1,9 +1,8 @@
-import uuid
 from pytest import fixture
 from mongoengine import connect
-
 from modules.users.models import User
 from modules.cards.models import Card
+from modules.transactions.models import Transaction
 
 
 @fixture(scope='module', autouse=True)
@@ -59,3 +58,24 @@ def mock_card(connect_db: fixture) -> Card:
     )
     mocked_card.save()
     return mocked_card
+
+
+@fixture
+def mock_transaction(connect_db: fixture, mock_card: Card) -> Transaction:
+    """
+      Mocks a transaction and save it in mocked database.
+
+      Args:
+        - connect_db: fixture = MongoDB connection fixture.
+        - mocked_card: Card = Mocked card fixture.
+    """
+
+    mocked_transaction = Transaction(
+        card_uuid=mock_card.uuid,
+        title='Mocked transaction',
+        type='Unique',
+        amount=750.1,
+        category='Money'
+    )
+    mocked_transaction.save()
+    return mocked_transaction

@@ -23,15 +23,9 @@ def create_transaction(card_uuid: str,
       Return:
         - new_transaction: Transaction = New transaction
         Mongoengine object created by provided information.
-
-      Raises:
-        - InvalidCardOwner = Raised when a user is not owner of provided
-        card.
     """
 
     card = cards_service.get_card_by_id(card_uuid, owner_uuid)
-    if not card.owner_uuid == owner_uuid:
-        raise InvalidCardOwner
 
     new_transaction = Transaction(**transaction_info)
     new_transaction.save()
@@ -61,9 +55,8 @@ def get_transaction_by_id(transaction_uuid: str,
     if not transaction:
         raise TransactionNotFound
 
-    card = cards_service.get_card_by_id(transaction.card_uuid, owner_uuid)
-    if not card.owner_uuid == owner_uuid:
-        raise InvalidCardOwner
+    # TODO: Try to refactor this
+    cards_service.get_card_by_id(transaction.card_uuid, owner_uuid)
 
     return transaction
 

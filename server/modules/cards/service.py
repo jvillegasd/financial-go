@@ -5,7 +5,7 @@ from modules.cards.models import Card
 from modules.cards.serializers import CardSchema
 from modules.constants import MAX_NUMBER_OF_CARDS
 from modules.users.exceptions import UserNotFound
-from modules.cards.exceptions import CardNotFound
+from modules.cards.exceptions import CardNotFound, InvalidCardOwner
 
 
 def user_can_create_card(owner_uuid: str) -> bool:
@@ -69,11 +69,16 @@ def get_card_by_id(card_uuid: str, owner_uuid: str) -> Card:
       Raises:
         - CardNotFound = Exception raises when a card is not found with
         provided owner_uuid.
+        - InvalidCardOwner = Raised when a user is not owner of provided
+        card.
     """
 
-    card = Card.objects.filter(uuid=card_uuid, owner_uuid=owner_uuid).first()
+    card = Card.objects.filter(uuid=card_uuid).first()
     if not card:
         raise CardNotFound
+    
+    if not str(card.owner_uuid) == owner_uuid:
+        raise InvalidCardOwner
 
     return card
 

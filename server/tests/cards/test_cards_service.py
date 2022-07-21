@@ -39,10 +39,6 @@ def test_create_card(mock_user: User):
     
     assert len(user.cards) > 0
     assert len(user_card_filter) == 1
-    
-    card = Card.objects.filter(uuid=new_card.uuid).first()
-    
-    assert card is not None
 
 
 def test_create_card_with_non_existing_user():
@@ -163,3 +159,59 @@ def test_user_cannot_create_card(mock_user: User):
     can_add_card = service.user_can_create_card(str(mock_user.uuid))
 
     assert not can_add_card
+
+
+def test_get_card_by_id(mock_card: Card, mock_user: User):
+    """
+      Test getting a card by id.
+      
+      Args:
+        - mock_card: Card = Mocked card fixture.
+        - mock_user: User = Mocked user owner of card.
+    """
+    
+    mock_user.add_card(mock_card)
+    card = service.get_card_by_id(str(mock_card.uuid), str(mock_user.uuid))
+    
+    assert card.uuid == mock_card.uuid
+
+
+def test_get_non_existing_card_by_id(mock_user: User):
+    """
+      Test getting a card with random generated uuid
+      for raise expected exception.
+      
+      Args:
+        - mock_user: User = Mocked user fixture.
+      
+      Raises:
+        - CardNotFound = Raised when a card is not found
+        with provided uuid.
+    """
+    
+    non_existing_card_uuid = uuid.uuid4()
+    
+    with pytest.raises(cards_exceptions.CardNotFound):
+        service.get_card_by_id(str(non_existing_card_uuid),
+                              str(mock_user.uuid))
+
+
+def test_get_card_by_id_another_owner(mock_card: Card):
+    """
+      Test getting a card with another owner for
+      raise expected exception. Another owner uuid
+      is random generated for testing purpose.
+      
+      Args:
+        - mock_card: Card = Mocked card fixture.
+      
+      Raises:
+        - InvalidCardOwner = Raises when a card owner differs on
+        provided user uuid.
+    """
+    
+    another_user_uuid = uuid.uuid4()
+    
+    with pytest.raises(cards_exceptions.InvalidCardOwner):
+        service.get_card_by_id(str(mock_card.uuid),
+                              str(another_user_uuid))
