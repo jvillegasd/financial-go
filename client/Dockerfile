@@ -4,10 +4,9 @@ RUN mkdir /app
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
-RUN npm install --global pnpm
-RUN pnpm install
+RUN yarn
 COPY . /app
-RUN pnpm run build
+RUN yarn build
 
 # Stage 2 - Run
 FROM nginx:1.17.10-alpine as run
