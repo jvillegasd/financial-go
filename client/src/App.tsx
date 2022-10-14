@@ -1,12 +1,11 @@
-import { Outlet, Router } from "@tanstack/react-location";
-import { location, routes } from "./router";
+import { useRoutes } from "@solidjs/router";
+import type { Component } from "solid-js";
+import routes from "./router";
 
-function App() {
-  return (
-    <Router location={location} routes={routes}>
-      <Outlet />
-    </Router>
-  );
-}
+const App: Component = () => {
+  const Routes = useRoutes(routes);
+
+  return <Routes />;
+};
 
 export default App;

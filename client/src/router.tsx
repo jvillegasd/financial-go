@@ -1,11 +1,11 @@
-import { ReactLocation, Route } from "@tanstack/react-location";
-import { Home } from "./pages/home/home";
+import { RouteDefinition } from "@solidjs/router";
+import Home from "./pages/home/home";
 
-export const routes: Route[] = [
+const routes: RouteDefinition[] = [
   {
     path: "/",
-    element: <Home />,
+    component: () => <Home />,
   },
 ];
 
-export const location = new ReactLocation();
+export default routes;

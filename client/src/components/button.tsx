@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { Component, createEffect, createSignal, JSX } from "solid-js";
 
 type ButtonAppearance = "primary" | "outlined" | "link";
 type ButtonSize = "m";
 
 interface Props {
-  children: React.ReactNode;
+  children?: JSX.Element;
   onClick?: () => void;
   appearance?: ButtonAppearance;
   size?: ButtonSize;
@@ -26,17 +26,17 @@ function getSpacing(size: ButtonSize) {
   return "p-4 rounded-lg px-12 py-2.5 transition duration-150 ease-in-out";
 }
 
-export const Button = ({
+export const Button: Component<Props> = ({
   appearance = "primary",
   size = "m",
   className = "",
   children,
   onClick = () => {},
   uppercase = false,
-}: Props) => {
-  const [classes, setClasses] = useState("");
+}) => {
+  const [classes, setClasses] = createSignal("");
 
-  useEffect(() => {
+  createEffect(() => {
     const background = getColors(appearance);
     const spacing = getSpacing(size);
     const uppercaseClass = uppercase ? "uppercase" : "";
@@ -46,7 +46,7 @@ export const Button = ({
   }, [appearance]);
 
   return (
-    <button className={classes} onClick={onClick}>
+    <button class={classes()} onClick={onClick}>
       {children}
     </button>
   );
