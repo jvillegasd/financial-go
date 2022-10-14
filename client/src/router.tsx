@@ -1,5 +1,5 @@
 import { ReactLocation, Route } from "@tanstack/react-location";
-import { Home } from "./pages/home";
+import { Home } from "./pages/home/home";
 
 export const routes: Route[] = [
   {

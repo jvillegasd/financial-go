@@ -5,10 +5,11 @@ type ButtonSize = "m";
 
 interface Props {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   appearance?: ButtonAppearance;
   size?: ButtonSize;
   className?: string;
+  uppercase?: boolean;
 }
 
 function getColors(appearance: ButtonAppearance) {
@@ -22,7 +23,7 @@ function getColors(appearance: ButtonAppearance) {
 }
 
 function getSpacing(size: ButtonSize) {
-  return "p-4 rounded-lg px-6 py-2.5 text-xs transition duration-150 ease-in-out";
+  return "p-4 rounded-lg px-12 py-2.5 transition duration-150 ease-in-out";
 }
 
 export const Button = ({
@@ -31,14 +32,16 @@ export const Button = ({
   className = "",
   children,
   onClick = () => {},
+  uppercase = false,
 }: Props) => {
   const [classes, setClasses] = useState("");
 
   useEffect(() => {
     const background = getColors(appearance);
     const spacing = getSpacing(size);
+    const uppercaseClass = uppercase ? "uppercase" : "";
     setClasses(
-      `inline-block ${background} ${spacing} cursor-pointer uppercase ${className}`
+      `inline-block ${background} ${spacing} text-xs font-medium cursor-pointer ${uppercaseClass} ${className}`
     );
   }, [appearance]);
 
