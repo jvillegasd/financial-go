@@ -1,4 +1,5 @@
-import type { Component } from 'solid-js';
+import type { Component } from "solid-js";
+import CharityIcon from "../../assets/icons/charity";
 import { Button } from "../../components/button";
 
 const Home: Component = () => {
@@ -11,15 +12,13 @@ const Home: Component = () => {
         </nav>
       </header>
       <main class="h-full w-full flex">
-        <div class="flex flex-col items-center justify-center px-16 w-3/6 z-50">
-          <h1 class="text-6xl font-normal mb-8">Financial Go</h1>
-          <h2 class="my-7 font-normal text-4xl text-center">The easiest way to manage your budget.</h2>
+        <div class="flex flex-col items-center justify-center mx-auto w-3/6 z-50">
+          <CharityIcon size={160} />
+          <h1 class="text-6xl font-normal my-2">Financial Go</h1>
+          <h2 class="mb-7 font-normal text-4xl text-center">
+            The easiest way to manage your budget.
+          </h2>
           <Button>Start saving</Button>
-        </div>
-        <div class="w-3/6 h-full z-0" >
-          <div class="h-full overflow-visible relative flex items-center">
-            <img class="top-0" src="src/assets/images/Icon_big.png" alt="" />
-          </div>
         </div>
       </main>
     </div>
