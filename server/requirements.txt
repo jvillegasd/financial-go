@@ -1,9 +1,6 @@
 Flask
 bcrypt
-Flask-Cors
 pyjwt
 pymongo
-mongoengine
 marshmallow
-pytest
 mongomock
