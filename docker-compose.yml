@@ -5,11 +5,11 @@ services:
     image: mongo
     container_name: fgo-db
     environment:
+      - MONGO_PORT=${MONGO_PORT}
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
-      - ./server/config/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
     ports:
       - ${MONGO_PORT}:${MONGO_PORT}
@@ -17,13 +17,19 @@ services:
       - financial_go-net
 
   backend:
-    container_name: fgo-backend
     build:
       context: ./server/
       dockerfile: Dockerfile
+    container_name: fgo-backend
+    environment:
+      - FLASK_PORT=${FLASK_PORT}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     depends_on:
       - mongodb
-    env_file: .env
     restart: always
     volumes:
       - ./server/:/src
@@ -33,11 +39,13 @@ services:
       - financial_go-net
 
   frontend:
-    container_name: fgo-frontend
     build:
       context: ./client/
       dockerfile: Dockerfile
-    env_file: .env
+    container_name: fgo-frontend
+    environment:
+      - NODEJS_PORT=${NODEJS_PORT}
+      - NODE_ENV=${NODE_ENV}
     restart: always
     volumes:
       - ./client/:/client
