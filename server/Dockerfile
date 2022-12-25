@@ -1,4 +1,4 @@
-FROM python:3.7 
+FROM --platform=linux/amd64 python:3.10
 
 LABEL Author="Johnny Villegas"
 LABEL version="1.0"
