@@ -23,7 +23,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - mongodb
-    command: python3 app.py
     env_file: .env
     restart: always
     volumes:
