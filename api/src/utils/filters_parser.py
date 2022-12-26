@@ -1,16 +1,8 @@
 
 import re
-
 from src.schemas.filter import FilterSchema
+from src.constants import QUERY_PARAMS_BRACKET_OPERATORS
 from src.errors.filter import InvalidComplexQueryOperator
-
-BRACKET_OPERATORS: tuple = (
-    '[lt]',
-    '[le]',
-    '[gt]',
-    '[ge]',
-    '[eq]'
-)
 
 
 class QueryParameterParser(object):
@@ -35,7 +27,7 @@ class QueryParameterParser(object):
         complex_op_match: re.Match = re.search('\[.*?\]', field)
         if complex_op_match:
             operator: str = complex_op_match.group(0)
-            if operator in BRACKET_OPERATORS:
+            if operator in QUERY_PARAMS_BRACKET_OPERATORS:
                 field = field.replace(operator, '')
                 operator = operator.replace('[', '').replace(']', '')
                 return field, operator

@@ -27,7 +27,6 @@ class DataAccessLayer:
     def get_session(self) -> Iterator[ClientSession]:
         """This generator yields a new session and closes
         it when it finished.
-
         Returns:
             -   Iterator[ClientSession]
         """

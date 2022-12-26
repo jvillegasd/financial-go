@@ -11,10 +11,8 @@ class BaseSchema:
     def _get_value(self, data: Any) -> Any:
         """Get value of provided data and it can be
         serialized if it is required.
-
         Args:
             -   data: Any = Data to be serialized
-
         Returns:
             -   Any = Serialized data
         """

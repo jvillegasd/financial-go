@@ -15,10 +15,8 @@ class AuthService:
             _ first_name
             - last_name
             - email
-
         Args:
             - user: User = User instance that requires JWT token.
-
         Return:
             - auth_token: str = JWT token with user information.
         """
@@ -37,10 +35,8 @@ class AuthService:
     def decode_auth_token(self, auth_token: str) -> dict:
         """Decode a JWT authorization token and extract user information
         saved on it.
-        
         Args:
             - auth_token: str = JWT authorization token.
-        
         Return:
             - user_info: dict = User information saved in JWT token.
         """

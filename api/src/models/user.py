@@ -38,7 +38,6 @@ class User(BaseDocument):
 
     def add_card(self, new_card: Card):
         """Save a reference of Card to current user.
-
           Args:
             - new_card: Card = Card to be referenced to user.
         """
