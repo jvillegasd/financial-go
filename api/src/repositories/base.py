@@ -5,5 +5,3 @@ class BaseRepository:
 
     def __init__(self, model: BaseDocument):
         self.model = model
-
-    def find_one()
