@@ -1,5 +1,5 @@
 import unittest
-from src import create_app
+from src.main import create_app
 from src.connection.database import DataAccessLayer
 
 

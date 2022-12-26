@@ -1,5 +1,5 @@
 import os
-from src import create_app
+from src.main import create_app
 from src.connection import get_dal
 
 
