@@ -1,4 +1,4 @@
-from test.base_case import BaseCase
+from tests import BaseCase
 
 
 class TestApiStartup(BaseCase):
