@@ -3,7 +3,7 @@ from mongoengine.fields import (
     StringField,
     FloatField
 )
-from models import BaseDocument
+from models.base import BaseDocument
 from src.constants import TRANSACTION_TYPES, TRANSACTION_CATEGORIES
 
 
