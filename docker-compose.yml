@@ -22,6 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: fgo-backend
     environment:
+      - APP_ENV=${APP_ENV}
       - FLASK_PORT=${FLASK_PORT}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - MONGO_PORT=${MONGO_PORT}
@@ -32,7 +33,7 @@ services:
       - mongodb
     restart: always
     volumes:
-      - ./server/:/src
+      - ./api/:/api
     ports:
       - ${FLASK_PORT}:${FLASK_PORT}
     networks:

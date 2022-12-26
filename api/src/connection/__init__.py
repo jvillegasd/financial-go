@@ -1,7 +1,8 @@
 
 
-from flask import g
 from src.connection.database import DataAccessLayer
+
+_dal: DataAccessLayer = None
 
 
 def get_dal() -> DataAccessLayer:
@@ -11,7 +12,8 @@ def get_dal() -> DataAccessLayer:
         -   DataAccessLayer
     """
 
-    if 'dal' not in g:
-        g.dal = DataAccessLayer()
+    global _dal
+    if _dal is None:
+        _dal = DataAccessLayer()
 
-    return g.dal
+    return _dal
