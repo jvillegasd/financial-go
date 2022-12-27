@@ -21,7 +21,10 @@ class AuthService:
             - auth_token: str = JWT token with user information.
         """
 
-        expiration_date = datetime.datetime.now() + datetime.timedelta(minutes=30)
+        expiration_date = (
+            datetime.datetime.now()
+            + datetime.timedelta(minutes=30)
+        )
         auth_token = jwt.encode({
             'sub': str(user.uuid),
             'first_name': user.first_name,

@@ -1,32 +1,27 @@
 from src.models.base import BaseDocument
 from mongoengine.queryset import QuerySet
 from src.schemas.filter import FilterSchema
+from pymongo.client_session import ClientSession
 from src.constants import ALLOWED_QUERY_OPERATORS
+from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
 
-class BaseRepository:
+class MongoEngineRepository(IRepository[BaseDocument]):
 
-    def __init__(self, model: BaseDocument):
+    def __init__(
+        self,
+        model: BaseDocument,
+        session: ClientSession
+    ):
         self.model = model
+        self.session = session
 
     def _apply_filters(
         self,
         query: QuerySet,
         filters: list[FilterSchema]
     ) -> QuerySet:
-        """Apply a list of simple filters to the provided
-        query. Simple filters are intented to interact with
-        fields of current model. Complex operations like Joins
-        or filtering by relationship fields are not allowed.
-        Args:
-            -   query: QuerySet = Query to be filtered.
-            -   filters: list[FilterSchema] = List of simple
-            filters for apply to current query.
-        Returns:
-            -   QuerySet = Provided query with filter applied.
-        """
-
         for raw_filter in filters:
             column = getattr(self.model, raw_filter.field_name, None)
             if column is None:
