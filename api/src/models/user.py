@@ -7,7 +7,7 @@ from mongoengine.fields import (
     ListField,
     ReferenceField
 )
-from models.base import BaseDocument
+from models.base.mongo import BaseDocument
 
 
 class User(BaseDocument):

@@ -1,5 +1,4 @@
-from typing import TypeVar, Optional
-from src.models.base import BaseDocument
+from typing import TypeVar, Optional, Any
 from mongoengine.queryset import QuerySet
 from src.schemas.model_pagination import (
     ModelPagination,
@@ -7,12 +6,13 @@ from src.schemas.model_pagination import (
     QueryParamPagination
 )
 from src.schemas.filter import FilterSchema
+from src.models.base.mongo import BaseDocument
 from pymongo.client_session import ClientSession
 from src.constants import ALLOWED_QUERY_OPERATORS
 from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
-ModelType = TypeVar('ModelType', bound=BaseDocument)
+ModelType = TypeVar('ModelType', BaseDocument)
 
 
 class MongoEngineRepository(IRepository[ModelType, QuerySet]):
@@ -24,6 +24,29 @@ class MongoEngineRepository(IRepository[ModelType, QuerySet]):
     ):
         self.model: ModelType = model
         self.session: ClientSession = session
+
+    def find_one(
+        self,
+        filters: list[FilterSchema]
+    ) -> Optional[ModelType]:
+        query = self.model.objects(session=self.session)
+        query = self._apply_filters(query, filters)
+        return query.first()
+
+    def find_all(
+        self,
+        filters: list[FilterSchema]
+    ) -> QuerySet:
+        query = self.model.objects(session=self.session)
+        query = self._apply_filters(query, filters)
+        return query
+
+    def find_by_id(self, record_id: Any) -> Optional[ModelType]:
+        record = self.model.objects(
+            uuid=record_id,
+            session=self.session
+        ).first()
+        return record
 
     def apply_pagination(
         self,
