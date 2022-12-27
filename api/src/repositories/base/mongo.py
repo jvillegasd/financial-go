@@ -13,7 +13,9 @@ from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
 ModelType = TypeVar('ModelType', BaseDocument)
-
+# https://github.com/cosmicpython/code/blob/chapter_06_uow/src/allocation/service_layer/unit_of_work.py
+# https://ming.readthedocs.io/en/latest/
+# TODO: Cambiar de MongoEngine a Ming para habilitar Unit of Work
 
 class MongoEngineRepository(IRepository[ModelType, QuerySet]):
 
