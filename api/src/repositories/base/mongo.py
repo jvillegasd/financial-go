@@ -1,4 +1,4 @@
-from src.models.base import BaseDocument
+from typing import TypeVar
 from mongoengine.queryset import QuerySet
 from src.schemas.filter import FilterSchema
 from pymongo.client_session import ClientSession
@@ -6,16 +6,18 @@ from src.constants import ALLOWED_QUERY_OPERATORS
 from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
+ModelType = TypeVar('ModelType')
 
-class MongoEngineRepository(IRepository[BaseDocument]):
+
+class MongoEngineRepository(IRepository[ModelType, QuerySet]):
 
     def __init__(
         self,
-        model: BaseDocument,
+        model: ModelType,
         session: ClientSession
     ):
-        self.model = model
-        self.session = session
+        self.model: ModelType = model
+        self.session: ClientSession = session
 
     def _apply_filters(
         self,

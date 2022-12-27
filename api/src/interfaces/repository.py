@@ -7,23 +7,24 @@ from src.schemas.filter import FilterSchema
 from src.models import User, Transaction, Card
 from typing import Optional, Any, Generic, TypeVar
 
-T = TypeVar('T')
+ModelType = TypeVar('ModelType')
+QueryType = TypeVar('QueryType')
 
 
-class IRepository(ABC, Generic[T]):
+class IRepository(ABC, Generic[ModelType, QueryType]):
 
     @abstractmethod
     def find_one(
         self,
         filters: list[FilterSchema]
-    ) -> Optional[T]:
+    ) -> Optional[ModelType]:
         """Find one record from current model that
         match simple filters.
         Args:
             -   filters: list[FilterSchema] = List of simple
             filters for apply to current model.
         Returns:
-            -  Optional[T] = Record (domain object) that
+            -  Optional[ModelType] = Record (domain object) that
             match provided filters.
         """
         raise NotImplementedError
@@ -32,34 +33,34 @@ class IRepository(ABC, Generic[T]):
     def find_all(
         self,
         filters: list[FilterSchema]
-    ) -> object:
+    ) -> QueryType:
         """Find all records from current model that
         match simple filters.
         Args:
             -   filters: list[FilterSchema] = List of simple
             filters for apply to current model.
         Returns:
-            -   object = Query of current models that match
+            -   QueryType = Query of current models that match
             provided filters. Query is returned due to allows pagination
             application.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def find_by_id(self, record_id: Any) -> Optional[T]:
+    def find_by_id(self, record_id: Any) -> Optional[ModelType]:
         """Find a record for loaded model by searching
         by id.
         Args:
             -   record_id: Any = Id to search in table.
         Returns:
-            -   Optional[T] = Record (domain object) if found.
+            -   Optional[QueryType] = Record (domain object) if found.
         """
         raise NotImplementedError
 
     @abstractmethod
     def apply_pagination(
         self,
-        query: object,
+        query: QueryType,
         paginate: Optional[QueryParamPagination] = None
     ) -> ModelPagination:
         """Paginates Query using cursor technique. So,
@@ -79,41 +80,41 @@ class IRepository(ABC, Generic[T]):
     @abstractmethod
     def _apply_filters(
         self,
-        query: object,
+        query: QueryType,
         filters: list[FilterSchema]
-    ) -> object:
+    ) -> QueryType:
         """Apply a list of simple filters to the provided
         query. Simple filters are intented to interact with
         fields of current model. Complex operations like Joins
         or filtering by relationship fields are not allowed.
         Args:
-            -   query: object = Query to be filtered.
+            -   query: QueryType = Query to be filtered.
             -   filters: list[FilterSchema] = List of simple
             filters for apply to current query.
         Returns:
-            -   object = Provided query with filter applied.
+            -   QueryType = Provided query with filter applied.
         """
         raise NotImplementedError
 
     @abstractmethod
     def create(
         self,
-        record: T
-    ) -> T:
+        record: ModelType
+    ) -> ModelType:
         """Create a new record of defined domain model.
         Args:
-            -   record: T = Domain model to be added into database.
+            -   record: ModelType = Domain model to be added into database.
         Returns:
-            -   T = Created domain model.
+            -   ModelType = Created domain model.
         """
         raise NotImplementedError
 
     @abstractmethod
     def update(
         self,
-        record: T,
+        record: ModelType,
         fields_to_update: dict
-    ) -> T:
+    ) -> ModelType:
         """Update an existing record of domain model.
         Args:
             -   record: T = Domain model to be updated.
@@ -135,13 +136,13 @@ class IRepository(ABC, Generic[T]):
         raise NotImplementedError
 
 
-class IUserRepository(IRepository[User]):
+class IUserRepository(IRepository[User, QueryType]):
     pass
 
 
-class ITransactionRepository(IRepository[Transaction]):
+class ITransactionRepository(IRepository[Transaction, QueryType]):
     pass
 
 
-class ICardRepository(IRepository[Card]):
+class ICardRepository(IRepository[Card, QueryType]):
     pass
