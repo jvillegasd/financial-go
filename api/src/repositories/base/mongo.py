@@ -7,31 +7,26 @@ from src.schemas.model_pagination import (
 )
 from src.schemas.filter import FilterSchema
 from src.models.base.mongo import BaseDocument
-from pymongo.client_session import ClientSession
 from src.constants import ALLOWED_QUERY_OPERATORS
 from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
 ModelType = TypeVar('ModelType', BaseDocument)
-# https://github.com/cosmicpython/code/blob/chapter_06_uow/src/allocation/service_layer/unit_of_work.py
-# https://ming.readthedocs.io/en/latest/
-# TODO: Cambiar de MongoEngine a Ming para habilitar Unit of Work
+
 
 class MongoEngineRepository(IRepository[ModelType, QuerySet]):
 
     def __init__(
         self,
-        model: ModelType,
-        session: ClientSession
+        model: ModelType
     ):
         self.model: ModelType = model
-        self.session: ClientSession = session
 
     def find_one(
         self,
         filters: list[FilterSchema]
     ) -> Optional[ModelType]:
-        query = self.model.objects(session=self.session)
+        query = self.model.objects
         query = self._apply_filters(query, filters)
         return query.first()
 
@@ -39,14 +34,13 @@ class MongoEngineRepository(IRepository[ModelType, QuerySet]):
         self,
         filters: list[FilterSchema]
     ) -> QuerySet:
-        query = self.model.objects(session=self.session)
+        query = self.model.objects
         query = self._apply_filters(query, filters)
         return query
 
     def find_by_id(self, record_id: Any) -> Optional[ModelType]:
         record = self.model.objects(
-            uuid=record_id,
-            session=self.session
+            uuid=record_id
         ).first()
         return record
 
