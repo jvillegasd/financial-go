@@ -13,8 +13,8 @@ from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
 ModelType = TypeVar('ModelType', BaseDocument)
 
-
-class MongoEngineRepository(IRepository[ModelType, QuerySet]):
+# https://github.com/cosmicpython/code/blob/chapter_06_uow/src/allocation/service_layer/unit_of_work.py
+class MongoRepository(IRepository[ModelType, QuerySet]):
 
     def __init__(
         self,
