@@ -11,7 +11,7 @@ class BaseDocument(Document):
     """ Model mixin that contains common fields and functions. """
     meta = {'abstract': True}
 
-    uuid = UUIDField(
+    doc_id = UUIDField(
         binary=False,
         default=uuid.uuid4,
         primary_key=True
