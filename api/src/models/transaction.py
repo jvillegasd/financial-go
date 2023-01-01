@@ -8,7 +8,7 @@ from src.constants import TRANSACTION_TYPES, TRANSACTION_CATEGORIES
 
 
 class Transaction(BaseDocument):
-    card_uuid = UUIDField(binary=False)
+    card_id = UUIDField(binary=False)
     title = StringField(required=True)
     type = StringField(required=True, choices=TRANSACTION_TYPES)
     amount = FloatField(default=0.0)
