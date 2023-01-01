@@ -1,3 +1,4 @@
+from uuid import UUID
 from abc import ABC, abstractmethod
 from src.schemas.model_pagination import (
     ModelPagination,
@@ -12,7 +13,6 @@ QueryType = TypeVar('QueryType')
 
 
 class IRepository(ABC, Generic[ModelType, QueryType]):
-
     @abstractmethod
     def find_one(
         self,
@@ -145,4 +145,12 @@ class ITransactionRepository(IRepository[Transaction, QueryType]):
 
 
 class ICardRepository(IRepository[Card, QueryType]):
-    pass
+    @abstractmethod
+    def number_of_cards(self, owner_id: UUID) -> int:
+        """Calculates the number of cards of provided
+        owner.
+        Args:
+            -   owner_id: UUID = Owner id
+        Returns:
+            -   int = Number of cards of user
+        """

@@ -77,7 +77,6 @@ class UserService:
             - new_user: User = New user Mongoengine object
             created by provided params.
         """
-
         new_user = User(**params)
         new_user.encrypt_password()
         user_repo: IUserRepository = uow.get_repo(name='user')

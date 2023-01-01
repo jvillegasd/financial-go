@@ -15,12 +15,31 @@ ModelType = TypeVar('ModelType', BaseDocument)
 
 
 class MongoRepository(IRepository[ModelType, QuerySet]):
-
     def __init__(
         self,
         model: ModelType
     ):
         self.model: ModelType = model
+
+    def create(
+        self,
+        record: ModelType
+    ) -> ModelType:
+        record.save()
+        return record
+
+    def update(
+        self,
+        record: ModelType,
+        fields_to_update: dict
+    ) -> ModelType:
+        for attr, value in fields_to_update.items():
+            setattr(record, attr, value)
+        record.save()
+        return record
+
+    def delete(self, record_id: Any):
+        self.model.objects.filter(doc_id=record_id).delete()
 
     def find_one(
         self,
