@@ -154,3 +154,4 @@ class ICardRepository(IRepository[Card, QueryType]):
         Returns:
             -   int = Number of cards of user
         """
+        raise NotImplementedError

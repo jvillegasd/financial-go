@@ -10,12 +10,13 @@ from src.errors.unit_of_work import RepositoryNotFoundError
 
 
 class MongoUnitOfWork(IUnitOfWork):
-    def __init__(self):
-        self.__repositories: dict[str, IRepository] = {
+    def __enter__(self):
+        self.__repositories = {
             'user': UserRepository(User),
             'card': CardRepository(Card),
             'transaction': TransactionRepository(Transaction)
         }
+        return self
 
     def get_repo(self, name: str) -> IRepository:
         repository: IRepository = self.__repositories.get(name, None)
