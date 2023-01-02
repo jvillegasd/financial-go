@@ -139,6 +139,6 @@ class CardService:
         card_repository: ICardRepository = uow.get_repo('card')
         updated_record = card_repository.update(
             record=card,
-            fields_to_update=card_info
+            fields_to_update=dict(card_info)
         )
         return updated_record
