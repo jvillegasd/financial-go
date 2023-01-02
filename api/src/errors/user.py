@@ -4,3 +4,7 @@ class UserNotFoundError(Exception):
 
 class UserBadCredentials(Exception):
     """Raises when bad credentials was provided"""
+
+
+class UserAlreadyExists(Exception):
+    """Raises when user already exists"""

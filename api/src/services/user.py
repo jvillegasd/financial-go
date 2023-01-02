@@ -2,11 +2,11 @@
 from uuid import UUID
 from typing import Optional
 from src.models import User
+from src.schemas.user import UserSchema
 from src.schemas.filter import FilterSchema
 from src.interfaces.unit_of_work import IUnitOfWork
 from src.interfaces.repository import IUserRepository
-from src.errors.user import UserNotFoundError
-from src.schemas.user import UserSchema
+from src.errors.user import UserNotFoundError, UserAlreadyExists
 
 
 class UserService:
@@ -77,6 +77,12 @@ class UserService:
             - new_user: User = New user Mongoengine object
             created by provided params.
         """
+        user_instance = self.get_user_by_email(
+            email=params.email,
+            uow=uow
+        )
+        if user_instance:
+            raise UserAlreadyExists('User already exists')
         new_user = User(**params)
         new_user.encrypt_password()
         user_repo: IUserRepository = uow.get_repo(name='user')
