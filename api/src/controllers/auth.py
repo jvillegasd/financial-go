@@ -18,13 +18,14 @@ uow = MongoUnitOfWork()
 def create_auth_token():
     body = request.get_json()
     try:
-        user: User = user_service.get_user_by_email(
-            body['email'],
-            uow
-        )
-        if not user.check_password(body['password']):
-            raise UserBadCredentials
-        auth_token = auth_service.create_auth_token(user)
+        with uow:
+            user: User = user_service.get_user_by_email(
+                body['email'],
+                uow
+            )
+            if not user.check_password(body['password']):
+                raise UserBadCredentials
+            auth_token = auth_service.create_auth_token(user)
         return {'token': f'Bearer {auth_token}'}
     except UserNotFoundError:
         abort(404, 'User not found.')

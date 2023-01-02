@@ -1,8 +1,10 @@
 from src.interfaces.repository import IRepository
 from src.interfaces.unit_of_work import IUnitOfWork
 from src.repositories.user import UserRepository
+from src.repositories.card import CardRepository
 from src.repositories.transaction import TransactionRepository
 from src.models.user import User
+from src.models.card import Card
 from src.models.transaction import Transaction
 from src.errors.unit_of_work import RepositoryNotFoundError
 
@@ -11,6 +13,7 @@ class MongoUnitOfWork(IUnitOfWork):
     def __init__(self):
         self.__repositories: dict[str, IRepository] = {
             'user': UserRepository(User),
+            'card': CardRepository(Card),
             'transaction': TransactionRepository(Transaction)
         }
 

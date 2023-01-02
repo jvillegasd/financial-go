@@ -20,10 +20,11 @@ uow = MongoUnitOfWork()
 def create():
     body = request.get_json()
     try:
-        new_user = user_service.create_user(
-            params=UserSchema(**body),
-            uow=uow
-        )
+        with uow:
+            new_user = user_service.create_user(
+                params=UserSchema(**body),
+                uow=uow
+            )
         return UserSchema().dump(new_user)
     except UserAlreadyExists:
         abort(400, 'User with same email exists.')
@@ -37,10 +38,11 @@ def read():
     auth_token = request.headers.get('Authorization')
     user_info = auth_service.decode_auth_token(auth_token)
     try:
-        user = user_service.get_user_by_email(
-            email=user_info['email'],
-            uow=uow
-        )
+        with uow:
+            user = user_service.get_user_by_email(
+                email=user_info['email'],
+                uow=uow
+            )
         return UserSchema(exclude=('password',)).dump(user)
     except UserNotFoundError as e:
         abort(404, str(e))
