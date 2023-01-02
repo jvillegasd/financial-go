@@ -6,11 +6,12 @@ from middlewares.schemas import validate_body
 from flask import request, Blueprint, abort
 from src.errors.user import UserNotFoundError, UserBadCredentials
 from src.unit_of_work.mongo import MongoUnitOfWork
+from src.interfaces.unit_of_work import IUnitOfWork
 
 auth_api = Blueprint('Authorization', __name__)
 auth_service = AuthService()
 user_service = UserService()
-uow = MongoUnitOfWork()
+uow: IUnitOfWork = MongoUnitOfWork()
 
 
 @auth_api.post('/')

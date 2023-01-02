@@ -5,12 +5,13 @@ from middlewares.auth import jwt_required
 from middlewares.schemas import validate_body
 from flask import request, Blueprint, abort
 from src.unit_of_work.mongo import MongoUnitOfWork
+from src.interfaces.unit_of_work import IUnitOfWork
 from src.errors.user import UserAlreadyExists, UserNotFoundError
 
 user_api = Blueprint('User', __name__)
 auth_service = AuthService()
 user_service = UserService()
-uow = MongoUnitOfWork()
+uow: IUnitOfWork = MongoUnitOfWork()
 
 
 @user_api.post('/')
