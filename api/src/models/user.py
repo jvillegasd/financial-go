@@ -25,12 +25,10 @@ class User(BaseDocument):
     def check_password(self, value: str) -> bool:
         """Check if tentative password matchs with
           current user password.
-
           Args:
-            - value: str = Raw password to check.
-
+            -   value: str = Raw password to check.
           Return:
-            - Boolean = A boolean that represents if tentative
+            -   Boolean = A boolean that represents if tentative
             password matches with hashed password.
         """
         return bcrypt.checkpw(value.encode('utf-8'),

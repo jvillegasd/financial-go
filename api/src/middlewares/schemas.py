@@ -4,7 +4,7 @@ from marshmallow import Schema
 from flask import request, abort
 
 
-def parameters(schema: Schema) -> Callable:
+def validate_body(schema: Schema) -> Callable:
     """Wraps endpoints to check if request body matches
     with provided schema.
     Args:
