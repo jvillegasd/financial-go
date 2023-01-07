@@ -1,3 +1,8 @@
+import os
+
+ROOT_PATH: str = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+
 # Query params filtering parser
 QUERY_PARAMS_BRACKET_OPERATORS: tuple = (
     '[lt]',
