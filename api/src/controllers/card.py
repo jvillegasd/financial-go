@@ -176,13 +176,22 @@ def update_transaction(card_id: str, transaction_id: str):
 @card_api.delete('/<card_id>/transaction/<transaction_id>')
 @jwt_required
 def delete_transaction(card_id: str, transaction_id: str):
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
     try:
         with uow:
-            transaction_service.delete_transaction(
+            card = card_service.get_card_by_id(
                 card_id=card_id,
+                owner_id=user_info['uuid'],
+                uow=uow
+            )
+            transaction_service.delete_transaction(
+                card_id=card.doc_id,
                 transaction_id=transaction_id,
                 uow=uow
             )
         return {'message': 'Transaction deleted successfully.'}
+    except CardNotFound as e:
+        abort(404, str(e))
     except TransactionNotFound as e:
         abort(404, str(e))
