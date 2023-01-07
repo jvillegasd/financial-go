@@ -39,8 +39,8 @@ class TransactionService:
 
     def get_transaction_by_id(
         self,
-        transaction_id: UUID,
         card_id: UUID,
+        transaction_id: UUID,
         uow: IUnitOfWork
     ) -> Transaction:
         """Fetch a transaction form database using uuid.
@@ -77,8 +77,8 @@ class TransactionService:
     def update_transaction(
         self,
         transaction_info: TransactionSchema,
-        transaction_id: UUID,
         card_id: UUID,
+        transaction_id: UUID,
         uow: IUnitOfWork
     ) -> Transaction:
         """Updates an existing transaction basic information.
@@ -110,14 +110,14 @@ class TransactionService:
 
     def delete_transaction(
         self,
-        transaction_id: UUID,
         card_id: UUID,
+        transaction_id: UUID,
         uow: IUnitOfWork
     ):
         """Delete transaction from database.
         
         Args:
-            - transaction_uuid: str = Provided uuid used to check
+            - transaction_id: str = Provided uuid used to check
             transaction existance.
             -   card_id: UUID = Card id owned of transaction.
             -   uow: IUnitOfWork = Provided Unit of Work for Database

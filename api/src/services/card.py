@@ -5,7 +5,7 @@ from src.schemas.filter import FilterSchema
 from src.constants import MAX_NUMBER_OF_CARDS
 from src.interfaces.unit_of_work import IUnitOfWork
 from src.interfaces.repository import ICardRepository
-from src.errors.card import CardNotFound
+from src.errors.card import CardNotFound, CardLimitExceeded
 
 
 class CardService:
@@ -54,6 +54,8 @@ class CardService:
 
         user_service = UserService()
         card_repository: ICardRepository = uow.get_repo(name='card')
+        if not self.user_can_create_card(user_id, uow):
+            raise CardLimitExceeded('User reached the amount of cards')
         new_card = Card(**card_info)
         card_repository.create(new_card)
         user = user_service.get_user_by_id(user_id, uow)
