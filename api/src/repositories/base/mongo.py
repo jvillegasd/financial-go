@@ -41,6 +41,9 @@ class MongoRepository(IRepository[ModelType, QuerySet]):
     def delete(self, record_id: Any):
         self.model.objects.filter(doc_id=record_id).delete()
 
+    def delete_all(self):
+        self.model.objects.delete()
+
     def find_one(
         self,
         filters: list[FilterSchema]
