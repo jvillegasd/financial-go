@@ -1,4 +1,4 @@
-from src.models.user import User
+from src.models import User
 from src.schemas.user import UserSchema
 from src.services.auth import AuthService
 from src.services.user import UserService

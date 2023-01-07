@@ -1,7 +1,7 @@
 import os
 import jwt
 import datetime
-from src.models.user import User
+from src.models import User
 
 JWT_KEY: str = os.getenv('JWT_SECRET_KEY')
 

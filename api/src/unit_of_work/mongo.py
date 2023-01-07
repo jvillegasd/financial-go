@@ -1,11 +1,11 @@
+from src.models import User
+from src.models import Card
+from src.models import Transaction
+from src.repositories import UserRepository
+from src.repositories import CardRepository
+from src.repositories import TransactionRepository
 from src.interfaces.repository import IRepository
 from src.interfaces.unit_of_work import IUnitOfWork
-from src.repositories.user import UserRepository
-from src.repositories.card import CardRepository
-from src.repositories.transaction import TransactionRepository
-from src.models.user import User
-from src.models.card import Card
-from src.models.transaction import Transaction
 from src.errors.unit_of_work import RepositoryNotFoundError
 
 
