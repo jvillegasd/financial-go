@@ -1,12 +1,15 @@
 import os
 import json
+from typing import Optional
 from abc import ABC, abstractmethod
 from src.constants import ROOT_PATH
+from src.interfaces.unit_of_work import IUnitOfWork
 
 
 class IDataImporter(ABC):
     def __init__(self):
         self.pwd: str = ROOT_PATH
+        self.uow: Optional[IUnitOfWork] = None
         self.seeds: dict[str, dict] = self._load_seeds()
         self.import_order: list[str] = self._load_import_order()
 
@@ -63,7 +66,8 @@ class IDataImporter(ABC):
         """This method load all tables of models that
         have created seeds.
         """
-        raise NotImplementedError
+        for model_name in self.import_order:
+            self.load_model(model_name)
 
     @abstractmethod
     def clear_model(self, model_name: str):
@@ -79,4 +83,6 @@ class IDataImporter(ABC):
         """This method clean all tables of loaded
         models.
         """
-        raise NotImplementedError
+        remove_order = list(reversed(self.import_order))
+        for model_name in remove_order:
+            self.clear_model(model_name)

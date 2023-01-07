@@ -135,6 +135,11 @@ class IRepository(ABC, Generic[ModelType, QueryType]):
         """
         raise NotImplementedError
 
+    @abstractmethod
+    def delete_all(self):
+        """Delete all records of domain model.
+        """
+
 
 class IUserRepository(IRepository[User, QueryType]):
     pass
