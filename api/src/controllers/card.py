@@ -96,26 +96,45 @@ def delete_card(card_id: str):
 ))
 def create_transaction(card_id: str):
     body = request.get_json()
-    with uow:
-        new_transaction = transaction_service.create_transaction(
-            card_id=card_id,
-            transaction_info=body,
-            uow=uow
-        )
-    return TransactionSchema().dump(new_transaction)
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
+    try:
+        with uow:
+            card = card_service.get_card_by_id(
+                card_id=card_id,
+                owner_id=user_info['uuid'],
+                uow=uow
+            )
+            new_transaction = transaction_service.create_transaction(
+                card_id=card.doc_id,
+                transaction_info=body,
+                uow=uow
+            )
+        return TransactionSchema().dump(new_transaction)
+    except CardNotFound as e:
+        abort(404, str(e))
 
 
 @card_api.get('/<card_id>/transaction/<transaction_id>')
 @jwt_required
 def read_transaction(card_id: str, transaction_id: str):
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
     try:
         with uow:
-            transaction = transaction_service.get_transaction_by_id(
+            card = card_service.get_card_by_id(
                 card_id=card_id,
+                owner_id=user_info['uuid'],
+                uow=uow
+            )
+            transaction = transaction_service.get_transaction_by_id(
+                card_id=card.doc_id,
                 transaction_id=transaction_id,
                 uow=uow
             )
         return TransactionSchema().dump(transaction)
+    except CardNotFound as e:
+        abort(404, str(e))
     except TransactionNotFound as e:
         abort(404, str(e))
 
@@ -132,15 +151,24 @@ def read_transaction(card_id: str, transaction_id: str):
 ))
 def update_transaction(card_id: str, transaction_id: str):
     body = request.get_json()
+    auth_token = request.headers.get('Authorization')
+    user_info = auth_service.decode_auth_token(auth_token)
     try:
         with uow:
+            card = card_service.get_card_by_id(
+                card_id=card_id,
+                owner_id=user_info['uuid'],
+                uow=uow
+            )
             transaction = transaction_service.update_transaction(
                 transaction_info=body,
-                card_id=card_id,
+                card_id=card.doc_id,
                 transaction_id=transaction_id,
                 uow=uow
             )
         return TransactionSchema().dump(transaction)
+    except CardNotFound as e:
+        abort(404, str(e))
     except TransactionNotFound as e:
         abort(404, str(e))
 
