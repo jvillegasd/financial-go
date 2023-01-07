@@ -9,4 +9,5 @@ from models.base.mongo import BaseDocument
 class Card(BaseDocument):
     owner_id = UUIDField(binary=False)
     title = StringField(required=True)
-    amount = FloatField(default=0.0)
+    initial_amount = FloatField(default=0.0)
+    # TODO: Amount hybrid prod pre-calculated
