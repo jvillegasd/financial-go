@@ -1,6 +1,6 @@
 {
     "model": "src.models.user.User",
-    "model_name": "users",
+    "model_name": "user",
     "records": [
         {
             "id": "0c6a5750-01ae-4757-9e0a-72da6146c0f0",

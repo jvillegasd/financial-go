@@ -1,6 +1,6 @@
 {
-    "model": "src.models.card.Card",
-    "model_name": "users",
+    "model": "src.models.transaction.Transaction",
+    "model_name": "transaction",
     "records": [
         {
             "id": "be8018f1-f4cc-4239-8e05-e34185cc020f",

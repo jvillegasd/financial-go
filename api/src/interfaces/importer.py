@@ -13,7 +13,6 @@ class IDataImporter(ABC):
         self.seeds: dict[str, dict] = self._load_seeds()
         self.import_order: list[str] = self._load_import_order()
 
-    @abstractmethod
     def _load_seeds(self) -> dict[str, dict]:
         """This method loads seeds JSON files stored in their
         folder for in-memory consulting.
@@ -33,7 +32,6 @@ class IDataImporter(ABC):
                 seeds[seed_dict['model_name']] = seed_dict
         return seeds
 
-    @abstractmethod
     def _load_import_order(self) -> list[str]:
         """This method loads the import order list stored
         in JSON file and it's used for loads all models in the right
@@ -44,7 +42,7 @@ class IDataImporter(ABC):
 
         import_order: dict = {}
         order_dir = os.path.abspath(
-            os.path.join(self.pwd, 'import_order.json')
+            os.path.join(self.pwd, 'src/scripts/importer/import_order.json')
         )
         with open(order_dir, 'r') as f:
             import_order = json.load(f)
@@ -61,7 +59,6 @@ class IDataImporter(ABC):
         """
         raise NotImplementedError
 
-    @abstractmethod
     def load_all_models(self):
         """This method load all tables of models that
         have created seeds.
@@ -78,7 +75,6 @@ class IDataImporter(ABC):
         """
         raise NotImplementedError
 
-    @abstractmethod
     def clear_all_models(self):
         """This method clean all tables of loaded
         models.

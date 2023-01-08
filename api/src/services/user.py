@@ -77,12 +77,14 @@ class UserService:
             - new_user: User = New user Mongoengine object
             created by provided params.
         """
-        user_instance = self.get_user_by_email(
-            email=params.email,
-            uow=uow
-        )
-        if user_instance:
+        try:
+            self.get_user_by_email(
+                email=params['email'],
+                uow=uow
+            )
             raise UserAlreadyExists('User already exists')
+        except UserNotFoundError:
+            pass
         new_user = User(**params)
         new_user.encrypt_password()
         user_repo: IUserRepository = uow.get_repo(name='user')

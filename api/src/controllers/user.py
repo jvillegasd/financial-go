@@ -23,7 +23,7 @@ def create():
     try:
         with uow:
             new_user = user_service.create_user(
-                params=UserSchema(**body),
+                params=UserSchema().load(body),
                 uow=uow
             )
         return UserSchema().dump(new_user)
