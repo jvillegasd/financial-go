@@ -2,7 +2,7 @@ from src.models import User
 from src.schemas.user import UserSchema
 from src.services.auth import AuthService
 from src.services.user import UserService
-from middlewares.schemas import validate_body
+from src.middlewares.schemas import validate_body
 from flask import request, Blueprint, abort
 from src.errors.user import UserNotFoundError, UserBadCredentials
 from src.unit_of_work.mongo import MongoUnitOfWork

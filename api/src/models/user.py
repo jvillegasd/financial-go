@@ -1,13 +1,13 @@
 import bcrypt
 from mongoengine import PULL
-from models.card import Card
+from src.models.card import Card
 from mongoengine.fields import (
     StringField,
     EmailField,
     ListField,
     ReferenceField
 )
-from models.base.mongo import BaseDocument
+from src.models.base.mongo import BaseDocument
 
 
 class User(BaseDocument):

@@ -1,8 +1,8 @@
 from src.schemas.user import UserSchema
 from src.services.user import UserService
 from src.services.auth import AuthService
-from middlewares.auth import jwt_required
-from middlewares.schemas import validate_body
+from src.middlewares.auth import jwt_required
+from src.middlewares.schemas import validate_body
 from flask import request, Blueprint, abort
 from src.unit_of_work.mongo import MongoUnitOfWork
 from src.interfaces.unit_of_work import IUnitOfWork

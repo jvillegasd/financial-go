@@ -11,7 +11,7 @@ from src.constants import ALLOWED_QUERY_OPERATORS
 from src.interfaces.repository import IRepository
 from src.errors.filter import InvalidFilterOperator, InvalidFilterColumn
 
-ModelType = TypeVar('ModelType', BaseDocument)
+ModelType = TypeVar('ModelType', bound=BaseDocument)
 
 
 class MongoRepository(IRepository[ModelType, QuerySet]):
