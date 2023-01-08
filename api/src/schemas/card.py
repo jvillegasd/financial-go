@@ -5,4 +5,4 @@ from src.schemas.base.library import MarshmallowSchema
 class CardSchema(MarshmallowSchema):
     owner_id = fields.UUID()
     title = fields.String()
-    amount = fields.Float()
+    initial_amount = fields.Float()

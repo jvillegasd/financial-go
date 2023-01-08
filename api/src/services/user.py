@@ -59,7 +59,7 @@ class UserService:
         ]
         user_instance = user_repo.find_one(filters)
         if user_instance is None:
-            raise UserNotFoundError('There is not user using provided email')
+            raise UserNotFoundError('User not found')
         return user_instance
 
     def create_user(

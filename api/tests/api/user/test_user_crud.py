@@ -41,6 +41,6 @@ class TestUserCRUD(BaseCase):
         response_json = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            self.auth_user['email'],
+            self.auth_user['user']['email'],
             response_json['email']
         )

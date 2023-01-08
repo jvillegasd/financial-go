@@ -23,7 +23,7 @@ uow: IUnitOfWork = MongoUnitOfWork()
 @validate_body(schema=CardSchema(
     only=(
         'title',
-        'amount',
+        'initial_amount',
     )
 ))
 def create_card():
@@ -33,8 +33,8 @@ def create_card():
     try:
         with uow:
             new_card = card_service.create_card(
-                card_info=CardSchema.load(body),
-                user_id=user_info.get('uuid'),
+                card_info=CardSchema().load(body),
+                user_id=user_info.get('doc_id'),
                 uow=uow
             )
         return CardSchema().dump(new_card)
@@ -47,7 +47,7 @@ def create_card():
 @validate_body(schema=CardSchema(
     only=(
         'title',
-        'amount',
+        'initial_amount',
     )
 ))
 def update_card(card_id: str):
@@ -57,9 +57,9 @@ def update_card(card_id: str):
     try:
         with uow:
             card = card_service.update_card(
-                card_info=CardSchema.load(body),
+                card_info=CardSchema().load(body),
                 card_id=card_id,
-                owner_id=user_info.get('uuid'),
+                owner_id=user_info.get('doc_id'),
                 uow=uow
             )
         return CardSchema().dump(card)
@@ -76,7 +76,7 @@ def delete_card(card_id: str):
         with uow:
             card_service.delete_card(
                 card_id=card_id,
-                owner_id=user_info.get('uuid'),
+                owner_id=user_info.get('doc_id'),
                 uow=uow
             )
         return {'message': 'Card deleted successfully.'}
@@ -102,7 +102,7 @@ def create_transaction(card_id: str):
         with uow:
             card = card_service.get_card_by_id(
                 card_id=card_id,
-                owner_id=user_info['uuid'],
+                owner_id=user_info['doc_id'],
                 uow=uow
             )
             new_transaction = transaction_service.create_transaction(
@@ -124,7 +124,7 @@ def read_transaction(card_id: str, transaction_id: str):
         with uow:
             card = card_service.get_card_by_id(
                 card_id=card_id,
-                owner_id=user_info['uuid'],
+                owner_id=user_info['doc_id'],
                 uow=uow
             )
             transaction = transaction_service.get_transaction_by_id(
@@ -157,7 +157,7 @@ def update_transaction(card_id: str, transaction_id: str):
         with uow:
             card = card_service.get_card_by_id(
                 card_id=card_id,
-                owner_id=user_info['uuid'],
+                owner_id=user_info['doc_id'],
                 uow=uow
             )
             transaction = transaction_service.update_transaction(
@@ -182,7 +182,7 @@ def delete_transaction(card_id: str, transaction_id: str):
         with uow:
             card = card_service.get_card_by_id(
                 card_id=card_id,
-                owner_id=user_info['uuid'],
+                owner_id=user_info['doc_id'],
                 uow=uow
             )
             transaction_service.delete_transaction(

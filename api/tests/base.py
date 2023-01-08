@@ -1,5 +1,6 @@
 import unittest
 from src.main import create_app
+from src.schemas.auth import AuthSchema
 from src.scripts import MongoDataImporter
 from src.interfaces.importer import IDataImporter
 from src.connection.database import DataAccessLayer
@@ -26,7 +27,7 @@ class BaseCase(unittest.TestCase):
             'Content-Type': 'application/json'
         }
 
-    def authentication(self, user_creds: dict) -> dict:
+    def authentication(self, user_creds: dict) -> AuthSchema:
         response = self.client.post(
             '/api/auth/',
             headers=self.headers,
