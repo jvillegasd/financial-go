@@ -22,3 +22,7 @@ class TestUserCRUD(BaseCase):
         )
         response_json = response.get_json()
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response_json['first_name'], data['first_name'])
+        self.assertEqual(response_json['last_name'], data['last_name'])
+        self.assertEqual(response_json['email'], data['email'])
+        self.assertNotIn('password', response_json)

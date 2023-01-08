@@ -1,5 +1,6 @@
 from src.models import User
 from src.schemas.user import UserSchema
+from src.schemas.auth import AuthSchema
 from src.services.auth import AuthService
 from src.services.user import UserService
 from src.middlewares.schemas import validate_body
@@ -27,8 +28,11 @@ def create_auth_token():
             if not user.check_password(body['password']):
                 raise UserBadCredentials
             auth_token = auth_service.create_auth_token(user)
-        return {'token': f'Bearer {auth_token}'}
+        return AuthSchema().dump({
+            'token': f'Bearer {auth_token}',
+            'user': user
+        })
     except UserNotFoundError:
-        abort(404, 'User not found.')
+        abort(404, 'User not found')
     except UserBadCredentials:
-        abort(400, 'Invalid email or password.')
+        abort(400, 'Email or password is wrong')

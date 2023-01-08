@@ -7,7 +7,6 @@ JWT_KEY: str = os.getenv('JWT_SECRET_KEY')
 
 
 class AuthService:
-
     def create_auth_token(self, user: User) -> str:
         """Create a JWT authorization token of 30 minutes of duration.
         JWT saves the following information related to user:
@@ -26,7 +25,7 @@ class AuthService:
             + datetime.timedelta(minutes=30)
         )
         auth_token = jwt.encode({
-            'sub': str(user.uuid),
+            'sub': str(user.doc_id),
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
@@ -50,7 +49,7 @@ class AuthService:
             algorithms='HS256'
         )
         user_info = {
-            'uuid': decoded_token['sub'],
+            'doc_id': decoded_token['sub'],
             'first_name': decoded_token['first_name'],
             'last_name': decoded_token['last_name'],
             'email': decoded_token['email'],

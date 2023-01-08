@@ -39,8 +39,7 @@ class User(BaseDocument):
           Args:
             - new_card: Card = Card to be referenced to user.
         """
-
-        new_card.owner_uuid = self.uuid
+        new_card.owner_id = self.doc_id
         self.cards.append(new_card)
         new_card.save()
         self.save()
@@ -49,7 +48,6 @@ class User(BaseDocument):
         """Encrypt raw password by hashing it using a
         fixed Salt rounds.
         """
-
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(self.password.encode('utf8'), salt)
         self.password = hashed_password.decode('utf8')

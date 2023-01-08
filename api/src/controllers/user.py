@@ -26,7 +26,7 @@ def create():
                 params=UserSchema().load(body),
                 uow=uow
             )
-        return UserSchema().dump(new_user)
+        return UserSchema(exclude=('password',)).dump(new_user)
     except UserAlreadyExists:
         abort(400, 'User with same email exists.')
     except UserNotFoundError as e:

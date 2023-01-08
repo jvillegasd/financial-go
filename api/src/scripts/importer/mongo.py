@@ -18,6 +18,8 @@ class MongoDataImporter(IDataImporter):
             repo = self.uow.get_repo(name=model_name)
             for seed in data['records']:
                 record = model(**seed)
+                if model_name == 'user':
+                    record.encrypt_password()
                 repo.create(record)
         return data['records']
 
