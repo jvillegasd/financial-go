@@ -25,3 +25,13 @@ class BaseCase(unittest.TestCase):
         cls.headers = {
             'Content-Type': 'application/json'
         }
+
+    def authentication(self, user_creds: dict) -> dict:
+        response = self.client.post(
+            '/api/auth/',
+            headers=self.headers,
+            json=user_creds
+        )
+        response_json = response.get_json()
+        self.headers['Authorization'] = response_json['token']
+        return response_json
