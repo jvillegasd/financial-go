@@ -4,6 +4,7 @@ from tests.base import BaseCase
 class TestUserCRUD(BaseCase):
     def setUp(self):
         self.users = self.importer.load_model('user')
+        self.importer.load_model('card')
         self.auth_user = self.authentication(
             user_creds={
                 'email': self.users[0]['email'],
@@ -12,6 +13,7 @@ class TestUserCRUD(BaseCase):
         )
 
     def tearDown(self):
+        self.importer.clear_model('card')
         self.importer.clear_model('user')
 
     def test_create_new_user(self):
@@ -44,3 +46,5 @@ class TestUserCRUD(BaseCase):
             self.auth_user['user']['email'],
             response_json['email']
         )
+        self.assertIn('cards', response_json)
+        self.assertGreater(len(response_json['cards']), 0)

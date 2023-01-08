@@ -10,6 +10,8 @@ class MongoDataImporter(IDataImporter):
         self.uow: IUnitOfWork = MongoUnitOfWork()
 
     def load_model(self, model_name: str) -> list:
+        from src.services.user import UserService
+
         data = self.seeds[model_name]
         with self.uow:
             module_name, class_name = data['model'].rsplit('.', 1)
@@ -20,6 +22,13 @@ class MongoDataImporter(IDataImporter):
                 record = model(**seed)
                 if model_name == 'user':
                     record.encrypt_password()
+                elif model_name == 'card':
+                    user_service = UserService()
+                    user = user_service.get_user_by_id(
+                        user_id=record.owner_id,
+                        uow=self.uow
+                    )
+                    user.add_card(new_card=record)
                 repo.create(record)
         return data['records']
 
