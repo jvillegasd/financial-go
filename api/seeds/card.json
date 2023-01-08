@@ -3,7 +3,7 @@
     "model_name": "card",
     "records": [
         {
-            "id": "e800749f-87fe-488c-b5a5-e1eb486863c5",
+            "doc_id": "e800749f-87fe-488c-b5a5-e1eb486863c5",
             "owner_id": "0c6a5750-01ae-4757-9e0a-72da6146c0f0",
             "title": "Testing card",
             "initial_amount": 100

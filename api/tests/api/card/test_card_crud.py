@@ -30,3 +30,28 @@ class TestCardCRUD(BaseCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_json['title'], data['title'])
         self.assertEqual(response_json['initial_amount'], data['initial_amount'])
+
+    def test_update_existing_card(self):
+        data = {
+            'title': 'a updated card',
+            'initial_amount': 100
+        }
+        response = self.client.patch(
+            f'/api/card/{self.cards[0]["doc_id"]}',
+            headers=self.headers,
+            json=data
+        )
+        response_json = response.get_json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response_json['title'], data['title'])
+        self.assertEqual(response_json['initial_amount'], data['initial_amount'])
+
+    def test_delete_existing_card(self):
+        response = self.client.delete(
+            f'/api/card/{self.cards[0]["doc_id"]}',
+            headers=self.headers
+        )
+        response_json = response.get_json()
+        expected_value: dict = {'message': 'Card deleted successfully.'}
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response_json, expected_value)
