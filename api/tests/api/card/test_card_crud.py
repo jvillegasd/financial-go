@@ -29,7 +29,10 @@ class TestCardCRUD(BaseCase):
         response_json = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_json['title'], data['title'])
-        self.assertEqual(response_json['initial_amount'], data['initial_amount'])
+        self.assertEqual(
+            response_json['initial_amount'],
+            data['initial_amount']
+        )
 
     def test_update_existing_card(self):
         data = {
@@ -44,7 +47,10 @@ class TestCardCRUD(BaseCase):
         response_json = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_json['title'], data['title'])
-        self.assertEqual(response_json['initial_amount'], data['initial_amount'])
+        self.assertEqual(
+            response_json['initial_amount'],
+            data['initial_amount']
+        )
 
     def test_delete_existing_card(self):
         response = self.client.delete(

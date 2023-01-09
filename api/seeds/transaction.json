@@ -6,17 +6,17 @@
             "doc_id": "be8018f1-f4cc-4239-8e05-e34185cc020f",
             "card_id": "e800749f-87fe-488c-b5a5-e1eb486863c5",
             "title": "Netflix",
-            "type": "Income",
+            "type": "Unique",
             "amount": 150,
-            "category": "Unique"
+            "category": "Income"
         },
         {
             "doc_id": "84bb8329-33c0-47a0-9b6e-db49791fe0b6",
             "card_id": "e800749f-87fe-488c-b5a5-e1eb486863c5",
             "title": "Netflix",
-            "type": "Entertainment",
+            "type": "Recurrent",
             "amount": 5,
-            "category": "Recurrent"
+            "category": "Entertainment"
         }
     ]
 }

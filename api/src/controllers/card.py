@@ -107,7 +107,7 @@ def create_transaction(card_id: str):
             )
             new_transaction = transaction_service.create_transaction(
                 card_id=card.doc_id,
-                transaction_info=TransactionSchema.load(body),
+                transaction_info=TransactionSchema().load(body),
                 uow=uow
             )
         return TransactionSchema().dump(new_transaction)
@@ -161,7 +161,7 @@ def update_transaction(card_id: str, transaction_id: str):
                 uow=uow
             )
             transaction = transaction_service.update_transaction(
-                transaction_info=TransactionSchema.load(body),
+                transaction_info=TransactionSchema().load(body),
                 card_id=card.doc_id,
                 transaction_id=transaction_id,
                 uow=uow
