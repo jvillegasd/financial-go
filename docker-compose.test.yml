@@ -1,0 +1,73 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo
+    profiles:
+      - api-test
+    container_name: fgo-db
+    environment:
+      - MONGO_PORT=27017
+      - MONGO_INITDB_DATABASE=database-financial-go
+      - MONGO_INITDB_ROOT_USERNAME=financial_admin
+      - MONGO_INITDB_ROOT_PASSWORD=123123
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - financial_go-net
+
+  backend:
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    command:
+      bash -c "python3 -m unittest"
+    profiles:
+      - api-test
+    container_name: fgo-backend
+    environment:
+      - APP_ENV=test
+      - FLASK_PORT=4000
+      - JWT_SECRET_KEY=dummykey
+      - MONGO_HOST=fgo-db
+      - MONGO_PORT=27017
+      - MONGO_INITDB_DATABASE=database-financial-go
+      - MONGO_INITDB_ROOT_USERNAME=financial_admin
+      - MONGO_INITDB_ROOT_PASSWORD=123123
+    depends_on:
+      - mongodb
+    restart: always
+    volumes:
+      - ./api/:/api
+    ports:
+      - 4000:4000
+    networks:
+      - financial_go-net
+
+  frontend:
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    profiles:
+      - front-test
+    container_name: fgo-frontend
+    environment:
+      - NODEJS_PORT=2500
+      - NODE_ENV=test
+    restart: always
+    volumes:
+      - ./client/:/client
+      - node_modules:/client/node_modules
+    ports:
+      - 2500:80
+    networks:
+      - financial_go-net
+
+volumes:
+  node_modules:
+
+networks:
+  financial_go-net:
+    driver: bridge
