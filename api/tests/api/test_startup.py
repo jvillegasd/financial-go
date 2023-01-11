@@ -12,3 +12,4 @@ class TestApiStartup(BaseCase):
             expected_value,
             response.get_json()
         )
+        self.assertEqual(True, False)

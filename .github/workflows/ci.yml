@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 jobs:
   build:
-    name: Build Docker
+    name: Test api
     runs-on:  ubuntu-latest
     steps:
       - name: Check out the repo
@@ -16,10 +16,13 @@ jobs:
       - name: Build docker containers
         run: |
           echo  ---Building and starting up docker---
-          docker-compose -f ./financial-go/docker-compose.test.yml -p api-test up -d
+          docker-compose -f ./financial-go/docker-compose.test.yml --profile api-test up -d
           echo  ---Containers up---
+      - name: Check containers are up
+        run: |
+          docker-compose ps
       - name: Run tests
         run: |
           echo  ---Running backend test cases---
-          docker-compose -f ./financial-go/docker-compose.test.yml -p api-test up --build
+          docker-compose -f ./financial-go/docker-compose.test.yml --profile api-test run backend python3 -m unittest
           echo  ---Completed backend test cases

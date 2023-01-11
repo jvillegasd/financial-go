@@ -22,8 +22,6 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile
-    command:
-      bash -c "python3 -m unittest"
     profiles:
       - api-test
     container_name: fgo-backend
