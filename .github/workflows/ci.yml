@@ -20,7 +20,7 @@ jobs:
           echo  ---Containers up---
       - name: Check containers are up
         run: |
-          docker-compose ps
+          docker ps
       - name: Run tests
         run: |
           echo  ---Running backend test cases---
