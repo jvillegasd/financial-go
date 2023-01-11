@@ -1,7 +1,3 @@
-# https://faun.pub/building-a-ci-cd-pipeline-with-github-actions-and-docker-part-1-a9d8709c31fb
-
-# https://github.com/peter-evans/docker-compose-actions-workflow
-# https://towardsdatascience.com/the-easy-python-ci-cd-pipeline-using-docker-compose-and-github-actions-80498f47b341
 name: backend-ci-pipeline
 on:
   branch:
