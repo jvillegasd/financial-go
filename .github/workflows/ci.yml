@@ -1,4 +1,4 @@
-name: backend-ci-pipeline
+name: ci-pipeline
 on:
   branch:
     push:
@@ -7,7 +7,7 @@ on:
       branches: [ main ]
 jobs:
   build:
-    name: Build Docker 
+    name: Build Docker
     runs-on:  ubuntu-latest
     steps:
       - name: Check out the repo
@@ -21,6 +21,6 @@ jobs:
           echo  ---Containers up---
       - name: Run tests
         run: |
-          echo  ---Running test cases---
+          echo  ---Running backend test cases---
           docker-compose -f ./financial-go/docker-compose.test.yml -p api-test up --build --exit-code-from backend
-          echo  ---Completed test cases
+          echo  ---Completed backend test cases
