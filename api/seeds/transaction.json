@@ -15,7 +15,7 @@
             "card_id": "e800749f-87fe-488c-b5a5-e1eb486863c5",
             "title": "Netflix",
             "type": "Recurrent",
-            "amount": 5,
+            "amount": -5,
             "category": "Entertainment"
         }
     ]

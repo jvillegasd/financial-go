@@ -23,7 +23,6 @@ uow: IUnitOfWork = MongoUnitOfWork()
 @validate_body(schema=CardSchema(
     only=(
         'title',
-        'initial_amount',
     )
 ))
 def create_card():
@@ -47,7 +46,6 @@ def create_card():
 @validate_body(schema=CardSchema(
     only=(
         'title',
-        'initial_amount',
     )
 ))
 def update_card(card_id: str):
