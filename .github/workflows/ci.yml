@@ -1,0 +1,28 @@
+name: ci-pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    name: Test api
+    runs-on:  ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          path: "financial-go"
+      - name: Build docker containers
+        run: |
+          echo  ---Building and starting up docker---
+          docker-compose -f ./financial-go/docker-compose.test.yml --profile api-test up -d
+          echo  ---Containers up---
+      - name: Check containers are up
+        run: |
+          docker ps
+      - name: Run tests
+        run: |
+          echo  ---Running backend test cases---
+          docker-compose -f ./financial-go/docker-compose.test.yml --profile api-test run backend python3 -m unittest
+          echo  ---Completed backend test cases
