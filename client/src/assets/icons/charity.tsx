@@ -4,17 +4,19 @@ interface Props {
   size?: number;
   width?: number;
   height?: number;
+  class?: string;
 }
 
-const CharityIcon: Component<Props> = ({ size, width, height }) => {
-  const calculatedHeight = size || height || 24;
-  const calculatedWidth = size || width || 24;
+const CharityIcon: Component<Props> = (props) => {
+  const calculatedHeight = props.size || props.height || 24;
+  const calculatedWidth = props.size || props.width || 24;
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={calculatedWidth}
       height={calculatedHeight}
+      class={props.class}
       viewBox="2.532 2.6 484.468 413.407"
     >
       <path
