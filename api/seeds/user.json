@@ -1,0 +1,20 @@
+{
+    "model": "src.models.user.User",
+    "model_name": "user",
+    "records": [
+        {
+            "doc_id": "0c6a5750-01ae-4757-9e0a-72da6146c0f0",
+            "first_name": "John",
+            "last_name": "Wick",
+            "email": "john.wick@email.com",
+            "password": "johnwick123"
+        },
+        {
+            "doc_id": "84551749-dc69-41c3-bce2-cfcedb3a1adc",
+            "first_name": "Aureliano",
+            "last_name": "Buendia",
+            "email": "100years.soledad@email.com",
+            "password": "gabo123"
+        }
+    ]
+}

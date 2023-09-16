@@ -1,0 +1,7 @@
+Flask
+bcrypt
+pyjwt
+pymongo
+mongoengine
+marshmallow
+mongomock

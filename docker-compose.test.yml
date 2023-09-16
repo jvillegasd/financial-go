@@ -3,16 +3,18 @@ version: '3.7'
 services:
   mongodb:
     image: mongo
+    profiles:
+      - api-test
     container_name: fgo-db
     environment:
-      - MONGO_PORT=${MONGO_PORT}
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_PORT=27017
+      - MONGO_INITDB_DATABASE=database-financial-go
+      - MONGO_INITDB_ROOT_USERNAME=financial_admin
+      - MONGO_INITDB_ROOT_PASSWORD=123123
     volumes:
       - ./mongo-volume:/data/db
     ports:
-      - ${MONGO_PORT}:${MONGO_PORT}
+      - 27017:27017
     networks:
       - financial_go-net
 
@@ -20,23 +22,25 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile
+    profiles:
+      - api-test
     container_name: fgo-backend
     environment:
-      - APP_ENV=${APP_ENV}
-      - FLASK_PORT=${FLASK_PORT}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - MONGO_HOST=${MONGO_HOST}
-      - MONGO_PORT=${MONGO_PORT}
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - APP_ENV=test
+      - FLASK_PORT=4000
+      - JWT_SECRET_KEY=dummykey
+      - MONGO_HOST=fgo-db
+      - MONGO_PORT=27017
+      - MONGO_INITDB_DATABASE=database-financial-go
+      - MONGO_INITDB_ROOT_USERNAME=financial_admin
+      - MONGO_INITDB_ROOT_PASSWORD=123123
     depends_on:
       - mongodb
     restart: always
     volumes:
       - ./api/:/api
     ports:
-      - ${FLASK_PORT}:${FLASK_PORT}
+      - 4000:4000
     networks:
       - financial_go-net
 
@@ -44,16 +48,18 @@ services:
     build:
       context: ./client/
       dockerfile: Dockerfile
+    profiles:
+      - front-test
     container_name: fgo-frontend
     environment:
-      - NODEJS_PORT=${NODEJS_PORT}
-      - NODE_ENV=${NODE_ENV}
+      - NODEJS_PORT=2500
+      - NODE_ENV=test
     restart: always
     volumes:
       - ./client/:/client
       - node_modules:/client/node_modules
     ports:
-      - ${NODEJS_PORT}:80
+      - 2500:80
     networks:
       - financial_go-net
 
