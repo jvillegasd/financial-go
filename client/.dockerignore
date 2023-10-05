@@ -1,2 +1,12 @@
+Dockerfile*
+.dockerignore
 node_modules
-.gitignore
+npm-debug.log
+README.md
+.next
+.git
+.jest_cache
+.docker-compose
+.vscode
+.terraform
+.husky

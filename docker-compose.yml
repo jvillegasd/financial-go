@@ -53,7 +53,7 @@ services:
       - ./client/:/client
       - node_modules:/client/node_modules
     ports:
-      - ${NODEJS_PORT}:80
+      - ${NODEJS_PORT}:3000
     networks:
       - financial_go-net
 
